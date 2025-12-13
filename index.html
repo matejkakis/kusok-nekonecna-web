@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kúsok Nekonečna | Matej - Astrofotografia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-deep: #050507;
+            --glass-bg: rgba(22, 22, 28, 0.92);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #e0e0e0;
+            --text-secondary: #9090a0;
+            --accent-gold: #ffb02e; 
+            --accent-purple: #9d4edd;
+            --accent-glow-gold: rgba(255, 176, 46, 0.6);
+            --accent-glow-purple: rgba(157, 78, 221, 0.5);
+            --ease-cinematic: cubic-bezier(0.19, 1, 0.22, 1);
+            --anim-speed: 0.4s;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; cursor: none; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        
+        body { 
+            background-color: var(--bg-deep); 
+            color: var(--text-primary); 
+            font-family: 'Montserrat', sans-serif; 
+            overflow-x: hidden; 
+            width: 100%;
+            max-width: 100vw;
+            line-height: 1.8; 
+            position: relative;
+        }
+
+        /* FILM GRAIN */
+        body::after { 
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.07'/%3E%3C/svg%3E"); 
+            pointer-events: none; z-index: 9998; opacity: 0.6; mix-blend-mode: overlay; 
+        }
+
+        /* POZADIE */
+        body::before { 
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: linear-gradient(to bottom, rgba(5,5,10,0.3), rgba(5,5,10,0.7)), url('bg.jpg') center/cover no-repeat; 
+            filter: blur(7px) brightness(0.6) contrast(1.1); 
+            transform: scale(1.05); z-index: -3; pointer-events: none; 
+        }
+
+        /* SEPARÁTOR */
+        .section-separator {
+            width: 70%; height: 1px; margin: 60px auto;
+            background: linear-gradient(90deg, transparent, rgba(157, 78, 221, 0.4), transparent);
+            filter: blur(1px); opacity: 0.6;
+        }
+
+        /* KURZOR */
+        #cursor {
+            position: fixed; top: 0; left: 0; width: 25px; height: 25px;
+            border: 1.5px solid rgba(255, 255, 255, 0.8); border-radius: 50%;
+            pointer-events: none; z-index: 2147483647; 
+            transform: translate3d(-50%, -50%, 0);
+            transition: width 0.1s, height 0.1s, background 0.1s; 
+            mix-blend-mode: difference; will-change: transform;
+        }
+        #cursor::after { 
+            content: ''; position: absolute; top: 50%; left: 50%; width: 4px; height: 4px; 
+            background: var(--accent-gold); border-radius: 50%; transform: translate(-50%, -50%); 
+        }
+        body.hovering #cursor { 
+            width: 60px; height: 60px; background: rgba(238, 187, 68, 0.15); border-color: var(--accent-gold); 
+        }
+
+        /* KANVAS */
+        #constellation-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0.6; }
+
+        /* SCROLL REVEAL */
+        .reveal-section { opacity: 1; transform: translateY(0); }
+        .reveal-active {
+            opacity: 0; transform: translateY(40px);
+            transition: opacity var(--anim-speed) var(--ease-cinematic), transform var(--anim-speed) var(--ease-cinematic);
+            will-change: opacity, transform;
+        }
+        .reveal-active.visible { opacity: 1; transform: translateY(0); }
+
+        /* UI ELEMENTS */
+        h1, h2, h3, h4 { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: #fff; }
+
+        .section-header { text-align: center; padding: 120px 0 60px; position: relative; }
+        .section-header h2 { 
+            font-size: 3.5rem; text-shadow: 0 0 40px rgba(136, 96, 192, 0.6); 
+            position: relative; z-index: 2; display: inline-flex; align-items: center; gap: 20px; flex-direction: column;
+        }
+        .section-header::after {
+            content: ''; position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%);
+            width: 350px; height: 120px;
+            background: radial-gradient(circle, rgba(238, 187, 68, 0.15) 0%, rgba(157, 78, 221, 0.15) 60%, transparent 80%);
+            filter: blur(40px); z-index: 1; pointer-events: none;
+        }
+        .section-header h2::after {
+            content: ''; display: block; width: 120px; height: 1.5px;
+            background: var(--accent-purple); margin-top: 15px; border-radius: 2px;
+            box-shadow: 0 0 20px 5px var(--accent-purple); filter: blur(2px);
+            animation: pulseLine 9s infinite ease-in-out;
+        }
+        @keyframes pulseLine { 0%, 100% { opacity: 0.5; width: 120px; } 50% { opacity: 1; width: 180px; } }
+        .section-header i { color: var(--accent-gold); font-size: 0.6em; margin-bottom: 10px; text-shadow: 0 0 15px var(--accent-gold); }
+
+        .btn {
+            display: inline-block; padding: 18px 50px; margin-top: 15px;
+            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 100px; color: #fff; text-decoration: none; 
+            font-family: 'Montserrat', sans-serif; font-weight: 600; text-transform: uppercase; 
+            letter-spacing: 1px; transition: all 0.3s var(--ease-cinematic); backdrop-filter: blur(5px);
+        }
+        .btn:hover { border-color: var(--accent-gold); color: var(--accent-gold); background: rgba(238, 187, 68, 0.05); box-shadow: 0 0 40px var(--accent-glow-gold); transform: scale(1.02); }
+
+        /* HERO & GALAXIA */
+        .hero-section { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .galaxy-bg {
+            position: absolute; top: 50%; left: 50%; width: 850px; height: 850px; border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(238, 187, 68, 0.5) 0%, transparent 40%),
+                        repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(136, 96, 192, 0.1) 10deg, transparent 50deg, rgba(238, 187, 68, 0.05) 70deg, transparent 90deg);
+            filter: blur(40px) contrast(1.3); opacity: 0.6; z-index: -1; pointer-events: none;
+            animation: rotateGalaxy 120s linear infinite; will-change: transform;
+        }
+        @keyframes rotateGalaxy { from { transform: translate(-50%, -50%) scale(1.4, 0.7) rotate(0deg); } to { transform: translate(-50%, -50%) scale(1.4, 0.7) rotate(360deg); } }
+        
+        .hero-content { text-align: center; z-index: 2; position: relative; padding: 0 20px; }
+        .hero-dynamic-text { font-size: 1.3rem; letter-spacing: 4px; color: var(--accent-gold); margin-bottom: 25px; min-height: 1.5em; font-weight: 600; opacity: 1; transition: opacity 0.8s ease; }
+        .hero-title { font-size: clamp(3rem, 6vw, 6rem); text-shadow: 0 0 60px rgba(136, 96, 192, 0.5); margin-bottom: 40px; }
+
+        /* GALÉRIA */
+        .gallery-category-title { text-align: left; margin-top: 60px; margin-bottom: 30px; font-size: 1.8rem; color: var(--accent-gold); display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .gallery-category-title i { font-size: 1.2rem; color: var(--accent-purple); }
+        .gallery-hint { text-align: center; margin-bottom: 40px; color: #aaa; font-size: 1rem; letter-spacing: 1px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-bottom: 40px; }
+        .gallery-item { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 16/10; border: 1px solid var(--glass-border); cursor: pointer; transform: translateZ(0); transition: transform 0.3s var(--ease-cinematic), box-shadow 0.3s var(--ease-cinematic); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s var(--ease-cinematic); will-change: transform; }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-item:hover { border-color: var(--accent-gold); box-shadow: 0 10px 40px rgba(0,0,0,0.5); z-index: 5; }
+
+        /* SEKCIE */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 10; }
+        .glass-panel { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 20px; padding: 60px; backdrop-filter: blur(15px); margin-bottom: 100px; box-shadow: 0 40px 80px rgba(0,0,0,0.4); transform: translateZ(0); }
+        .split-layout { display: flex; gap: 60px; align-items: center; }
+        .split-text { flex: 1; }
+        .split-text h3 { font-size: 2rem; margin-bottom: 25px; color: #fff; }
+        .split-text p { color: var(--text-secondary); line-height: 1.9; margin-bottom: 20px; }
+        .split-media { flex: 1; height: 500px; border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); transform: translateZ(0); }
+        .split-media img { width: 100%; height: 100%; object-fit: cover; }
+        .mentoring-img img { object-position: 20% 80%; }
+        .custom-img img { object-position: center bottom; }
+
+        /* TECHNIKA */
+        .gear-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
+        .gear-card { background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); padding: 30px; border-radius: 10px; position: relative; overflow: hidden; }
+        .gear-card h4 { color: var(--accent-gold); margin-bottom: 20px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        .gear-card ul { list-style: none; padding: 0; color: #ccc; }
+        .gear-card li { margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 5px; }
+
+        /* HRA & HUD */
+        .game-section { text-align: center; }
+        .game-container { width: 100%; max-width: 700px; height: 400px; margin: 0 auto; border: 1px solid var(--glass-border); border-radius: 12px; overflow: hidden; background: #000; position: relative; }
+        #focus-image { width: 100%; height: 100%; object-fit: cover; filter: blur(25px); transition: filter 0.1s linear; }
+        .game-hud { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .hud-corner { position: absolute; width: 40px; height: 40px; border-color: rgba(255, 255, 255, 0.4); border-style: solid; transition: all 0.3s; }
+        .tl { top: 20px; left: 20px; border-width: 2px 0 0 2px; } .tr { top: 20px; right: 20px; border-width: 2px 2px 0 0; }
+        .bl { bottom: 20px; left: 20px; border-width: 0 0 2px 2px; } .br { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; }
+        .hud-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; border: 1px dashed rgba(255,255,255,0.3); border-radius: 50%; transition: 0.1s; }
+        .hud-center::before { content: '+'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; }
+        .hud-line { position: absolute; background: rgba(255,255,255,0.2); }
+        .hud-line.h { top: 50%; left: 10%; width: 80%; height: 1px; }
+        .hud-line.v { left: 50%; top: 10%; height: 80%; width: 1px; }
+
+        input[type=range] { width: 100%; max-width: 500px; margin-top: 30px; margin-bottom: 20px; accent-color: var(--accent-gold); cursor: pointer; }
+        #discount-container { display: none; text-align: center; margin-top: 30px; flex-direction: column-reverse; }
+        
+        #discount-code { 
+            font-size: 3rem; font-weight: 800; font-family: 'Cinzel', serif; letter-spacing: 4px;
+            background: linear-gradient(135deg, #fff 0%, var(--accent-gold) 50%, var(--accent-purple) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.6); 
+            animation: cosmicShine 5s infinite linear;
+            margin-bottom: 20px;
+        }
+        @keyframes cosmicShine { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
+        .discount-note { color: #fff; font-size: 1.1rem; margin-top: 15px; letter-spacing: 1px; }
+        #gratulation-text { color: #fff; font-size: 1.2rem; margin-bottom: 10px; }
+
+        /* UPDATED MOCKUP GRID (CLEAN IMAGES) */
+        .mockup-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); /* 2 v jednom riadku pre PC */
+            gap: 30px; 
+        }
+        .mockup-item { 
+            border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative;
+            aspect-ratio: 4/3; /* Zmenené na 4:3 podľa novej požiadavky */
+        }
+        .mockup-item img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; /* Vyplnenie celého placeholderu */
+            display: block; 
+        }
+        /* Override for first item removed - all use cover now */
+        
+        /* FAQ */
+        details { background: rgba(255,255,255,0.02); padding: 25px; margin-bottom: 20px; border-radius: 10px; cursor: pointer; border: 1px solid var(--glass-border); transition: 0.3s; }
+        details[open] { background: rgba(238, 187, 68, 0.05); border-color: var(--accent-gold); }
+        summary { font-weight: 600; color: #fff; font-size: 1.15rem; outline: none; letter-spacing: 0.5px; }
+        details p { margin-top: 15px; color: #e0e0e0; font-size: 1.05rem; line-height: 1.8; font-weight: 400; }
+
+        /* TOP NAV & LOGO EFFECT */
+        .top-nav { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 100; background: rgba(5, 5, 7, 0.5); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .nav-logo { font-family: 'Cinzel'; font-weight: 700; color: var(--accent-gold); font-size: 1.2rem; position: relative; }
+        /* ∞ Effect behind text */
+        .nav-logo::before {
+            content: '∞'; position: absolute; top: 50%; left: 50%; 
+            transform: translate(-50%, -55%) scale(3, 1.1); 
+            font-size: 3.5rem; 
+            color: transparent; 
+            -webkit-text-stroke: 0.5px rgba(255, 176, 46, 0.4); 
+            font-family: sans-serif;
+            filter: blur(1px); z-index: -1; animation: pulseInfinity 5s infinite ease-in-out;
+            opacity: 0.5;
+        }
+        @keyframes pulseInfinity { 
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -55%) scale(3, 1.1); filter: blur(1px); } 
+            50% { opacity: 0.6; transform: translate(-50%, -55%) scale(3.2, 1.2); filter: blur(2px); text-shadow: 0 0 10px var(--accent-gold); } 
+        }
+
+        .nav-cart { color: #fff; font-size: 1.4rem; position: relative; transition: 0.3s; display: flex; align-items: center; }
+        .nav-cart:hover { color: var(--accent-gold); }
+        .cart-count { 
+            position: absolute; top: -8px; right: -10px; 
+            background: var(--accent-purple); color: #fff; 
+            font-size: 0.7rem; font-weight: bold; 
+            width: 18px; height: 18px; display: flex; justify-content: center; align-items: center;
+            border-radius: 50%; 
+        }
+
+        /* AUDIO */
+        .audio-btn { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: rgba(0,0,0,0.6); border: 1px solid var(--accent-gold); color: var(--accent-gold); display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 100; transition: 0.3s; font-size: 1.2rem; }
+        .audio-btn:hover { box-shadow: 0 0 20px var(--accent-glow-gold); transform: scale(1.1); background: var(--accent-gold); color: #000; }
+        .audio-playing { animation: pulseMusic 2s infinite; background: rgba(255, 176, 46, 0.2); }
+        @keyframes pulseMusic { 0% { box-shadow: 0 0 0 0 rgba(255, 176, 46, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(255, 176, 46, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 176, 46, 0); } }
+
+        /* MICRO BLOG STYLES */
+        .sky-blog-card {
+            text-align: center; border: 1px solid var(--accent-purple); cursor: pointer;
+            position: relative; overflow: hidden; margin-top: 50px;
+        }
+        .sky-blog-card h3 { 
+            font-size: 1.4rem; text-shadow: 0 0 20px rgba(136, 96, 192, 0.4); margin-bottom: 20px;
+        }
+        .sky-blog-card::after { 
+            content: ''; display: block; width: 60px; height: 2px;
+            background: var(--accent-purple); margin: 15px auto 0;
+            box-shadow: 0 0 15px var(--accent-purple); filter: blur(1px);
+        }
+
+        /* --- MODAL (LUXURY INTERIOR) --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 90000; display: none; justify-content: center; align-items: center; backdrop-filter: blur(15px); }
+        .modal-overlay.active { display: flex; }
+        
+        .modal-content { 
+            background: #08080a; width: 100%; height: 100%; 
+            display: flex; position: relative; overflow: hidden;
+        }
+        
+        .close-modal { 
+            position: absolute; top: 30px; right: 40px; font-size: 2.5rem; color: #fff; 
+            transition: color 0.3s, text-shadow 0.3s; cursor: pointer; z-index: 20; opacity: 0.8;
+        }
+        .close-modal:hover { color: var(--accent-gold); text-shadow: 0 0 20px var(--accent-gold); }
+
+        /* Left - Image */
+        .modal-img-box { 
+            width: 50%; height: 100%; background: #000; border-right: 1px solid #222;
+            display: flex; align-items: center; justify-content: center; 
+        }
+        .modal-img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* Right - Info */
+        .modal-info { 
+            width: 50%; padding: 80px; overflow-y: auto; 
+            display: flex; flex-direction: column; justify-content: center;
+        }
+        
+        .modal-info h2 { font-size: 3rem; color: #fff; margin-bottom: 20px; font-weight: 400; line-height: 1.1; }
+        .modal-desc { color: #bbb; font-weight: 300; line-height: 1.8; margin-bottom: 40px; font-size: 1.1rem; border-left: 2px solid var(--accent-gold); padding-left: 20px; }
+        
+        /* Pricing List Style */
+        .pricing-list { margin-bottom: 40px; border-top: 1px solid #222; width: 100%; }
+        .pricing-item { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding-top: 25px; color: #fff; transition: 0.3s;
+        }
+        .pricing-item span:first-child { font-weight: 600; font-family: 'Cinzel'; letter-spacing: 1px; font-size: 1.2rem; }
+        .pricing-item span:last-child { color: var(--accent-gold); font-weight: 600; font-size: 1.2rem; }
+        
+        .pricing-sub {
+            font-size: 0.9rem; color: #777; margin-bottom: 10px; padding-bottom: 15px; 
+            border-bottom: 1px solid #222; line-height: 1.5;
+        }
+
+        /* Form */
+        label { display: block; color: var(--accent-gold); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; margin-top: 30px; }
+        select, input[type="text"], input[type="email"], input[type="tel"], textarea { 
+            width: 100%; background: #08080a; border: none; border-bottom: 1px solid #333; 
+            color: #fff; padding: 15px 0; font-family: 'Montserrat'; font-size: 1.1rem; cursor: pointer;
+        }
+        textarea { height: 100px; resize: none; }
+        select option { background: #08080a; color: #fff; padding: 10px; }
+        select:focus, input:focus, textarea:focus { outline: none; border-color: var(--accent-gold); }
+        
+        /* Info Button Style */
+        .info-btn {
+            background: transparent; border: 1px solid #444; color: #aaa;
+            padding: 10px 20px; font-size: 0.8rem; border-radius: 5px;
+            margin: 20px auto 0; cursor: pointer; transition: 0.3s; display: inline-flex; align-items: center; gap: 8px; width: fit-content; align-self: center;
+        }
+        .info-btn:hover { border-color: var(--accent-gold); color: #fff; }
+
+        .modal-btn { 
+            margin-top: 40px; width: 100%; padding: 20px; 
+            background: transparent; border: 1px solid var(--accent-gold); 
+            color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; 
+            transition: 0.3s; cursor: pointer; position: relative; overflow: hidden;
+        }
+        .modal-btn:hover { background: var(--accent-gold); color: #000; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
+
+        /* Particles on Btn (Slower & Blurred) */
+        .btn-particles { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; transform: translate(-50%, -50%); pointer-events: none; }
+        .btn-p { position: absolute; width: 4px; height: 4px; background: #fff; border-radius: 50%; opacity: 0; filter: blur(2px); }
+        .modal-btn:hover .btn-p { animation: btnParticle 2s ease-out infinite; }
+        @keyframes btnParticle { 0% { transform: translate(0,0); opacity: 1; } 100% { transform: translate(var(--tx), var(--ty)); opacity: 0; } }
+
+        /* Glowing Purple Icons for Contact */
+        .glow-icon-purple {
+            color: var(--accent-purple);
+            margin-right: 12px;
+            font-size: 1.3rem;
+            vertical-align: middle;
+            text-shadow: 0 0 10px var(--accent-glow-purple);
+            animation: pulsePurpleIcon 2s infinite alternate;
+        }
+        @keyframes pulsePurpleIcon {
+            from { text-shadow: 0 0 5px var(--accent-glow-purple); transform: scale(1); }
+            to { text-shadow: 0 0 15px var(--accent-purple); transform: scale(1.1); }
+        }
+
+        /* Cart Styles */
+        .cart-item {
+            background: rgba(255,255,255,0.03); border: 1px solid #333; padding: 20px;
+            margin-bottom: 15px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .cart-item-title { font-weight: 600; color: #fff; }
+        .cart-item-desc { font-size: 0.85rem; color: #999; }
+        .cart-item-price { color: var(--accent-gold); font-weight: 700; }
+        .remove-item { color: #f44336; cursor: pointer; padding: 5px; opacity: 0.7; transition: 0.3s; }
+        .remove-item:hover { opacity: 1; transform: scale(1.2); }
+        .cart-total { text-align: right; font-size: 1.5rem; color: var(--accent-gold); margin: 30px 0; font-family: 'Cinzel'; border-top: 1px solid #333; padding-top: 20px; }
+
+        /* Animácie v modale */
+        .stagger-item { opacity: 0; transform: translateY(20px); animation: fadeInUp 0.3s var(--ease-cinematic) forwards; }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        footer { text-align: center; padding: 80px 20px; margin-top: 150px; border-top: 1px solid #111; background: #050507; }
+        .social-icons a { color: #888; margin: 0 20px; font-size: 1.6rem; transition: 0.3s; display: inline-block; }
+        .social-icons a:hover { color: var(--accent-gold); transform: scale(1.1); }
+
+        @media (max-width: 900px) {
+            .container { padding: 0 15px; } /* Zmenšený padding */
+            .hero-title { font-size: 2.2rem; text-shadow: 0 0 30px rgba(136, 96, 192, 0.5); } /* Zmenšený font */
+            .glass-panel { padding: 25px 15px; margin-bottom: 60px; }
+            .section-header { padding: 60px 0 30px; } 
+            .section-header h2 { font-size: 1.5rem; padding: 0 10px; } /* Zmenšený font */
+            .top-nav { padding: 15px 20px; } /* Kompaktnejšia navigácia */
+            
+            .split-layout { flex-direction: column; gap: 30px; }
+            .split-media { width: 100%; height: 300px; }
+            .split-layout.bio-section-mobile { flex-direction: column-reverse; }
+            .bio-img.split-media { width: 100%; height: auto; aspect-ratio: 3/4; margin: 0 auto; }
+            .bio-img img { object-position: center top; }
+            .split-text p { font-size: 0.9rem; } /* Trochu menší text */
+            .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
+            .gallery-item { aspect-ratio: 4/3; }
+            .mockup-grid { grid-template-columns: 1fr; gap: 30px; }
+            .mockup-item { aspect-ratio: 4/3; } /* Na mobile zachováme kompaktnejší pomer */
+            
+            /* UPDATED MOBILE MODAL STYLE */
+            .modal-overlay { padding: 20px; align-items: center; } /* Centers the modal vertically */
+            
+            .modal-content { 
+                flex-direction: column; 
+                overflow: hidden; /* Important so radius works */
+                
+                /* Compact Card Style */
+                width: 100%;
+                max-width: 400px; /* Prevents it from being too wide if screen is slightly larger */
+                height: auto;
+                max-height: 85vh; /* Not full screen anymore */
+                border-radius: 20px; /* Rounded corners */
+                border: 1px solid var(--accent-gold); /* Add border to make it pop */
+                box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            }
+
+            .modal-img-box { 
+                width: 100%; 
+                height: 200px; /* Much smaller image area */
+                border-right: none; 
+                border-bottom: 1px solid #222; 
+                flex-shrink: 0; 
+            }
+            
+            .modal-info { 
+                width: 100%; 
+                padding: 25px 20px; 
+                height: auto; 
+                display: block; 
+                overflow-y: auto; /* Enable scrolling for content */
+            }
+            
+            .modal-info h2 { font-size: 1.8rem; margin-top: 0; margin-bottom: 15px; } /* Smaller title */
+            .modal-desc { font-size: 0.95rem; margin-bottom: 20px; } /* Smaller text */
+            .modal-btn { margin-top: 20px; padding: 15px; } /* Smaller button */
+            
+            .close-modal { 
+                top: 10px; right: 10px; 
+                background: rgba(0,0,0,0.6); 
+                border-radius: 50%; 
+                width: 35px; height: 35px; 
+                font-size: 1.8rem; 
+                padding-bottom: 4px;
+                z-index: 50;
+            }
+            
+            #discount-code { font-size: 1.5rem; }
+            #cursor { display: none !important; }
+            * { cursor: default; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="constellation-canvas"></canvas>
+    <div class="galaxy-bg"></div>
+    <div id="cursor"></div>
+
+    <audio id="bg-audio" loop><source src="drone.mp3" type="audio/mpeg"></audio>
+    <div class="audio-btn" id="audio-toggle"><i class="fa-solid fa-music"></i></div>
+
+    <!-- MODAL -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="close-modal clickable" onclick="closeModal()">×</div>
+            <div class="modal-img-box stagger-item" id="modal-img-box"></div>
+            <div class="modal-info stagger-item" id="modal-info"></div>
+        </div>
+    </div>
+
+    <nav class="top-nav">
+        <div class="nav-logo">Kúsok Nekonečna</div>
+        <div class="nav-cart clickable" onclick="openCart()"><i class="fa-solid fa-cart-shopping"></i> <span class="cart-count" id="cart-count">0</span></div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-dynamic-text" id="dynamic-text">Objednaj si svoj</div>
+            <h1 class="hero-title">Kúsok Nekonečna</h1>
+            <button onclick="document.getElementById('galeria').scrollIntoView()" class="btn clickable">Vesmír na dosah</button>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- Initial reveal class added in JS, now static for safety -->
+        <div class="section-header reveal-section"><h2><i class="fa-solid fa-user-astronaut"></i> Vitaj pozemšťan</h2></div>
+        <div class="glass-panel split-layout bio-section-mobile reveal-section">
+            <div class="split-text">
+                <h3>Volám sa Matej</h3>
+                <p>Astrofotografia je pre mňa vášnou a srdcovou záležitosťou. Je o precíznom zbere fotónov, kalibrácii a hodinách spracovania dát, ktoré sú pre bežné oko neviditeľné.</p>
+                <p>Vždy zachytávam vesmír v podobe, ktorú si môžeš zavesiť na stenu a každý deň sa stratiť v jej nekonečne.</p>
+                <button onclick="openModal('contact')" class="btn clickable">Kontaktuj ma</button>
+            </div>
+            <div class="split-media bio-img"><img src="bio.jpg" alt="Matej"></div>
+        </div>
+
+        <div class="section-header reveal-section"><h2><i class="fa-solid fa-eye"></i> Zaostri na Nekonečno</h2></div>
+        <div class="glass-panel game-section reveal-section" style="text-align: center;">
+            <div class="game-container">
+                <img src="" id="focus-image" alt="Hra">
+                <div class="game-hud">
+                    <div class="hud-corner tl"></div><div class="hud-corner tr"></div><div class="hud-corner bl"></div><div class="hud-corner br"></div>
+                    <div class="hud-center"></div>
+                    <div class="hud-line h"></div><div class="hud-line v"></div>
+                </div>
+            </div>
+            
+            <div id="game-message-area">
+                <p id="game-msg" style="color:var(--accent-gold); margin-top:20px; font-weight:600;">Pohni posuvníkom a nájdi ostrosť</p>
+                <!-- GRATULÁCIA NAD POSUVNÍKOM -->
+                <div id="gratulation-text" style="display:none; color:#fff; font-size:1.1rem; margin-top:10px;"></div>
+            </div>
+            
+            <input type="range" min="0" max="100" value="0" id="focus-slider" class="clickable">
+            
+            <!-- KÓD POD POSUVNÍKOM -->
+            <div id="discount-container">
+                <div id="discount-code"></div>
+            </div>
+        </div>
+        
+        <div class="section-separator reveal-section"></div>
+
+        <div class="section-header reveal-section" id="galeria"><h2><i class="fa-solid fa-image"></i> Galéria</h2></div>
+        <p class="gallery-hint reveal-section"><i class="fa-solid fa-arrow-pointer"></i> Kliknutím na fotografiu zobrazíte jej príbeh a možnosť kúpy.</p>
+        
+        <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-star"></i> Hlboký Vesmír</h3>
+        <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Pohľad do dávnej minulosti, kde sa rodia hviezdy a formujú galaxie.</p>
+        <div class="gallery-grid reveal-section">
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Dvojitá Hviezdokopa v Perzeovi', 'Majestátna dvojitá hviezdokopa a klenot jesennej oblohy. Nadčasová vesmírna klasika.', 'galeriahlbokyvesmir1.jpg')"><img src="galeriahlbokyvesmir1.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Hmlovina Tulipán', 'Svojim tvarom naozaj pripomína tento pozemský kvet, v skutočnosti je to hmlovina v našej Mliečnej Ceste - vesmírna kolíska kde sa rodia, aj zanikajú hviezdy. V podobnej kolíske vznikla aj naša Slnečná sústava!', 'galeriahlbokyvesmir2.jpg')"><img src="galeriahlbokyvesmir2.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Pár Galaxií', 'Na fotke sa skvejú galaxie s krkolomnými názvami NGC4725 a NGC4726. Sú vzdialenými príbuznými našej Mliečnej Cesty a v ladnom gravitačnom tanci sa kútia spolu vesmírom.', 'galeriahlbokyvesmir3.jpg')"><img src="galeriahlbokyvesmir3.jpg"></div>
+            <!-- NOVÉ OBRÁZKY -->
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Galaxia M101', 'Známa aj ako galaxia Veterník. Tento vesmírny gigant nám ukazuje svoju krásu priamo „do tváre“. Jej špirálové ramená sú domovom miliárd hviezd a hmlovín.', 'galeriahlbokyvesmir5.jpg')"><img src="galeriahlbokyvesmir5.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Hmlovina Jaskyňa', 'Tajomná emisná hmlovina Sh2-155 v súhvezdí Cefeus. Pripomína vstup do kozmickej jaskyne, kde sa v mračnách prachu a plynu rodia nové hviezdy.', 'galeriahlbokyvesmir4.jpg')"><img src="galeriahlbokyvesmir4.jpg"></div>
+        </div>
+
+        <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-mountain"></i> Krajinky</h3>
+        <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Spojenie pozemského a nekonečného divadla vesmíru nad nami.</p>
+        <div class="gallery-grid reveal-section">
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Stráž si svoje svetlo', 'Fotka, ktorá krásne zobrazuje, aká je naša galaxia obrovská a ktorá je pre mňa zároveň zosobnením prijatia a osobnej slobody v mojej tvorbe.', 'galeriakrajinky1.jpg')"><img src="galeriakrajinky1.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Star Catcher', 'Fotka, kde v krásnej panoráme Veľkého Poľa chytám hviezdu - venovaná jednej špeciálnej osobe - kto vie čítať medzi riadkami pochopí, že hviezda bola milá vtedy zamilovaného Mateja :)', 'galeriakrajinky2.jpg')"><img src="galeriakrajinky2.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Polárna žiara', 'Nezabudnuteľný moment z 10.5.2024, kedy sa Polárnou žiarou rozsvietila takmer celá Zem!', 'galeriakrajinky3.jpg')"><img src="galeriakrajinky3.jpg"></div>
+            <!-- NOVÉ OBRÁZKY -->
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Antitéza', 'Súboj dvoch svetov. Ostré, dynamické línie svetla v rukách človeka tvoria dokonalý protiklad k tichej, nemenne majestátnej žiare hviezdneho prachu nad nami.', 'galeriakrajinky5.jpg')"><img src="galeriakrajinky5.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Your Own Light', 'Tento záber mám veľmi rád pre jeho atmosféru. Pripomína mi, že pod tou nádhernou hviezdnou oblohou si žijeme svoje životy a svietime si na cestu vlastným svetlom, ktoré je pre nás nakoniec tým najdôležitejším.', 'galeriakrajinky7.jpg')"><img src="galeriakrajinky7.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Zatmenie Mesiaca', 'Vzácny okamih, kedy sa „Krvavý Mesiac“ vznáša nad vežami Bojnického zámku. Spojenie slovenskej histórie a nebeského úkazu v jedinečnej atmosfére.', 'galeriakrajinky6.jpg')"><img src="galeriakrajinky6.jpg"></div>
+        </div>
+
+        <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-sun"></i> Slnečná Sústava</h3>
+        <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Naši najbližší susedia. Krátery Mesiaca a dynamika planét na dosah ruky.</p>
+        <div class="gallery-grid reveal-section">
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Spln Mesiaca', 'Mesiac odfotený v splne v septembri 2024. Ako by povedali naši bratia Česi - To jse nevokouká!', 'galeriaslnecnasustava1.jpg')"><img src="galeriaslnecnasustava1.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Mesiac v detailoch', 'Mesiac takmer v splne odfotený mojim ďalekohľadom. Do tohto záberu bolo nafotených cez 300 fotografií, aby nám Mesiac ukázal svoje pravé farby. Pridané sú aj popisy jednotlivých častí a kráterov.', 'galeriaslnecnasustava2.jpg')"><img src="galeriaslnecnasustava2.jpg"></div>
+        </div>
+
+        <!-- NOVÁ KATEGÓRIA SCI-FI -->
+        <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-rocket"></i> Sci-Fi</h3>
+        <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Exkurzia do budúcnosti a na cudzie svety. Tam, kde fantázia nepozná hranice.</p>
+        <!-- Tiež odstránený inline style pre konzistenciu a správne zobrazenie na mobile -->
+        <div class="gallery-grid reveal-section">
+            <!-- Opravené názvy súborov: galeriascifi namiesto galeriacsifi -->
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Planéta POES-1A', 'Posielam Ti pohľadnicu z MOEB-1!<br><br>Poviem Ti, POES-1A je v simulácii krásna, ale naživo, ach.. tá oranžová človeku potrápi dýchacie aparáty!<br><br>Zápis v logu z 11.11.3025<br><br><strong>*V CENE SÚ ZAHRNUTÉ OBE FOTOGRAFIE!</strong>', 'galeriascifi1a.jpg,galeriascifi1b.jpg')">
+                <img src="galeriascifi1a.jpg" alt="Planéta POES-1A">
+            </div>
+        </div>
+
+        <div class="section-separator reveal-section"></div>
+
+        <!-- MOCKUPY - CLEAN VERSION -->
+        <div class="section-header reveal-section"><h2><i class="fa-solid fa-house"></i> Kúsky nekonečna u vás</h2></div>
+        <div class="mockup-grid reveal-section">
+            <div class="mockup-item"><img src="mockup_final_1.jpg" alt="Mockup 1" style="object-fit: cover;"></div>
+            <div class="mockup-item"><img src="mockup_final_2.jpg" alt="Mockup 2"></div>
+            <div class="mockup-item"><img src="mockup_final_3.jpg" alt="Mockup 3"></div>
+            <!-- Odstránené špeciálne zarovnanie, teraz sa použije default 4:3 cover -->
+            <div class="mockup-item"><img src="mockup_final_4.jpg" alt="Mockup 4"></div>
+        </div>
+
+        <div class="section-separator reveal-section"></div>
+
+        <div class="section-header reveal-section"><h2><i class="fa-solid fa-book-open"></i> Mentoring</h2></div>
+        <div class="glass-panel split-layout mentoring-layout reveal-section">
+            <div class="split-media mentoring-img"><img src="mentoring.jpg" alt="Mentoring"></div>
+            <div class="split-text" style="text-align: left;">
+                <h3>Staň sa lovcom hviezd</h3>
+                <p>Astrofotografia je náročná disciplína. Ponúkam ti individuálny mentoring, kde ti odovzdám svoje know-how. Naučím ťa všetko od výberu techniky až po post-proces.</p>
+                <button onclick="openModal('mentoring')" class="btn clickable">Ponuka kurzov</button>
+            </div>
+        </div>
+
+        <div class="section-header reveal-section"><h2><i class="fa-solid fa-cogs"></i> Moja Technika</h2></div>
+        <div class="mockup-grid reveal-section" style="gap:30px; margin-bottom:100px;">
+            <div style="background:rgba(255,255,255,0.02); padding:40px; border:1px solid rgba(255,255,255,0.05); border-radius:10px;">
+                <h4 style="color:var(--accent-gold); margin-bottom:20px; letter-spacing:2px;"><i class="fa-solid fa-mountain-sun"></i> Krajinky</h4>
+                <ul style="list-style:none; color:#999; font-size:0.9rem; line-height:2;"><li>Panasonic Lumix S5</li><li>Lumix 50mm f/1.8</li><li>Montáž: SWSA</li></ul>
+            </div>
+            <div style="background:rgba(255,255,255,0.02); padding:40px; border:1px solid rgba(255,255,255,0.05); border-radius:10px;">
+                <h4 style="color:var(--accent-purple); margin-bottom:20px; letter-spacing:2px;"><i class="fa-solid fa-star"></i> Hlboký Vesmír</h4>
+                <ul style="list-style:none; color:#999; font-size:0.9rem; line-height:2;"><li>Teleskop: SW Quattro 250/1000</li><li>Montáž: iOptron CEM70</li><li>Kamera: Lumix S5 (Mod)</li></ul>
+            </div>
+        </div>
+
+        <div class="section-separator reveal-section"></div>
+
+        <div class="section-header reveal-section"><h2><i class="fa-solid fa-gift"></i> Vesmír na Mieru</h2></div>
+        <div class="glass-panel split-layout reveal-section">
+            <div class="split-text">
+                <h3>Vaše miesto pod hviezdami</h3>
+                <p>Máte chatu na samote? Vytvorím pre vás jedinečné dielo na mieru - spojenie vášho pozemského domova s hlbokým vesmírom.</p>
+                <button onclick="openModal('zakazka')" class="btn clickable">Cenník fotenia</button>
+            </div>
+            <div class="split-media custom-img"><img src="zakazka.jpg" alt="Chata"></div>
+        </div>
+
+        <div class="section-separator reveal-section"></div>
+
+        <div class="section-header reveal-section"><h2><i class="fa-solid fa-circle-question"></i> Novinky vo vesmíre</h2></div>
+        <div class="glass-panel sky-blog-card reveal-section" onclick="window.open('https://www.facebook.com/hvezdarenpartizanske')">
+            <h3 style="color:var(--accent-gold)">Aktuálne dianie na nočnej oblohe <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:1rem; margin-left:10px;"></i></h3>
+            <div id="sky-microblog" style="font-size:1.1rem; color:#fff; font-weight:300;">Načítavam dáta...</div>
+        </div>
+
+        <div class="section-separator reveal-section"></div>
+
+        <div class="section-header reveal-section"><h2><i class="fa-solid fa-circle-question"></i> Najčastejšie otázky</h2></div>
+        <div class="reveal-section" style="max-width:800px; margin:0 auto 100px;">
+            <details><summary>Aké materiály používate na tlač?</summary><p>Tlačím výhradne na kvalitné, archívne materiály. Fine Art papier má životnosť cez 100 rokov. Pre moderný vzhľad odporúčam tlač na PVC dosku, alebo hliníkovú dosku (Dibond), ktorá nepotrebuje rám.</p></details>
+            <details><summary>Ako dlho trvá dodanie obrazu?</summary><p>Štandardná doba dodania je 7-14 dní. Každý obraz sa vyrába na zákazku, prechádza kontrolou kvality a je bezpečne zabalený.</p></details>
+            <details><summary>Je potrebná vlastná technika na mentoring?</summary><p>Pre začiatočnícky balík Štart nie je technika podmienkou, všetko si vysvetlíme na tej mojej. Pre Masterclass je požadované mať vlastný fotoaparát a statív.</p></details>
+        </div>
+
+    </div>
+
+    <footer>
+        <h3>Kúsok Nekonečna</h3>
+        <div style="margin:30px; font-size:1.5rem;">
+            <a href="https://www.facebook.com/Donorofficialsvk" target="_blank" class="social-icons"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/donor.astro" target="_blank" class="social-icons"><i class="fa-brands fa-instagram"></i></a>
+            <a href="mailto:matejkakis@gmail.com" class="social-icons"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p>© 2026 Matej Kakiš - Donor Astophoto</p>
+    </footer>
+
+    <script>
+        // CART LOGIC
+        let cart = [];
+        let imageInterval = null; // Premenná pre časovač obrázkov
+
+        function addToCart(title) {
+            const matSelect = document.getElementById('mat-select');
+            const sizeSelect = document.getElementById('size-select');
+            
+            const material = matSelect.options[matSelect.selectedIndex].text;
+            const sizeRaw = sizeSelect.value;
+            // Get price from option text (e.g. "A3 - 45€")
+            const sizeText = sizeSelect.options[sizeSelect.selectedIndex].text;
+            const price = parseInt(sizeText.split('-')[1].replace('€','').trim());
+
+            cart.push({ title, material, size: sizeText, price });
+            updateCartCount();
+            closeModal();
+            alert('Položka bola pridaná do košíka');
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            openCart(); // Re-render cart
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        function openCart() {
+            // Hide image box for cart
+            mImg.style.display = 'none';
+            modal.style.display = 'flex';
+            
+            let total = 0;
+            let cartHTML = `<h2>Váš Košík</h2>`;
+
+            if (cart.length === 0) {
+                cartHTML += `<p class="modal-desc">Váš košík je zatiaľ prázdny.</p>`;
+                cartHTML += `<button class="modal-btn clickable" onclick="closeModal()">Pokračovať v nákupe</button>`;
+            } else {
+                cartHTML += `<div style="max-height: 300px; overflow-y: auto; margin-bottom: 20px;">`;
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    cartHTML += `
+                        <div class="cart-item">
+                            <div>
+                                <div class="cart-item-title">${item.title}</div>
+                                <div class="cart-item-desc">${item.material} | ${item.size}</div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:15px;">
+                                <div class="cart-item-price">${item.price}€</div>
+                                <div class="remove-item" onclick="removeFromCart(${index})"><i class="fa-solid fa-trash"></i></div>
+                            </div>
+                        </div>
+                    `;
+                });
+                cartHTML += `</div>`;
+                cartHTML += `<div class="cart-total">Spolu: ${total}€</div>`;
+                
+                // Formspree Form Integration
+                // DÔLEŽITÉ: Nahraď https://formspree.io/f/VASE_ID tvojím skutočným Formspree odkazom
+                cartHTML += `
+                    <form action="https://formspree.io/f/mnnellqk" method="POST" id="order-form">
+                        <input type="hidden" name="objednavka" id="order-details">
+                        
+                        <label>Kontaktné údaje</label>
+                        <input type="text" name="meno" placeholder="Meno a Priezvisko" required>
+                        <input type="email" name="email" placeholder="Váš Email" required>
+                        <input type="tel" name="telefon" placeholder="Telefónne číslo" required>
+                        
+                        <label>Adresa doručenia</label>
+                        <textarea name="adresa" placeholder="Ulica, Číslo, Mesto, PSČ" style="height:80px;" required></textarea>
+                        
+                        <div style="margin-top:20px; font-size:0.8rem; color:#888;">
+                            <input type="checkbox" required> Súhlasím so spracovaním osobných údajov a VOP.
+                        </div>
+
+                        <button type="submit" class="modal-btn clickable" onclick="prepareOrder()">
+                            <div class="btn-particle-container">Odoslať objednávku s povinnosťou platby<div class="btn-gold-dust"></div></div>
+                        </button>
+                    </form>
+                    <p style="font-size:0.8rem; color:#666; margin-top:15px; text-align:center;">Po odoslaní Vám príde potvrdzujúci email s platobnými údajmi.</p>
+                `;
+            }
+            mInfo.innerHTML = cartHTML;
+        }
+
+        function prepareOrder() {
+            // Prepare string for hidden input
+            const orderInput = document.getElementById('order-details');
+            if(orderInput) {
+                let details = "OBJEDNÁVKA:\n";
+                cart.forEach(item => {
+                    details += `- ${item.title} (${item.material}, ${item.size}) - ${item.price}€\n`;
+                });
+                details += `\nSPOLU: ${cart.reduce((a,b)=>a+b.price,0)}€`;
+                
+                // Check if user has discount code saved
+                const savedCode = localStorage.getItem('astroCode');
+                const savedPerc = localStorage.getItem('astroPerc');
+                if(savedCode) {
+                    details += `\n\nUPLATNENÁ ZĽAVA: Kód ${savedCode} (${savedPerc}%)`;
+                }
+                
+                orderInput.value = details;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // SÚHVEZDIA
+            const canvas = document.getElementById('constellation-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height, particles = [];
+            function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; initParticles(); }
+            window.addEventListener('resize', resize);
+
+            function initParticles() {
+                particles = [];
+                const particleCount = window.innerWidth < 900 ? 30 : 70; 
+                for(let i=0; i<particleCount; i++) { particles.push({x: Math.random()*width, y: Math.random()*height, vx:(Math.random()-0.5)*0.2, vy:(Math.random()-0.5)*0.2}); }
+            }
+            resize();
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height); ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)'; ctx.lineWidth = 0.5;
+                particles.forEach((p, i) => {
+                    p.x += p.vx; p.y += p.vy; if(p.x<0||p.x>width)p.vx*=-1; if(p.y<0||p.y>height)p.vy*=-1;
+                    ctx.fillStyle='rgba(255, 255, 255, 0.4)'; ctx.beginPath(); ctx.arc(p.x,p.y,1,0,Math.PI*2); ctx.fill();
+                    const connectDistance = window.innerWidth < 900 ? 80 : 120;
+                    for(let j=i+1; j<particles.length; j++) { let p2=particles[j]; let d=Math.hypot(p.x-p2.x, p.y-p2.y); if(d<connectDistance){ ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke(); } }
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+
+            // HERO
+            const texts = ["Objednaj si svoj", "Nauč sa zachytiť"]; let tIdx = 0;
+            const tEl = document.getElementById('dynamic-text');
+            setInterval(() => { tEl.style.opacity = 0; setTimeout(() => { tIdx = (tIdx + 1) % texts.length; tEl.innerText = texts[tIdx]; tEl.style.opacity = 1; }, 500); }, 3000);
+
+            // SCROLL REVEAL - SAFETY FIRST
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { 
+                    if (entry.isIntersecting) { 
+                        entry.target.classList.add('reveal-active');
+                        entry.target.classList.add('visible'); 
+                        observer.unobserve(entry.target); 
+                    } 
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.reveal-section').forEach(section => {
+                section.classList.add('reveal-active'); // Add class via JS to hide initially
+                observer.observe(section);
+            });
+
+            // AUDIO & CURSOR
+            const audio = document.getElementById('bg-audio');
+            const btn = document.getElementById('audio-toggle');
+            btn.addEventListener('click', () => { if(audio.paused) { audio.play(); btn.classList.add('audio-playing'); } else { audio.pause(); btn.classList.remove('audio-playing'); } });
+            const cur = document.getElementById('cursor');
+            if(window.matchMedia("(min-width: 900px)").matches) { document.addEventListener('mousemove', e => { cur.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`; }); } else { cur.style.display = 'none'; }
+
+            // MICROBLOG
+            function updateSkyBlog() {
+                const now = new Date(); const month = now.getMonth() + 1;
+                let status = "Pokojná obloha. Ideálny čas na pozorovanie hlbokého vesmíru.";
+                if(month === 1) status = "❄️ Január: Orion dominuje zimnej oblohe.";
+                if(month === 4) status = "✨ Apríl: Meteorický roj Lyridy.";
+                if(month === 8) status = "🔥 August: Perzeidy sú tu! Vrchol aktivity.";
+                if(month === 12) status = "☄️ December: Geminidy - kráľ meteorických rojov.";
+                const moonPhase = (now.getDate() % 30) / 30;
+                let moonIcon = moonPhase < 0.1 || moonPhase > 0.9 ? '<i class="fa-solid fa-moon"></i>' : (moonPhase > 0.4 && moonPhase < 0.6 ? '<i class="fa-solid fa-circle"></i>' : '<i class="fa-solid fa-cloud-moon"></i>');
+                document.getElementById('sky-microblog').innerHTML = `<span style="color:var(--accent-gold)">${status}</span> <br> <span style="font-size:1rem; color:#ccc">Mesiac ${moonIcon}</span>`;
+            }
+            updateSkyBlog();
+
+            // HRA
+            const img = document.getElementById('focus-image');
+            img.src = ['galeriakrajinky2.jpg', 'galeriahlbokyvesmir2.jpg', 'galeriakrajinky3.jpg'][Math.floor(Math.random()*3)];
+            const slider = document.getElementById('focus-slider'); 
+            const msg = document.getElementById('game-msg');
+            const gratulation = document.getElementById('gratulation-text');
+            const code = document.getElementById('discount-code');
+            const resDiv = document.getElementById('discount-container');
+            const hud = document.querySelector('.hud-center');
+
+            const savedCode = localStorage.getItem('astroCode');
+            const savedPerc = localStorage.getItem('astroPerc');
+            
+            if(savedCode) {
+                setWin(savedCode, savedPerc);
+            } else {
+                slider.addEventListener('input', e => {
+                    let val = Math.abs(e.target.value - 60); 
+                    img.style.filter = `blur(${val/2.5}px)`;
+                    hud.style.transform = `translate(-50%, -50%) scale(${1 + val/50})`;
+                    if(val < 10) { hud.style.borderColor = "#fff"; } else { hud.style.borderColor = "rgba(255,255,255,0.3)"; }
+                    
+                    if(val < 4) { 
+                        const perc = [5,10,15,20,25][Math.floor(Math.random()*5)]; 
+                        const c = `NEKONECNO${perc}`; 
+                        localStorage.setItem('astroCode', c); localStorage.setItem('astroPerc', perc);
+                        setWin(c, perc); 
+                    }
+                });
+            }
+
+            function setWin(c, p) { 
+                img.style.filter = 'blur(0)'; slider.value=60; slider.disabled=true; 
+                msg.innerText = "PERFEKTNE ZAOSTRENÉ!"; msg.style.color="#ffb02e";
+                gratulation.style.display = 'block';
+                gratulation.innerHTML = `Gratulujem! Získavaš <strong>${p}%</strong> zľavu.<br>Uplatni si ju v košíku.`;
+                resDiv.style.display = 'block'; // Ukáže container pre kód
+                code.style.display = 'block';
+                code.innerText = c;
+            }
+        });
+
+        // MODAL SYSTEM
+        const modal = document.getElementById('modal-overlay');
+        const mImg = document.getElementById('modal-img-box');
+        const mInfo = document.getElementById('modal-info');
+
+        // Material Info Data
+        const materialInfo = {
+            title: "Info o materiáloch",
+            desc: `
+                <strong style="color:var(--accent-gold); display:block; margin-bottom:10px;">Časopriestor (Štandard)</strong>
+                <ul>
+                    <li><b>Foto Papier:</b> Saténový polomatný povrch, živé farby, ekonomická voľba. Ideálne do klasických rámov.</li>
+                    <li><b>Fine Art:</b> Múzejná kvalita, 100% bavlna, hlboká čierna a textúra. Životnosť cez 100 rokov. Pre zberateľov.</li>
+                    <li><b>Plátno (Canvas):</b> Klasický vzhľad maľby, napnuté na drevenom ráme. Plastický efekt.</li>
+                </ul>
+                <br>
+                <strong style="color:var(--accent-purple); display:block; margin-bottom:10px;">Hviezdny prach (Premium)</strong>
+                <ul>
+                    <li><b>PVC Tabuľa:</b> Ľahká, odolná, moderný bezrámový vzhľad. Čistý dizajn.</li>
+                    <li><b>Hliník (Dibond):</b> Absolútna špička. Extrémna ostrosť, odolnosť a luxusný kovový odlesk. Obraz "pláva" na stene.</li>
+                </ul>
+            `
+        };
+
+        const content = {
+            contact: `
+                <h2>Kontakt</h2>
+                <div style="font-size:1.1rem; color:#ccc; margin-top:30px; display:inline-block; text-align:left;">
+                    <p style="margin-bottom:20px;">
+                        <i class="fa-solid fa-phone glow-icon-purple"></i> 
+                        <span style="vertical-align:middle;">0902 385 807</span>
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-envelope glow-icon-purple"></i> 
+                        <span style="vertical-align:middle;">matejkakis@gmail.com</span>
+                    </p>
+                </div>
+            `,
+            mentoring: `
+                <h2>Ponuka</h2>
+                <span class="modal-subtitle">Mentoring</span>
+                <div class="pricing-list">
+                    <div class="pricing-item"><span>Štart</span><span>99€</span></div>
+                    <div class="pricing-sub">Základy astrofotografie, výber techniky, nastavenie fotoaparátu a prvé kroky v spracovaní. Ideálne pre začiatočníkov.</div>
+                    
+                    <div class="pricing-item"><span>Masterclass</span><span>249€</span></div>
+                    <div class="pricing-sub">Pokročilé techniky snímania (trackovanie), kalibrácia dát, skladanie a profesionálny post-proces v PixInsight a Photoshop.</div>
+                </div>
+                <p class="modal-desc">Odovzdám ti svoje know-how a skrátim ti cestu k vysnívanej fotke.</p>
+                <button class="modal-btn clickable" onclick="openModal('contact')">
+                    <div class="btn-particle-container">Mám záujem<div class="btn-gold-dust"></div></div>
+                </button>
+            `,
+            zakazka: `
+                <h2>Zákazka</h2>
+                <span class="modal-subtitle">Vesmír na Mieru</span>
+                <div class="pricing-list">
+                    <div class="pricing-item"><span>Digitál</span><span>150€</span></div>
+                    <div class="pricing-sub">Fotenie vašej lokality + Mliečna Cesta.<br>2 profesionálne upravené fotografie vo vysokom rozlíšení.</div>
+                    
+                    <div class="pricing-item"><span>Exclusive Print</span><span>250€</span></div>
+                    <div class="pricing-sub">Balík Digitál + Veľkoformátový obraz (Materiál PVC).</div>
+                </div>
+                <p class="modal-desc">Unikátne fotenie Vášho špeciálneho miesta pod hviezdami.</p>
+                <button class="modal-btn clickable" onclick="openModal('contact')">
+                    <div class="btn-particle-container">Dohodnúť<div class="btn-gold-dust"></div></div>
+                </button>
+            `,
+            buy: (t, d) => `
+                <h2>${t}</h2><p class="modal-desc">${d}</p>
+                
+                <label>Materiál</label>
+                <select id="mat-select">
+                    <optgroup label="Časopriestor">
+                        <option value="paper">Foto Papier</option>
+                        <option value="fineart">Fine Art</option>
+                        <option value="canvas">Plátno</option>
+                    </optgroup>
+                    <optgroup label="Hviezdny prach">
+                        <option value="pvc">PVC Tabuľa (iba bez rámu)</option>
+                        <option value="alu">Hliník (iba bez rámu)</option>
+                    </optgroup>
+                </select>
+
+                <label>Veľkosť</label>
+                <select id="size-select">
+                    <!-- Options populated by JS -->
+                </select>
+
+                <button class="modal-btn clickable" onclick="addToCart('${t}')"><div class="btn-particle-container">Vložiť do košíka<div class="btn-gold-dust"></div></div></button>
+
+                <div style="text-align:center; margin-top:15px;">
+                    <button class="info-btn clickable" onclick="openModal('materials')"><i class="fa-solid fa-scroll"></i> Info o materiáloch</button>
+                </div>
+            `,
+            materials: `<h2>${materialInfo.title}</h2><div class="modal-desc" style="border:none;">${materialInfo.desc}</div><button class="modal-btn clickable" onclick="closeModal()">Zavrieť</button>`
+        };
+
+        function updatePrice() {
+            const mat = document.getElementById('mat-select').value;
+            const sizeSel = document.getElementById('size-select');
+            
+            // Cenník
+            const pricesStandard = { 'A3': 45, 'A2': 75, 'A1': 105, 'A0': 155 };
+            const pricesPremium = { 'A2': 125, 'A1': 175, 'A0': 250 };
+
+            sizeSel.innerHTML = ''; 
+
+            if (mat === 'pvc' || mat === 'alu') {
+                for (const [s, p] of Object.entries(pricesPremium)) {
+                    sizeSel.add(new Option(`${s} - ${p}€`, s));
+                }
+            } else {
+                for (const [s, p] of Object.entries(pricesStandard)) {
+                    sizeSel.add(new Option(`${s} - ${p}€`, s));
+                }
+            }
+        }
+
+        function openModal(type, title='', desc='', src='') {
+            // Najprv vyčistíme starý interval, ak nejaký beží
+            if (imageInterval) {
+                clearInterval(imageInterval);
+                imageInterval = null;
+            }
+
+            if(type === 'materials') {
+                 mImg.style.display = 'none';
+                 mInfo.innerHTML = content.materials;
+            } else {
+                if(src) { 
+                    // Logika pre striedanie obrázkov (ak je v src čiarka)
+                    if (src.includes(',')) {
+                        const images = src.split(',');
+                        let currentIdx = 0;
+                        
+                        // Zobrazíme prvý obrázok
+                        mImg.innerHTML = `<img src="${images[0]}" id="cycling-img" style="transition: opacity 0.5s ease;">`;
+                        mImg.style.display = 'flex';
+
+                        // Nastavíme interval na 2.5 sekundy
+                        imageInterval = setInterval(() => {
+                            currentIdx = (currentIdx + 1) % images.length;
+                            const imgEl = document.getElementById('cycling-img');
+                            if (imgEl) {
+                                // Jemný efekt prebliknutia (voliteľné, ak chceš plynulejšie, stačí len zmeniť src)
+                                imgEl.style.opacity = 0;
+                                setTimeout(() => {
+                                    imgEl.src = images[currentIdx];
+                                    imgEl.style.opacity = 1;
+                                }, 200); // Krátka pauza na fade-out
+                            }
+                        }, 2500);
+
+                    } else {
+                        // Klasický jeden obrázok
+                        mImg.innerHTML = `<img src="${src}">`; 
+                        mImg.style.display = 'flex'; 
+                    }
+                } else { 
+                    mImg.style.display = 'none'; 
+                }
+
+                if(type === 'buy') {
+                    mInfo.innerHTML = content.buy(title, desc);
+                    setTimeout(() => {
+                        const matSel = document.getElementById('mat-select');
+                        if(matSel) {
+                            matSel.addEventListener('change', updatePrice);
+                            updatePrice(); 
+                        }
+                    }, 50);
+                } else {
+                    mInfo.innerHTML = content[type];
+                }
+            }
+            
+            const items = mInfo.querySelectorAll('*');
+            items.forEach((el, index) => {
+                el.classList.add('stagger-item'); el.style.animationDelay = `${index * 0.05}s`;
+            });
+            if(mImg.style.display !== 'none') mImg.classList.add('stagger-item');
+            
+            // Particles on btns (Slow & Blurred)
+            const btns = mInfo.querySelectorAll('.modal-btn');
+            btns.forEach(btn => {
+                const container = btn.querySelector('.btn-particle-container');
+                if(container) {
+                    for(let i=0; i<10; i++) {
+                        let p = document.createElement('div'); p.className = 'btn-p';
+                        p.style.left = '50%'; p.style.top = '50%';
+                        p.style.setProperty('--tx', (Math.random()*100-50)+'px'); p.style.setProperty('--ty', (Math.random()*60-30)+'px');
+                        p.style.animationDuration = (Math.random()*2+1)+'s'; p.style.animationDelay = (Math.random()*0.5)+'s';
+                        container.appendChild(p);
+                    }
+                }
+            });
+
+            modal.style.display = 'flex';
+        }
+        
+        function closeModal() { 
+            // Pri zatvorení zrušíme interval, aby nebežal na pozadí
+            if (imageInterval) {
+                clearInterval(imageInterval);
+                imageInterval = null;
+            }
+            modal.style.display = 'none'; 
+        }
+        modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+    </script>
+</body>
+</html>
