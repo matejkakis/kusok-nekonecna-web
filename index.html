@@ -425,11 +425,16 @@
             .top-nav { padding: 15px 20px; } 
             
             .split-layout { flex-direction: column; gap: 30px; }
+            
+            /* UPRAVENÉ: Zmenšené písma pre obsah v sekciách (nadpisy a texty) */
+            .split-text h3 { font-size: 1.5rem; margin-bottom: 15px; }
+            .split-text p { font-size: 0.85rem; } 
+            
             .split-media { width: 100%; height: 300px; }
             .split-layout.bio-section-mobile { flex-direction: column-reverse; }
             .bio-img.split-media { width: 100%; height: auto; aspect-ratio: 3/4; margin: 0 auto; }
             .bio-img img { object-position: center top; }
-            .split-text p { font-size: 0.9rem; } 
+            
             .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
             .gallery-item { aspect-ratio: 4/3; }
             .mockup-grid { grid-template-columns: 1fr; gap: 30px; }
