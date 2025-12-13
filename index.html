@@ -45,10 +45,10 @@
             pointer-events: none; z-index: 9998; opacity: 0.6; mix-blend-mode: overlay; 
         }
 
-        /* POZADIE - GITHUB VERZIA (priečinok img/) */
+        /* POZADIE - ROOT (priamo v priečinku) */
         body::before { 
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(to bottom, rgba(5,5,10,0.3), rgba(5,5,10,0.7)), url('img/bg.jpg') center/cover no-repeat; 
+            background: linear-gradient(to bottom, rgba(5,5,10,0.3), rgba(5,5,10,0.7)), url('bg.jpg') center/cover no-repeat; 
             filter: blur(7px) brightness(0.6) contrast(1.1); 
             transform: scale(1.05); z-index: -3; pointer-events: none; 
         }
@@ -514,7 +514,7 @@
                 <p>Vždy zachytávam vesmír v podobe, ktorú si môžeš zavesiť na stenu a každý deň sa stratiť v jej nekonečne.</p>
                 <button onclick="openModal('contact')" class="btn clickable">Kontaktuj ma</button>
             </div>
-            <div class="split-media bio-img"><img src="img/bio.jpg" alt="Matej"></div>
+            <div class="split-media bio-img"><img src="bio.jpg" alt="Matej"></div>
         </div>
 
         <div class="section-header reveal-section"><h2><i class="fa-solid fa-eye"></i> Zaostri na Nekonečno</h2></div>
@@ -550,39 +550,39 @@
         <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-star"></i> Hlboký Vesmír</h3>
         <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Pohľad do dávnej minulosti, kde sa rodia hviezdy a formujú galaxie.</p>
         <div class="gallery-grid reveal-section">
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Dvojitá Hviezdokopa v Perzeovi', 'Majestátna dvojitá hviezdokopa a klenot jesennej oblohy. Nadčasová vesmírna klasika.', 'img/galeriahlbokyvesmir1.jpg')"><img src="img/galeriahlbokyvesmir1.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Hmlovina Tulipán', 'Svojim tvarom naozaj pripomína tento pozemský kvet, v skutočnosti je to hmlovina v našej Mliečnej Ceste - vesmírna kolíska kde sa rodia, aj zanikajú hviezdy. V podobnej kolíske vznikla aj naša Slnečná sústava!', 'img/galeriahlbokyvesmir2.jpg')"><img src="img/galeriahlbokyvesmir2.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Pár Galaxií', 'Na fotke sa skvejú galaxie s krkolomnými názvami NGC4725 a NGC4726. Sú vzdialenými príbuznými našej Mliečnej Cesty a v ladnom gravitačnom tanci sa kútia spolu vesmírom.', 'img/galeriahlbokyvesmir3.jpg')"><img src="img/galeriahlbokyvesmir3.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Dvojitá Hviezdokopa v Perzeovi', 'Majestátna dvojitá hviezdokopa a klenot jesennej oblohy. Nadčasová vesmírna klasika.', 'galeriahlbokyvesmir1.jpg')"><img src="galeriahlbokyvesmir1.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Hmlovina Tulipán', 'Svojim tvarom naozaj pripomína tento pozemský kvet, v skutočnosti je to hmlovina v našej Mliečnej Ceste - vesmírna kolíska kde sa rodia, aj zanikajú hviezdy. V podobnej kolíske vznikla aj naša Slnečná sústava!', 'galeriahlbokyvesmir2.jpg')"><img src="galeriahlbokyvesmir2.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Pár Galaxií', 'Na fotke sa skvejú galaxie s krkolomnými názvami NGC4725 a NGC4726. Sú vzdialenými príbuznými našej Mliečnej Cesty a v ladnom gravitačnom tanci sa kútia spolu vesmírom.', 'galeriahlbokyvesmir3.jpg')"><img src="galeriahlbokyvesmir3.jpg"></div>
             <!-- NOVÉ OBRÁZKY -->
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Galaxia M101', 'Známa aj ako galaxia Veterník. Tento vesmírny gigant nám ukazuje svoju krásu priamo „do tváre“. Jej špirálové ramená sú domovom miliárd hviezd a hmlovín.', 'img/galeriahlbokyvesmir5.jpg')"><img src="img/galeriahlbokyvesmir5.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Hmlovina Jaskyňa', 'Tajomná emisná hmlovina Sh2-155 v súhvezdí Cefeus. Pripomína vstup do kozmickej jaskyne, kde sa v mračnách prachu a plynu rodia nové hviezdy.', 'img/galeriahlbokyvesmir4.jpg')"><img src="img/galeriahlbokyvesmir4.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Galaxia M101', 'Známa aj ako galaxia Veterník. Tento vesmírny gigant nám ukazuje svoju krásu priamo „do tváre“. Jej špirálové ramená sú domovom miliárd hviezd a hmlovín.', 'galeriahlbokyvesmir5.jpg')"><img src="galeriahlbokyvesmir5.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Hmlovina Jaskyňa', 'Tajomná emisná hmlovina Sh2-155 v súhvezdí Cefeus. Pripomína vstup do kozmickej jaskyne, kde sa v mračnách prachu a plynu rodia nové hviezdy.', 'galeriahlbokyvesmir4.jpg')"><img src="galeriahlbokyvesmir4.jpg"></div>
         </div>
 
         <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-mountain"></i> Krajinky</h3>
         <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Spojenie pozemského a nekonečného divadla vesmíru nad nami.</p>
         <div class="gallery-grid reveal-section">
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Stráž si svoje svetlo', 'Fotka, ktorá krásne zobrazuje, aká je naša galaxia obrovská a ktorá je pre mňa zároveň zosobnením prijatia a osobnej slobody v mojej tvorbe.', 'img/galeriakrajinky1.jpg')"><img src="img/galeriakrajinky1.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Star Catcher', 'Fotka, kde v krásnej panoráme Veľkého Poľa chytám hviezdu - venovaná jednej špeciálnej osobe - kto vie čítať medzi riadkami pochopí, že hviezda bola milá vtedy zamilovaného Mateja :)', 'img/galeriakrajinky2.jpg')"><img src="img/galeriakrajinky2.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Polárna žiara', 'Nezabudnuteľný moment z 10.5.2024, kedy sa Polárnou žiarou rozsvietila takmer celá Zem!', 'img/galeriakrajinky3.jpg')"><img src="img/galeriakrajinky3.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Stráž si svoje svetlo', 'Fotka, ktorá krásne zobrazuje, aká je naša galaxia obrovská a ktorá je pre mňa zároveň zosobnením prijatia a osobnej slobody v mojej tvorbe.', 'galeriakrajinky1.jpg')"><img src="galeriakrajinky1.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Star Catcher', 'Fotka, kde v krásnej panoráme Veľkého Poľa chytám hviezdu - venovaná jednej špeciálnej osobe - kto vie čítať medzi riadkami pochopí, že hviezda bola milá vtedy zamilovaného Mateja :)', 'galeriakrajinky2.jpg')"><img src="galeriakrajinky2.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Polárna žiara', 'Nezabudnuteľný moment z 10.5.2024, kedy sa Polárnou žiarou rozsvietila takmer celá Zem!', 'galeriakrajinky3.jpg')"><img src="galeriakrajinky3.jpg"></div>
             <!-- NOVÉ OBRÁZKY -->
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Antitéza', 'Súboj dvoch svetov. Ostré, dynamické línie svetla v rukách človeka tvoria dokonalý protiklad k tichej, nemenne majestátnej žiare hviezdneho prachu nad nami.', 'img/galeriakrajinky5.jpg')"><img src="img/galeriakrajinky5.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Your Own Light', 'Tento záber mám veľmi rád pre jeho atmosféru. Pripomína mi, že pod tou nádhernou hviezdnou oblohou si žijeme svoje životy a svietime si na cestu vlastným svetlom, ktoré je pre nás nakoniec tým najdôležitejším.', 'img/galeriakrajinky7.jpg')"><img src="img/galeriakrajinky7.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Zatmenie Mesiaca', 'Vzácny okamih, kedy sa „Krvavý Mesiac“ vznáša nad vežami Bojnického zámku. Spojenie slovenskej histórie a nebeského úkazu v jedinečnej atmosfére.', 'img/galeriakrajinky6.jpg')"><img src="img/galeriakrajinky6.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Antitéza', 'Súboj dvoch svetov. Ostré, dynamické línie svetla v rukách človeka tvoria dokonalý protiklad k tichej, nemenne majestátnej žiare hviezdneho prachu nad nami.', 'galeriakrajinky5.jpg')"><img src="galeriakrajinky5.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Your Own Light', 'Tento záber mám veľmi rád pre jeho atmosféru. Pripomína mi, že pod tou nádhernou hviezdnou oblohou si žijeme svoje životy a svietime si na cestu vlastným svetlom, ktoré je pre nás nakoniec tým najdôležitejším.', 'galeriakrajinky7.jpg')"><img src="galeriakrajinky7.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Zatmenie Mesiaca', 'Vzácny okamih, kedy sa „Krvavý Mesiac“ vznáša nad vežami Bojnického zámku. Spojenie slovenskej histórie a nebeského úkazu v jedinečnej atmosfére.', 'galeriakrajinky6.jpg')"><img src="galeriakrajinky6.jpg"></div>
         </div>
 
         <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-sun"></i> Slnečná Sústava</h3>
         <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Naši najbližší susedia. Krátery Mesiaca a dynamika planét na dosah ruky.</p>
         <div class="gallery-grid reveal-section">
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Spln Mesiaca', 'Mesiac odfotený v splne v septembri 2024. Ako by povedali naši bratia Česi - To jse nevokouká!', 'img/galeriaslnecnasustava1.jpg')"><img src="img/galeriaslnecnasustava1.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Mesiac v detailoch', 'Mesiac takmer v splne odfotený mojim ďalekohľadom. Do tohto záberu bolo nafotených cez 300 fotografií, aby nám Mesiac ukázal svoje pravé farby. Pridané sú aj popisy jednotlivých častí a kráterov.', 'img/galeriaslnecnasustava2.jpg')"><img src="img/galeriaslnecnasustava2.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Spln Mesiaca', 'Mesiac odfotený v splne v septembri 2024. Ako by povedali naši bratia Česi - To jse nevokouká!', 'galeriaslnecnasustava1.jpg')"><img src="galeriaslnecnasustava1.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Mesiac v detailoch', 'Mesiac takmer v splne odfotený mojim ďalekohľadom. Do tohto záberu bolo nafotených cez 300 fotografií, aby nám Mesiac ukázal svoje pravé farby. Pridané sú aj popisy jednotlivých častí a kráterov.', 'galeriaslnecnasustava2.jpg')"><img src="galeriaslnecnasustava2.jpg"></div>
         </div>
 
         <!-- NOVÁ KATEGÓRIA SCI-FI -->
         <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-rocket"></i> Sci-Fi</h3>
         <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Exkurzia do budúcnosti a na cudzie svety. Tam, kde fantázia nepozná hranice.</p>
         <div class="gallery-grid reveal-section">
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Planéta POES-1A', 'Posielam Ti pohľadnicu z MOEB-1!<br><br>Poviem Ti, POES-1A je v simulácii krásna, ale naživo, ach.. tá oranžová človeku potrápi dýchacie aparáty!<br><br>Zápis v logu z 11.11.3025<br><br><strong>*V CENE SÚ ZAHRNUTÉ OBE FOTOGRAFIE!</strong>', 'img/galeriascifi1a.jpg,img/galeriascifi1b.jpg')">
-                <img src="img/galeriascifi1a.jpg" alt="Planéta POES-1A">
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Planéta POES-1A', 'Posielam Ti pohľadnicu z MOEB-1!<br><br>Poviem Ti, POES-1A je v simulácii krásna, ale naživo, ach.. tá oranžová človeku potrápi dýchacie aparáty!<br><br>Zápis v logu z 11.11.3025<br><br><strong>*V CENE SÚ ZAHRNUTÉ OBE FOTOGRAFIE!</strong>', 'galeriascifi1a.jpg,galeriascifi1b.jpg')">
+                <img src="galeriascifi1a.jpg" alt="Planéta POES-1A">
             </div>
         </div>
 
@@ -591,17 +591,17 @@
         <!-- MOCKUPY - CLEAN VERSION -->
         <div class="section-header reveal-section"><h2><i class="fa-solid fa-house"></i> Kúsky nekonečna u vás</h2></div>
         <div class="mockup-grid reveal-section">
-            <div class="mockup-item"><img src="img/mockup_final_1.jpg" alt="Mockup 1" style="object-fit: cover;"></div>
-            <div class="mockup-item"><img src="img/mockup_final_2.jpg" alt="Mockup 2"></div>
-            <div class="mockup-item"><img src="img/mockup_final_3.jpg" alt="Mockup 3"></div>
-            <div class="mockup-item"><img src="img/mockup_final_4.jpg" alt="Mockup 4"></div>
+            <div class="mockup-item"><img src="mockup_final_1.jpg" alt="Mockup 1" style="object-fit: cover;"></div>
+            <div class="mockup-item"><img src="mockup_final_2.jpg" alt="Mockup 2"></div>
+            <div class="mockup-item"><img src="mockup_final_3.jpg" alt="Mockup 3"></div>
+            <div class="mockup-item"><img src="mockup_final_4.jpg" alt="Mockup 4"></div>
         </div>
 
         <div class="section-separator reveal-section"></div>
 
         <div class="section-header reveal-section"><h2><i class="fa-solid fa-book-open"></i> Mentoring</h2></div>
         <div class="glass-panel split-layout mentoring-layout reveal-section">
-            <div class="split-media mentoring-img"><img src="img/mentoring.jpg" alt="Mentoring"></div>
+            <div class="split-media mentoring-img"><img src="mentoring.jpg" alt="Mentoring"></div>
             <div class="split-text" style="text-align: left;">
                 <h3>Staň sa lovcom hviezd</h3>
                 <p>Astrofotografia je náročná disciplína. Ponúkam ti individuálny mentoring, kde ti odovzdám svoje know-how. Naučím ťa všetko od výberu techniky až po post-proces.</p>
@@ -628,7 +628,7 @@
         <div class="glass-panel split-layout reveal-section">
             <div class="split-media custom-img">
                 <!-- Použitá fotka Antitéza (4. v poradí v galérii Krajinky) -->
-                <img src="img/galeriakrajinky4.jpg" alt="Portrét pod hviezdami">
+                <img src="galeriakrajinky4.jpg" alt="Portrét pod hviezdami">
             </div>
             <div class="split-text">
                 <h3>Staňte sa súčasťou nekonečna</h3>
@@ -649,7 +649,7 @@
                 <p style="font-size: 0.95rem; color: #888;">Ideálne pre Airbnb, Booking alebo exkluzívnu prezentáciu vášho podniku.</p>
                 <button onclick="openModal('zakazka')" class="btn clickable">Možnosti fotenia</button>
             </div>
-            <div class="split-media custom-img"><img src="img/zakazka.jpg" alt="Chata"></div>
+            <div class="split-media custom-img"><img src="zakazka.jpg" alt="Chata"></div>
         </div>
 
         <div class="section-separator reveal-section"></div>
@@ -889,9 +889,9 @@
             // HRA - Opravené cesty k obrázkom
             const img = document.getElementById('focus-image');
             img.src = [
-                'img/galeriahlbokyvesmir1.jpg',
-                'img/galeriahlbokyvesmir2.jpg',
-                'img/galeriahlbokyvesmir3.jpg'
+                'galeriahlbokyvesmir1.jpg',
+                'galeriahlbokyvesmir2.jpg',
+                'galeriahlbokyvesmir3.jpg'
             ][Math.floor(Math.random()*3)];
             
             const slider = document.getElementById('focus-slider'); 
