@@ -22,7 +22,9 @@
             --anim-speed: 0.4s;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; cursor: none; }
+        /* GLOBÁLNE SKRYTIE SYSTÉMOVÉHO KURZORA */
+        * { box-sizing: border-box; margin: 0; padding: 0; cursor: none !important; }
+        
         html { scroll-behavior: smooth; overflow-x: hidden; }
         
         body { 
@@ -43,10 +45,10 @@
             pointer-events: none; z-index: 9998; opacity: 0.6; mix-blend-mode: overlay; 
         }
 
-        /* POZADIE */
+        /* POZADIE - GITHUB VERZIA (priečinok img/) */
         body::before { 
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(to bottom, rgba(5,5,10,0.3), rgba(5,5,10,0.7)), url('bg.jpg') center/cover no-repeat; 
+            background: linear-gradient(to bottom, rgba(5,5,10,0.3), rgba(5,5,10,0.7)), url('img/bg.jpg') center/cover no-repeat; 
             filter: blur(7px) brightness(0.6) contrast(1.1); 
             transform: scale(1.05); z-index: -3; pointer-events: none; 
         }
@@ -58,21 +60,30 @@
             filter: blur(1px); opacity: 0.6;
         }
 
-        /* KURZOR */
+        /* VLASTNÝ KURZOR */
         #cursor {
             position: fixed; top: 0; left: 0; width: 25px; height: 25px;
-            border: 1.5px solid rgba(255, 255, 255, 0.8); border-radius: 50%;
-            pointer-events: none; z-index: 2147483647; 
+            border: 1.5px solid rgba(255, 255, 255, 0.9); 
+            border-radius: 50%;
+            pointer-events: none; 
+            z-index: 2147483647; 
             transform: translate3d(-50%, -50%, 0);
-            transition: width 0.1s, height 0.1s, background 0.1s; 
-            mix-blend-mode: difference; will-change: transform;
+            transition: width 0.15s, height 0.15s, background 0.15s, border-color 0.15s; 
+            mix-blend-mode: difference; 
+            will-change: transform;
+            display: block; 
         }
+        
         #cursor::after { 
             content: ''; position: absolute; top: 50%; left: 50%; width: 4px; height: 4px; 
             background: var(--accent-gold); border-radius: 50%; transform: translate(-50%, -50%); 
         }
+
         body.hovering #cursor { 
-            width: 60px; height: 60px; background: rgba(238, 187, 68, 0.15); border-color: var(--accent-gold); 
+            width: 50px; height: 50px; 
+            background: rgba(238, 187, 68, 0.1); 
+            border-color: var(--accent-gold); 
+            mix-blend-mode: normal; 
         }
 
         /* KANVAS */
@@ -155,7 +166,24 @@
         .split-media img { width: 100%; height: 100%; object-fit: cover; }
         .mentoring-img img { object-position: 20% 80%; }
         .custom-img img { object-position: center bottom; }
-
+        
+        /* NOVÁ SEKCIA DARČEKOVÉ POUKAZY */
+        .gift-panel {
+            background: linear-gradient(135deg, rgba(22, 22, 28, 0.95) 0%, rgba(30, 20, 40, 0.95) 100%);
+            border: 1px solid rgba(157, 78, 221, 0.3);
+            box-shadow: 0 0 50px rgba(157, 78, 221, 0.15);
+            position: relative;
+            overflow: hidden;
+            z-index: 5; 
+        }
+        .gift-panel::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255, 176, 46, 0.05) 0%, transparent 70%);
+            animation: rotateGalaxy 60s linear infinite; pointer-events: none;
+        }
+        .gift-content { position: relative; z-index: 2; text-align: center; }
+        .gift-icon { font-size: 3rem; color: var(--accent-gold); margin-bottom: 20px; display: inline-block; filter: drop-shadow(0 0 15px var(--accent-gold)); }
+        
         /* TECHNIKA */
         .gear-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
         .gear-card { background: rgba(0,0,0,0.4); border: 1px solid var(--glass-border); padding: 30px; border-radius: 10px; position: relative; overflow: hidden; }
@@ -192,24 +220,23 @@
         .discount-note { color: #fff; font-size: 1.1rem; margin-top: 15px; letter-spacing: 1px; }
         #gratulation-text { color: #fff; font-size: 1.2rem; margin-bottom: 10px; }
 
-        /* UPDATED MOCKUP GRID (CLEAN IMAGES) */
+        /* MOCKUP GRID */
         .mockup-grid { 
             display: grid; 
-            grid-template-columns: repeat(2, 1fr); /* 2 v jednom riadku pre PC */
+            grid-template-columns: repeat(2, 1fr); 
             gap: 30px; 
         }
         .mockup-item { 
             border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); 
             box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative;
-            aspect-ratio: 4/3; /* Zmenené na 4:3 podľa novej požiadavky */
+            aspect-ratio: 4/3; 
         }
         .mockup-item img { 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* Vyplnenie celého placeholderu */
+            object-fit: cover; 
             display: block; 
         }
-        /* Override for first item removed - all use cover now */
         
         /* FAQ */
         details { background: rgba(255,255,255,0.02); padding: 25px; margin-bottom: 20px; border-radius: 10px; cursor: pointer; border: 1px solid var(--glass-border); transition: 0.3s; }
@@ -378,44 +405,41 @@
         .social-icons a:hover { color: var(--accent-gold); transform: scale(1.1); }
 
         @media (max-width: 900px) {
-            .container { padding: 0 15px; } /* Zmenšený padding */
-            .hero-title { font-size: 2.2rem; text-shadow: 0 0 30px rgba(136, 96, 192, 0.5); } /* Zmenšený font */
+            .container { padding: 0 15px; } 
+            .hero-title { font-size: 2.2rem; text-shadow: 0 0 30px rgba(136, 96, 192, 0.5); } 
             .glass-panel { padding: 25px 15px; margin-bottom: 60px; }
             .section-header { padding: 60px 0 30px; } 
-            .section-header h2 { font-size: 1.5rem; padding: 0 10px; } /* Zmenšený font */
-            .top-nav { padding: 15px 20px; } /* Kompaktnejšia navigácia */
+            .section-header h2 { font-size: 1.5rem; padding: 0 10px; } 
+            .top-nav { padding: 15px 20px; } 
             
             .split-layout { flex-direction: column; gap: 30px; }
             .split-media { width: 100%; height: 300px; }
             .split-layout.bio-section-mobile { flex-direction: column-reverse; }
             .bio-img.split-media { width: 100%; height: auto; aspect-ratio: 3/4; margin: 0 auto; }
             .bio-img img { object-position: center top; }
-            .split-text p { font-size: 0.9rem; } /* Trochu menší text */
+            .split-text p { font-size: 0.9rem; } 
             .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
             .gallery-item { aspect-ratio: 4/3; }
             .mockup-grid { grid-template-columns: 1fr; gap: 30px; }
-            .mockup-item { aspect-ratio: 4/3; } /* Na mobile zachováme kompaktnejší pomer */
+            .mockup-item { aspect-ratio: 4/3; } 
             
-            /* UPDATED MOBILE MODAL STYLE */
-            .modal-overlay { padding: 20px; align-items: center; } /* Centers the modal vertically */
+            .modal-overlay { padding: 20px; align-items: center; } 
             
             .modal-content { 
                 flex-direction: column; 
-                overflow: hidden; /* Important so radius works */
-                
-                /* Compact Card Style */
+                overflow: hidden; 
                 width: 100%;
-                max-width: 400px; /* Prevents it from being too wide if screen is slightly larger */
+                max-width: 400px; 
                 height: auto;
-                max-height: 85vh; /* Not full screen anymore */
-                border-radius: 20px; /* Rounded corners */
-                border: 1px solid var(--accent-gold); /* Add border to make it pop */
+                max-height: 85vh; 
+                border-radius: 20px; 
+                border: 1px solid var(--accent-gold); 
                 box-shadow: 0 10px 40px rgba(0,0,0,0.8);
             }
 
             .modal-img-box { 
                 width: 100%; 
-                height: 200px; /* Much smaller image area */
+                height: 200px; 
                 border-right: none; 
                 border-bottom: 1px solid #222; 
                 flex-shrink: 0; 
@@ -426,12 +450,12 @@
                 padding: 25px 20px; 
                 height: auto; 
                 display: block; 
-                overflow-y: auto; /* Enable scrolling for content */
+                overflow-y: auto; 
             }
             
-            .modal-info h2 { font-size: 1.8rem; margin-top: 0; margin-bottom: 15px; } /* Smaller title */
-            .modal-desc { font-size: 0.95rem; margin-bottom: 20px; } /* Smaller text */
-            .modal-btn { margin-top: 20px; padding: 15px; } /* Smaller button */
+            .modal-info h2 { font-size: 1.8rem; margin-top: 0; margin-bottom: 15px; } 
+            .modal-desc { font-size: 0.95rem; margin-bottom: 20px; } 
+            .modal-btn { margin-top: 20px; padding: 15px; } 
             
             .close-modal { 
                 top: 10px; right: 10px; 
@@ -482,7 +506,6 @@
 
     <div class="container">
 
-        <!-- Initial reveal class added in JS, now static for safety -->
         <div class="section-header reveal-section"><h2><i class="fa-solid fa-user-astronaut"></i> Vitaj pozemšťan</h2></div>
         <div class="glass-panel split-layout bio-section-mobile reveal-section">
             <div class="split-text">
@@ -491,7 +514,7 @@
                 <p>Vždy zachytávam vesmír v podobe, ktorú si môžeš zavesiť na stenu a každý deň sa stratiť v jej nekonečne.</p>
                 <button onclick="openModal('contact')" class="btn clickable">Kontaktuj ma</button>
             </div>
-            <div class="split-media bio-img"><img src="bio.jpg" alt="Matej"></div>
+            <div class="split-media bio-img"><img src="img/bio.jpg" alt="Matej"></div>
         </div>
 
         <div class="section-header reveal-section"><h2><i class="fa-solid fa-eye"></i> Zaostri na Nekonečno</h2></div>
@@ -527,41 +550,39 @@
         <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-star"></i> Hlboký Vesmír</h3>
         <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Pohľad do dávnej minulosti, kde sa rodia hviezdy a formujú galaxie.</p>
         <div class="gallery-grid reveal-section">
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Dvojitá Hviezdokopa v Perzeovi', 'Majestátna dvojitá hviezdokopa a klenot jesennej oblohy. Nadčasová vesmírna klasika.', 'galeriahlbokyvesmir1.jpg')"><img src="galeriahlbokyvesmir1.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Hmlovina Tulipán', 'Svojim tvarom naozaj pripomína tento pozemský kvet, v skutočnosti je to hmlovina v našej Mliečnej Ceste - vesmírna kolíska kde sa rodia, aj zanikajú hviezdy. V podobnej kolíske vznikla aj naša Slnečná sústava!', 'galeriahlbokyvesmir2.jpg')"><img src="galeriahlbokyvesmir2.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Pár Galaxií', 'Na fotke sa skvejú galaxie s krkolomnými názvami NGC4725 a NGC4726. Sú vzdialenými príbuznými našej Mliečnej Cesty a v ladnom gravitačnom tanci sa kútia spolu vesmírom.', 'galeriahlbokyvesmir3.jpg')"><img src="galeriahlbokyvesmir3.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Dvojitá Hviezdokopa v Perzeovi', 'Majestátna dvojitá hviezdokopa a klenot jesennej oblohy. Nadčasová vesmírna klasika.', 'img/galeriahlbokyvesmir1.jpg')"><img src="img/galeriahlbokyvesmir1.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Hmlovina Tulipán', 'Svojim tvarom naozaj pripomína tento pozemský kvet, v skutočnosti je to hmlovina v našej Mliečnej Ceste - vesmírna kolíska kde sa rodia, aj zanikajú hviezdy. V podobnej kolíske vznikla aj naša Slnečná sústava!', 'img/galeriahlbokyvesmir2.jpg')"><img src="img/galeriahlbokyvesmir2.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Pár Galaxií', 'Na fotke sa skvejú galaxie s krkolomnými názvami NGC4725 a NGC4726. Sú vzdialenými príbuznými našej Mliečnej Cesty a v ladnom gravitačnom tanci sa kútia spolu vesmírom.', 'img/galeriahlbokyvesmir3.jpg')"><img src="img/galeriahlbokyvesmir3.jpg"></div>
             <!-- NOVÉ OBRÁZKY -->
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Galaxia M101', 'Známa aj ako galaxia Veterník. Tento vesmírny gigant nám ukazuje svoju krásu priamo „do tváre“. Jej špirálové ramená sú domovom miliárd hviezd a hmlovín.', 'galeriahlbokyvesmir5.jpg')"><img src="galeriahlbokyvesmir5.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Hmlovina Jaskyňa', 'Tajomná emisná hmlovina Sh2-155 v súhvezdí Cefeus. Pripomína vstup do kozmickej jaskyne, kde sa v mračnách prachu a plynu rodia nové hviezdy.', 'galeriahlbokyvesmir4.jpg')"><img src="galeriahlbokyvesmir4.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Galaxia M101', 'Známa aj ako galaxia Veterník. Tento vesmírny gigant nám ukazuje svoju krásu priamo „do tváre“. Jej špirálové ramená sú domovom miliárd hviezd a hmlovín.', 'img/galeriahlbokyvesmir5.jpg')"><img src="img/galeriahlbokyvesmir5.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Hmlovina Jaskyňa', 'Tajomná emisná hmlovina Sh2-155 v súhvezdí Cefeus. Pripomína vstup do kozmickej jaskyne, kde sa v mračnách prachu a plynu rodia nové hviezdy.', 'img/galeriahlbokyvesmir4.jpg')"><img src="img/galeriahlbokyvesmir4.jpg"></div>
         </div>
 
         <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-mountain"></i> Krajinky</h3>
         <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Spojenie pozemského a nekonečného divadla vesmíru nad nami.</p>
         <div class="gallery-grid reveal-section">
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Stráž si svoje svetlo', 'Fotka, ktorá krásne zobrazuje, aká je naša galaxia obrovská a ktorá je pre mňa zároveň zosobnením prijatia a osobnej slobody v mojej tvorbe.', 'galeriakrajinky1.jpg')"><img src="galeriakrajinky1.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Star Catcher', 'Fotka, kde v krásnej panoráme Veľkého Poľa chytám hviezdu - venovaná jednej špeciálnej osobe - kto vie čítať medzi riadkami pochopí, že hviezda bola milá vtedy zamilovaného Mateja :)', 'galeriakrajinky2.jpg')"><img src="galeriakrajinky2.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Polárna žiara', 'Nezabudnuteľný moment z 10.5.2024, kedy sa Polárnou žiarou rozsvietila takmer celá Zem!', 'galeriakrajinky3.jpg')"><img src="galeriakrajinky3.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Stráž si svoje svetlo', 'Fotka, ktorá krásne zobrazuje, aká je naša galaxia obrovská a ktorá je pre mňa zároveň zosobnením prijatia a osobnej slobody v mojej tvorbe.', 'img/galeriakrajinky1.jpg')"><img src="img/galeriakrajinky1.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Star Catcher', 'Fotka, kde v krásnej panoráme Veľkého Poľa chytám hviezdu - venovaná jednej špeciálnej osobe - kto vie čítať medzi riadkami pochopí, že hviezda bola milá vtedy zamilovaného Mateja :)', 'img/galeriakrajinky2.jpg')"><img src="img/galeriakrajinky2.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Polárna žiara', 'Nezabudnuteľný moment z 10.5.2024, kedy sa Polárnou žiarou rozsvietila takmer celá Zem!', 'img/galeriakrajinky3.jpg')"><img src="img/galeriakrajinky3.jpg"></div>
             <!-- NOVÉ OBRÁZKY -->
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Antitéza', 'Súboj dvoch svetov. Ostré, dynamické línie svetla v rukách človeka tvoria dokonalý protiklad k tichej, nemenne majestátnej žiare hviezdneho prachu nad nami.', 'galeriakrajinky5.jpg')"><img src="galeriakrajinky5.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Your Own Light', 'Tento záber mám veľmi rád pre jeho atmosféru. Pripomína mi, že pod tou nádhernou hviezdnou oblohou si žijeme svoje životy a svietime si na cestu vlastným svetlom, ktoré je pre nás nakoniec tým najdôležitejším.', 'galeriakrajinky7.jpg')"><img src="galeriakrajinky7.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Zatmenie Mesiaca', 'Vzácny okamih, kedy sa „Krvavý Mesiac“ vznáša nad vežami Bojnického zámku. Spojenie slovenskej histórie a nebeského úkazu v jedinečnej atmosfére.', 'galeriakrajinky6.jpg')"><img src="galeriakrajinky6.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Antitéza', 'Súboj dvoch svetov. Ostré, dynamické línie svetla v rukách človeka tvoria dokonalý protiklad k tichej, nemenne majestátnej žiare hviezdneho prachu nad nami.', 'img/galeriakrajinky5.jpg')"><img src="img/galeriakrajinky5.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Your Own Light', 'Tento záber mám veľmi rád pre jeho atmosféru. Pripomína mi, že pod tou nádhernou hviezdnou oblohou si žijeme svoje životy a svietime si na cestu vlastným svetlom, ktoré je pre nás nakoniec tým najdôležitejším.', 'img/galeriakrajinky7.jpg')"><img src="img/galeriakrajinky7.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Zatmenie Mesiaca', 'Vzácny okamih, kedy sa „Krvavý Mesiac“ vznáša nad vežami Bojnického zámku. Spojenie slovenskej histórie a nebeského úkazu v jedinečnej atmosfére.', 'img/galeriakrajinky6.jpg')"><img src="img/galeriakrajinky6.jpg"></div>
         </div>
 
         <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-sun"></i> Slnečná Sústava</h3>
         <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Naši najbližší susedia. Krátery Mesiaca a dynamika planét na dosah ruky.</p>
         <div class="gallery-grid reveal-section">
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Spln Mesiaca', 'Mesiac odfotený v splne v septembri 2024. Ako by povedali naši bratia Česi - To jse nevokouká!', 'galeriaslnecnasustava1.jpg')"><img src="galeriaslnecnasustava1.jpg"></div>
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Mesiac v detailoch', 'Mesiac takmer v splne odfotený mojim ďalekohľadom. Do tohto záberu bolo nafotených cez 300 fotografií, aby nám Mesiac ukázal svoje pravé farby. Pridané sú aj popisy jednotlivých častí a kráterov.', 'galeriaslnecnasustava2.jpg')"><img src="galeriaslnecnasustava2.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Spln Mesiaca', 'Mesiac odfotený v splne v septembri 2024. Ako by povedali naši bratia Česi - To jse nevokouká!', 'img/galeriaslnecnasustava1.jpg')"><img src="img/galeriaslnecnasustava1.jpg"></div>
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Mesiac v detailoch', 'Mesiac takmer v splne odfotený mojim ďalekohľadom. Do tohto záberu bolo nafotených cez 300 fotografií, aby nám Mesiac ukázal svoje pravé farby. Pridané sú aj popisy jednotlivých častí a kráterov.', 'img/galeriaslnecnasustava2.jpg')"><img src="img/galeriaslnecnasustava2.jpg"></div>
         </div>
 
         <!-- NOVÁ KATEGÓRIA SCI-FI -->
         <h3 class="gallery-category-title reveal-section"><i class="fa-solid fa-rocket"></i> Sci-Fi</h3>
         <p class="reveal-section" style="margin-top: -15px; margin-bottom: 30px; color: #bbb; font-style: italic; font-size: 0.95rem;">Exkurzia do budúcnosti a na cudzie svety. Tam, kde fantázia nepozná hranice.</p>
-        <!-- Tiež odstránený inline style pre konzistenciu a správne zobrazenie na mobile -->
         <div class="gallery-grid reveal-section">
-            <!-- Opravené názvy súborov: galeriascifi namiesto galeriacsifi -->
-            <div class="gallery-item clickable" onclick="openModal('buy', 'Planéta POES-1A', 'Posielam Ti pohľadnicu z MOEB-1!<br><br>Poviem Ti, POES-1A je v simulácii krásna, ale naživo, ach.. tá oranžová človeku potrápi dýchacie aparáty!<br><br>Zápis v logu z 11.11.3025<br><br><strong>*V CENE SÚ ZAHRNUTÉ OBE FOTOGRAFIE!</strong>', 'galeriascifi1a.jpg,galeriascifi1b.jpg')">
-                <img src="galeriascifi1a.jpg" alt="Planéta POES-1A">
+            <div class="gallery-item clickable" onclick="openModal('buy', 'Planéta POES-1A', 'Posielam Ti pohľadnicu z MOEB-1!<br><br>Poviem Ti, POES-1A je v simulácii krásna, ale naživo, ach.. tá oranžová človeku potrápi dýchacie aparáty!<br><br>Zápis v logu z 11.11.3025<br><br><strong>*V CENE SÚ ZAHRNUTÉ OBE FOTOGRAFIE!</strong>', 'img/galeriascifi1a.jpg,img/galeriascifi1b.jpg')">
+                <img src="img/galeriascifi1a.jpg" alt="Planéta POES-1A">
             </div>
         </div>
 
@@ -570,18 +591,17 @@
         <!-- MOCKUPY - CLEAN VERSION -->
         <div class="section-header reveal-section"><h2><i class="fa-solid fa-house"></i> Kúsky nekonečna u vás</h2></div>
         <div class="mockup-grid reveal-section">
-            <div class="mockup-item"><img src="mockup_final_1.jpg" alt="Mockup 1" style="object-fit: cover;"></div>
-            <div class="mockup-item"><img src="mockup_final_2.jpg" alt="Mockup 2"></div>
-            <div class="mockup-item"><img src="mockup_final_3.jpg" alt="Mockup 3"></div>
-            <!-- Odstránené špeciálne zarovnanie, teraz sa použije default 4:3 cover -->
-            <div class="mockup-item"><img src="mockup_final_4.jpg" alt="Mockup 4"></div>
+            <div class="mockup-item"><img src="img/mockup_final_1.jpg" alt="Mockup 1" style="object-fit: cover;"></div>
+            <div class="mockup-item"><img src="img/mockup_final_2.jpg" alt="Mockup 2"></div>
+            <div class="mockup-item"><img src="img/mockup_final_3.jpg" alt="Mockup 3"></div>
+            <div class="mockup-item"><img src="img/mockup_final_4.jpg" alt="Mockup 4"></div>
         </div>
 
         <div class="section-separator reveal-section"></div>
 
         <div class="section-header reveal-section"><h2><i class="fa-solid fa-book-open"></i> Mentoring</h2></div>
         <div class="glass-panel split-layout mentoring-layout reveal-section">
-            <div class="split-media mentoring-img"><img src="mentoring.jpg" alt="Mentoring"></div>
+            <div class="split-media mentoring-img"><img src="img/mentoring.jpg" alt="Mentoring"></div>
             <div class="split-text" style="text-align: left;">
                 <h3>Staň sa lovcom hviezd</h3>
                 <p>Astrofotografia je náročná disciplína. Ponúkam ti individuálny mentoring, kde ti odovzdám svoje know-how. Naučím ťa všetko od výberu techniky až po post-proces.</p>
@@ -603,14 +623,47 @@
 
         <div class="section-separator reveal-section"></div>
 
-        <div class="section-header reveal-section"><h2><i class="fa-solid fa-gift"></i> Vesmír na Mieru</h2></div>
+        <!-- NOVÁ SEKCIA: VESMÍR, OSOBNE -->
+        <div class="section-header reveal-section"><h2><i class="fa-solid fa-user-group"></i> Vesmír, osobne.</h2></div>
+        <div class="glass-panel split-layout reveal-section">
+            <div class="split-media custom-img">
+                <!-- Použitá fotka Antitéza (4. v poradí v galérii Krajinky) -->
+                <img src="img/galeriakrajinky4.jpg" alt="Portrét pod hviezdami">
+            </div>
+            <div class="split-text">
+                <h3>Staňte sa súčasťou nekonečna</h3>
+                <p>Nie je to len fotka. Je to zážitok. Rande pod Mliečnou cestou, rodinný portrét s hviezdami alebo umelecké fotenie, ktoré zachytí vašu podstatu v kontexte vesmíru.</p>
+                <p style="font-size: 0.95rem; color: #888;">Ideálne ako darček k výročiu alebo zásnuby pod hviezdami.</p>
+                <button onclick="openModal('portret')" class="btn clickable">Chcem fotku s hviezdami</button>
+            </div>
+        </div>
+
+        <div class="section-separator reveal-section"></div>
+        
+        <!-- UPRAVENÁ SEKCIA: ZLÚČENÁ ARCHITEKTÚRA -->
+        <div class="section-header reveal-section"><h2><i class="fa-solid fa-hotel"></i> Vesmír na mieru</h2></div>
         <div class="glass-panel split-layout reveal-section">
             <div class="split-text">
-                <h3>Vaše miesto pod hviezdami</h3>
-                <p>Máte chatu na samote? Vytvorím pre vás jedinečné dielo na mieru - spojenie vášho pozemského domova s hlbokým vesmírom.</p>
-                <button onclick="openModal('zakazka')" class="btn clickable">Cenník fotenia</button>
+                <h3>Vaše miesto v inom svetle</h3>
+                <p>Nechajte svoju nehnuteľnosť zažiariť. Či už ide o <strong>súkromnú chatu na samote</strong>, <strong>penzión</strong> alebo <strong>hotel</strong>. Nočná fotografia odhalí krásu a atmosféru, ktorú cez deň nevidieť.</p>
+                <p style="font-size: 0.95rem; color: #888;">Ideálne pre Airbnb, Booking alebo exkluzívnu prezentáciu vášho podniku.</p>
+                <button onclick="openModal('zakazka')" class="btn clickable">Možnosti fotenia</button>
             </div>
-            <div class="split-media custom-img"><img src="zakazka.jpg" alt="Chata"></div>
+            <div class="split-media custom-img"><img src="img/zakazka.jpg" alt="Chata"></div>
+        </div>
+
+        <div class="section-separator reveal-section"></div>
+
+        <!-- PRESUNUTÁ SEKCIA: DARČEKOVÉ POUKAZY -->
+        <div class="glass-panel gift-panel reveal-section" style="text-align: center; padding: 80px 40px; margin-top: 40px;">
+            <div class="gift-content">
+                <i class="fa-solid fa-gift gift-icon"></i>
+                <h2 style="font-size: 2.5rem; margin-bottom: 20px; text-shadow: 0 0 20px rgba(157, 78, 221, 0.4);">Darujte Kúsok Nekonečna</h2>
+                <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto 30px; color: #ddd;">
+                    Neviete vybrať ten správny obraz? Darujte svojim blízkym slobodu výberu alebo nezabudnuteľné fotenie pod hviezdami.
+                </p>
+                <button onclick="openModal('voucher')" class="btn clickable" style="border-color: var(--accent-purple); color: var(--accent-purple);">Kúpiť Poukaz</button>
+            </div>
         </div>
 
         <div class="section-separator reveal-section"></div>
@@ -705,7 +758,6 @@
                 cartHTML += `<div class="cart-total">Spolu: ${total}€</div>`;
                 
                 // Formspree Form Integration
-                // DÔLEŽITÉ: Nahraď https://formspree.io/f/VASE_ID tvojím skutočným Formspree odkazom
                 cartHTML += `
                     <form action="https://formspree.io/f/mnnellqk" method="POST" id="order-form">
                         <input type="hidden" name="objednavka" id="order-details">
@@ -805,8 +857,20 @@
             const audio = document.getElementById('bg-audio');
             const btn = document.getElementById('audio-toggle');
             btn.addEventListener('click', () => { if(audio.paused) { audio.play(); btn.classList.add('audio-playing'); } else { audio.pause(); btn.classList.remove('audio-playing'); } });
+            
+            // CURSOR LOGIC - FIXED & ROBUST
             const cur = document.getElementById('cursor');
-            if(window.matchMedia("(min-width: 900px)").matches) { document.addEventListener('mousemove', e => { cur.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`; }); } else { cur.style.display = 'none'; }
+            
+            // 1. Always track mouse (CSS handles visibility on mobile)
+            document.addEventListener('mousemove', e => { 
+                cur.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`; 
+            });
+
+            // 2. Hover effects (Restored) - Makes cursor interactive
+            document.querySelectorAll('a, button, .clickable, input, select, details, summary').forEach(el => {
+                el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
+            });
 
             // MICROBLOG
             function updateSkyBlog() {
@@ -822,9 +886,14 @@
             }
             updateSkyBlog();
 
-            // HRA
+            // HRA - Opravené cesty k obrázkom
             const img = document.getElementById('focus-image');
-            img.src = ['galeriakrajinky2.jpg', 'galeriahlbokyvesmir2.jpg', 'galeriakrajinky3.jpg'][Math.floor(Math.random()*3)];
+            img.src = [
+                'img/galeriahlbokyvesmir1.jpg',
+                'img/galeriahlbokyvesmir2.jpg',
+                'img/galeriahlbokyvesmir3.jpg'
+            ][Math.floor(Math.random()*3)];
+            
             const slider = document.getElementById('focus-slider'); 
             const msg = document.getElementById('game-msg');
             const gratulation = document.getElementById('gratulation-text');
@@ -919,17 +988,48 @@
             `,
             zakazka: `
                 <h2>Zákazka</h2>
-                <span class="modal-subtitle">Vesmír na Mieru</span>
+                <span class="modal-subtitle">Architektúra pod hviezdami</span>
                 <div class="pricing-list">
-                    <div class="pricing-item"><span>Digitál</span><span>150€</span></div>
-                    <div class="pricing-sub">Fotenie vašej lokality + Mliečna Cesta.<br>2 profesionálne upravené fotografie vo vysokom rozlíšení.</div>
+                    <div class="pricing-item"><span>Chata / Dom</span><span>od 150€</span></div>
+                    <div class="pricing-sub">Fotenie vašej nehnuteľnosti + Mliečna Cesta. Unikátna pamiatka alebo prezentácia pre Airbnb.</div>
                     
-                    <div class="pricing-item"><span>Exclusive Print</span><span>250€</span></div>
-                    <div class="pricing-sub">Balík Digitál + Veľkoformátový obraz (Materiál PVC).</div>
+                    <div class="pricing-item"><span>Hotel / Podnik</span><span>od 350€</span></div>
+                    <div class="pricing-sub">Komplexný balík exteriérových nočných fotografií pre váš marketing. Zvýšte atraktivitu vášho podniku.</div>
                 </div>
-                <p class="modal-desc">Unikátne fotenie Vášho špeciálneho miesta pod hviezdami.</p>
+                <p class="modal-desc">Jedinečné fotenie, ktoré odlíši váš priestor od konkurencie.</p>
                 <button class="modal-btn clickable" onclick="openModal('contact')">
-                    <div class="btn-particle-container">Dohodnúť<div class="btn-gold-dust"></div></div>
+                    <div class="btn-particle-container">Nezáväzne dohodnúť<div class="btn-gold-dust"></div></div>
+                </button>
+            `,
+            // NOVÝ MODAL PRE PORTRÉTY
+            portret: `
+                <h2>Portrét</h2>
+                <span class="modal-subtitle">Vy a Vesmír</span>
+                <div class="pricing-list">
+                    <div class="pricing-item"><span>Rande pod hviezdami</span><span>150€</span></div>
+                    <div class="pricing-sub">Romantické fotenie párov. Spomienka, ktorá nevybledne.</div>
+                    
+                    <div class="pricing-item"><span>Osobný portrét</span><span>100€</span></div>
+                    <div class="pricing-sub">Kreatívne fotenie jednotlivcov. Hra so svetlom a tmou.</div>
+                </div>
+                <p class="modal-desc">Termíny sú závislé od počasia a fázy Mesiaca.</p>
+                <button class="modal-btn clickable" onclick="openModal('contact')">
+                    <div class="btn-particle-container">Rezervovať termín<div class="btn-gold-dust"></div></div>
+                </button>
+            `,
+            voucher: `
+                <h2>Darčekový Poukaz</h2>
+                <span class="modal-subtitle">Darujte vesmír</span>
+                <div class="pricing-list">
+                    <div class="pricing-item"><span>Poukaz na nákup</span><span>od 50€</span></div>
+                    <div class="pricing-sub">Obdarovaný si sám vyberie obraz z galérie, ktorý ho najviac osloví.</div>
+                    
+                    <div class="pricing-item"><span>Zážitkové fotenie</span><span>150€</span></div>
+                    <div class="pricing-sub">Poukaz na fotenie "Rande pod hviezdami" alebo fotenie rodiny pod nočnou oblohou.</div>
+                </div>
+                <p class="modal-desc">Poukaz obdržíte v luxusnej tlačenej forme alebo elektronicky.</p>
+                <button class="modal-btn clickable" onclick="openModal('contact')">
+                    <div class="btn-particle-container">Objednať poukaz<div class="btn-gold-dust"></div></div>
                 </button>
             `,
             buy: (t, d) => `
