@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="sk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Odstúpenie od zmluvy | Kúsok Nekonečna</title>
+<meta name="description" content="Formulár na odstúpenie od zmluvy pri nákupe na Kúsok Nekonečna.">
+<meta name="theme-color" content="#070912">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../legal.css">
+<meta name="robots" content="noindex">
+</head>
+<body>
+<header class="lg-top"><a href="../">Kúsok Nekonečna</a><a class="lg-back" href="../">Späť na stránku</a></header>
+<main>
+<h1>Odstúpenie od zmluvy</h1>
+<p class="lg-meta">Do 14 dní od prevzatia tovaru, bez udania dôvodu</p>
+<div class="lg-intro">
+<p>Vyplňte meno, číslo objednávky a e-mail. Po stlačení tlačidla sa vám hneď zobrazí potvrdenie o prijatí s dátumom a časom odoslania. Uložte si ho alebo vytlačte, kópiu vám pošlem aj e-mailom.</p>
+<p>Čo bude ďalej: do 14 dní mi tovar pošlite späť na adresu, ktorú vám napíšem v e-maile. Peniaze vrátim do 14 dní od prijatia odstúpenia, najneskôr keď mi tovar príde. Podrobnosti sú v <a href="../obchodne-podmienky/">obchodných podmienkach</a> v časti 7.</p>
+</div>
+<form class="wd-form" id="wd-form" action="https://formspree.io/f/mnnellqk" method="POST">
+<input type="hidden" name="_subject" id="wd-subj" value="ODSTÚPENIE OD ZMLUVY (Kúsok Nekonečna)">
+<input type="hidden" name="odstupenie" id="wd-text">
+<input type="hidden" name="odoslane" id="wd-time">
+<label>Meno a priezvisko<input name="meno" id="wd-name" autocomplete="name" required></label>
+<label>Číslo objednávky <small>Napríklad KN-261008-7QX2. Ak ho nemáte, napíšte dátum objednávky a čo ste kúpili.</small><input name="cislo_objednavky" id="wd-no" required></label>
+<label>E-mail <small>Sem vám pošlem kópiu potvrdenia.</small><input type="email" name="email" id="wd-mail" autocomplete="email" required></label>
+<label>Od čoho odstupujete <small>Nepovinné. Ak len od časti objednávky, napíšte ktorej.</small><textarea name="polozky" id="wd-items" rows="2"></textarea></label>
+<label>Dátum prevzatia tovaru <small>Nepovinné</small><input type="date" name="prevzate" id="wd-got"></label>
+<button class="wd-btn" type="submit">Potvrdiť odstúpenie od zmluvy</button>
+<p class="wd-err" id="wd-err" role="alert" hidden></p>
+</form>
+<div class="wd-done" id="wd-done" hidden tabindex="-1">
+<h2>Odstúpenie som prijal</h2>
+<p>Toto je potvrdenie o prijatí vášho odstúpenia. Uložte si ho alebo vytlačte. Kópiu vám pošlem aj e-mailom.</p>
+<pre id="wd-copy"></pre>
+<div class="wd-acts"><button class="wd-btn" type="button" id="wd-print">Vytlačiť alebo uložiť ako PDF</button><button class="wd-btn ghost" type="button" id="wd-save">Stiahnuť potvrdenie</button></div>
+</div>
+</main>
+<nav class="lg-nav" aria-label="Právne informácie"><a href="../obchodne-podmienky/">Obchodné podmienky</a><a href="../ochrana-osobnych-udajov/">Ochrana osobných údajov</a><a href="../odstupenie/">Odstúpiť od zmluvy tu</a></nav>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s), form = $('#wd-form');
+  const q = new URLSearchParams(location.search); if (q.get('objednavka')) $('#wd-no').value = q.get('objednavka').slice(0, 40);
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const now = new Date();
+    const when = now.toLocaleDateString('sk-SK', { day: 'numeric', month: 'numeric', year: 'numeric' }) + ' o ' + now.toLocaleTimeString('sk-SK', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const items = $('#wd-items').value.trim(), got = $('#wd-got').value;
+    const text = `ODSTÚPENIE OD ZMLUVY\n\nPredávajúci: Matej Kakiš, Kúsok Nekonečna, matejkakis@gmail.com\nTýmto oznamujem, že odstupujem od zmluvy.\n\nMeno: ${$('#wd-name').value.trim()}\nČíslo objednávky: ${$('#wd-no').value.trim()}\nE-mail: ${$('#wd-mail').value.trim()}\nOdstupujem od: ${items || 'celej objednávky'}${got ? `\nTovar prevzatý: ${new Date(got + 'T12:00').toLocaleDateString('sk-SK')}` : ''}\n\nOdoslané: ${when}`;
+    $('#wd-text').value = text; $('#wd-time').value = now.toISOString();
+    $('#wd-subj').value = `ODSTÚPENIE OD ZMLUVY: ${$('#wd-no').value.trim()}`;
+    const btn = form.querySelector('button[type=submit]'); btn.disabled = true; btn.textContent = 'Odosielam…'; $('#wd-err').hidden = true;
+    let ok = false;
+    try { const r = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } }); ok = r.ok; } catch (_) { ok = false; }
+    if (!ok) { btn.disabled = false; btn.textContent = 'Potvrdiť odstúpenie od zmluvy'; $('#wd-err').textContent = 'Odoslanie sa nepodarilo. Skúste to znova, alebo pošlite odstúpenie e-mailom na matejkakis@gmail.com.'; $('#wd-err').hidden = false; return; }
+    $('#wd-copy').textContent = text; form.hidden = true; $('#wd-done').hidden = false; $('#wd-done').focus();
+    $('#wd-print').onclick = () => window.print();
+    $('#wd-save').onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' })); a.download = `odstupenie-${$('#wd-no').value.trim().replace(/[^A-Za-z0-9-]+/g, '-') || 'kusok-nekonecna'}.txt`; document.body.appendChild(a); a.click(); a.remove(); };
+  });
+})();
+</script>
+</body>
+</html>

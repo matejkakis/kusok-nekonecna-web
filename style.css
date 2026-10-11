@@ -1,0 +1,1914 @@
+/* =========================================================
+   KÚSOK NEKONEČNA — štýly
+   Rovnaký systém ako 17 Studios (Instrument Sans, tlačidlá,
+   rámčeky, predely, stupnica ostrenia), iná nálada:
+   hlboká nočná modrá, svetlo hviezd a zlatá.
+   Nadpisy Fraunces: mäkký, teplý serif ako obálky starých
+   kníh o vesmíre.
+========================================================= */
+
+@font-face { font-family: 'Fraunces'; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url(assets/fonts/fraunces-latin-wght-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+221E; }
+@font-face { font-family: 'Fraunces'; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url(assets/fonts/fraunces-latin-ext-wght-normal.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Fraunces'; font-style: italic; font-weight: 100 900; font-display: swap;
+  src: url(assets/fonts/fraunces-latin-wght-italic.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+221E; }
+@font-face { font-family: 'Fraunces'; font-style: italic; font-weight: 100 900; font-display: swap;
+  src: url(assets/fonts/fraunces-latin-ext-wght-italic.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Instrument Sans'; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url(assets/fonts/instrument-sans-latin-wght-normal.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215; }
+@font-face { font-family: 'Instrument Sans'; font-style: normal; font-weight: 400 700; font-display: swap;
+  src: url(assets/fonts/instrument-sans-latin-ext-wght-normal.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1E00-1E9F, U+2C60-2C7F, U+A720-A7FF; }
+/* len pre logo 17 Studios v pätičke */
+@font-face { font-family: 'Instrument Serif'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url(assets/fonts/instrument-serif-latin-400-normal.woff2) format('woff2'); unicode-range: U+0000-00FF; }
+
+:root {
+  --night:   #070912;   /* obloha */
+  --night-2: #0E1222;   /* rámčeky */
+  --night-3: #161B2F;
+  --star:    #ECEAE4;   /* svetlo hviezd */
+  --star-2:  #A5A8B8;
+  --gold:    #E8B65A;   /* zlatá hviezda */
+  --gold-2:  #F2CA7E;
+  --nebula:  #7A68E8;   /* len jemný náznak */
+  --rule:    rgba(236,234,228,.12);
+  --display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --sans:    'Instrument Sans', 'Helvetica Neue', Arial, sans-serif;
+  --r: 6px;
+  --gut: clamp(20px, 5vw, 72px);
+  --wide: min(1360px, 100% - 2 * var(--gut));
+  --ease: cubic-bezier(.2, .7, .1, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--night); color: var(--star); font-family: var(--sans); font-size: 17px; line-height: 1.6; overflow-x: hidden; }
+::selection { background: var(--gold); color: var(--night); }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.skip { position: absolute; left: -999px; top: 8px; z-index: 9999; background: var(--star); color: var(--night); padding: 10px 16px; border-radius: var(--r); }
+.skip:focus { left: 8px; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.meta { font-size: 13px; color: var(--star-2); }
+
+/* ---------- Typografia ---------- */
+.h2, .h3, #hero-title, .logo, .mm-link, .foot-name, .g-title, .offer-price, .modal-info h2, .chip, .price-now, .cart-total, .code-box strong {
+  font-family: var(--display); font-variation-settings: 'SOFT' 50; letter-spacing: -.01em;
+}
+.h2 { margin: 0; font-size: clamp(48px, 7vw, 104px); font-weight: 500; line-height: .98; text-wrap: balance; }
+.h2 em, #hero-title em { font-style: italic; font-weight: 400; }
+.h3 { margin: 0; font-size: clamp(28px, 2.6vw, 38px); font-weight: 500; line-height: 1.05; }
+.lead { margin: 0; max-width: 34em; font-size: clamp(17px, 1.5vw, 19px); line-height: 1.6; color: var(--star-2); }
+
+/* ---------- Tlačidlá (rovnaký tvar ako 17 Studios) ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 0 26px; border-radius: var(--r); border: 1px solid transparent; font-weight: 550; font-size: 15px; text-decoration: none; cursor: pointer; transition: background-color .25s, color .25s, border-color .25s, transform .2s var(--ease); }
+.btn:active { transform: scale(.98); }
+.btn-gold, .btn-star { background: var(--gold); color: var(--night); }
+.btn-gold:hover, .btn-star:hover { background: var(--gold-2); }
+.btn-ghost { border-color: rgba(236,234,228,.4); background: transparent; color: var(--star); }
+.btn-ghost:hover { border-color: var(--star); background: rgba(236,234,228,.06); }
+.link-btn { background: none; border: 0; padding: 4px 0; color: var(--star-2); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; font-size: 14px; }
+.link-btn:hover { color: var(--star); }
+
+/* ---------- Navigácia ---------- */
+.nav { position: fixed; inset: 0 0 auto 0; z-index: 1000; display: flex; align-items: center; gap: 28px; padding: 18px var(--gut); transition: background-color .35s, padding .35s, box-shadow .35s; }
+.nav.is-solid { background: rgba(7,9,18,.86); padding-block: 12px; box-shadow: 0 1px 0 var(--rule); backdrop-filter: blur(12px); }
+.logo { font-size: 26px; font-weight: 500; text-decoration: none; line-height: 1; }
+.nav-links { display: flex; gap: 26px; margin-left: auto; }
+.nav-links a { text-decoration: none; font-size: 15px; position: relative; padding: 6px 0; color: var(--star-2); transition: color .25s; }
+.nav-links a:hover, .nav-links a.active { color: var(--star); }
+.nav-links a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 1px; background: var(--gold); transition: right .3s var(--ease); }
+.nav-links a.active::after, .nav-links a:hover::after { right: 0; }
+.nav-tools { display: flex; gap: 8px; align-items: center; }
+.icon-btn { position: relative; display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 14px; border-radius: var(--r); border: 1px solid var(--rule); background: rgba(7,9,18,.4); cursor: pointer; font-size: 14px; font-weight: 550; transition: border-color .25s, background-color .25s; }
+.icon-btn:hover { border-color: rgba(236,234,228,.4); }
+.icon-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+#sound-btn[aria-pressed="true"] { border-color: var(--gold); color: var(--gold); }
+#sound-btn[aria-pressed="true"] svg path { animation: eq 1s ease-in-out infinite alternate; transform-origin: center; }
+@keyframes eq { to { transform: scaleY(.55); } }
+.cart-count { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; background: var(--gold); color: var(--night); font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+.cart-count.bump { animation: bump .5s var(--ease); }
+@keyframes bump { 40% { transform: scale(1.35); } }
+.nav-toggle { display: none; }
+@media (max-width: 900px) {
+  .nav-links { display: none; } .nav-toggle { display: inline-flex; } .nav-tools { margin-left: auto; }
+  .sound-label { display: none; }
+  .logo { font-size: 22px; }
+}
+
+/* Menu: otvára sa ako štrbina kupoly hvezdárne */
+.mobile-menu { position: fixed; inset: 0; z-index: 999; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 100px var(--gut) 40px; background: radial-gradient(70% 50% at 50% 0%, rgba(122,104,232,.16), transparent 70%), var(--night); }
+.mobile-menu[hidden] { display: none; }
+.mm-link { font-size: clamp(38px, 10vw, 60px); font-weight: 500; line-height: 1.1; text-decoration: none; }
+.mm-link:hover, .mm-link:focus-visible { color: var(--gold); font-style: italic; }
+.mobile-menu.is-opening { animation: domeOpen .6s cubic-bezier(.7, 0, .2, 1) both; }
+.mobile-menu.is-closing { animation: domeClose .35s cubic-bezier(.7, 0, .3, 1) both; }
+.mobile-menu.is-opening .mm-link { animation: mmIn .6s var(--ease) both; animation-delay: calc(.3s + var(--i, 0) * .06s); }
+@keyframes domeOpen { from { clip-path: inset(0 50% 0 50%); } to { clip-path: inset(0 0 0 0); } }
+@keyframes domeClose { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 50% 0 50%); } }
+@keyframes mmIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Úvod: obloha a stopy hviezd ---------- */
+.hero { position: relative; min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end; padding: 120px var(--gut) 28px; overflow: hidden; isolation: isolate; }
+.hero-sky { position: absolute; inset: 0; z-index: -2; background: url(assets/img/bg.jpg) center / cover no-repeat; background-image: image-set(url(assets/img/bg.webp) type("image/webp"), url(assets/img/bg.jpg) type("image/jpeg")); transform: scale(1.04); animation: skyIn 2.4s var(--ease) both; }
+.hero-sky::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7,9,18,.55) 0%, rgba(7,9,18,.15) 30%, rgba(7,9,18,.55) 62%, var(--night) 100%), linear-gradient(90deg, rgba(7,9,18,.75), transparent 70%); }
+@keyframes skyIn { from { filter: blur(14px) brightness(.6); transform: scale(1.1); } to { filter: none; transform: scale(1.04); } }
+.hero-trails { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; mix-blend-mode: screen; opacity: .85; }
+.hero-inner { width: 100%; max-width: 1360px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; padding-bottom: clamp(24px, 6vh, 64px); }
+#hero-title { margin: 0; font-size: clamp(64px, 12vw, 190px); font-weight: 500; line-height: .9; letter-spacing: -.02em; text-wrap: balance; text-shadow: 0 0 60px rgba(7,9,18,.6); }
+#hero-title em { color: var(--gold-2); }
+.hero-lead { margin: 0; max-width: 30em; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.55; color: var(--star); opacity: .9; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+@media (max-width: 700px) { .hero-actions { flex-direction: column; } .hero-actions .btn { width: 100%; } }
+
+
+/* ---------- Sekcie a predely ---------- */
+.section { width: var(--wide); margin: 0 auto; padding: clamp(72px, 10vw, 140px) 0; }
+.section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px 48px; flex-wrap: wrap; margin-bottom: clamp(28px, 4vw, 52px); }
+.section-head .lead { max-width: 26em; }
+.divider { position: relative; width: var(--wide); margin: 0 auto; height: 1px; background: linear-gradient(90deg, transparent, var(--rule) 12%, var(--rule) 88%, transparent); }
+.divider span { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 0 14px; background: var(--night); color: var(--gold); font-size: 14px; line-height: 1; text-shadow: 0 0 12px rgba(232,182,90,.7); }
+@media (max-width: 700px) { .section-head { flex-direction: column; align-items: center; text-align: center; } .section-head .lead { margin-inline: auto; } }
+
+/* Zaostrenie pri príchode */
+.fp { filter: blur(var(--fp-blur, 7px)); opacity: .5; transform: scale(1.015); transition: filter 1.1s var(--ease), opacity 1.1s var(--ease), transform 1.1s var(--ease); }
+.fp.is-sharp { filter: none; opacity: 1; transform: none; }
+.no-js .fp { filter: none; opacity: 1; transform: none; }
+
+/* ---------- Galéria ako obchod ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.chip { min-height: 44px; padding: 0 18px; border-radius: var(--r); border: 1px solid var(--rule); background: var(--night-2); color: var(--star-2); font-size: 18px; font-weight: 500; cursor: pointer; transition: background-color .3s, color .3s, border-color .3s; }
+.chip:hover { color: var(--star); border-color: rgba(236,234,228,.35); }
+.chip.is-on { background: var(--star); color: var(--night); border-color: var(--star); }
+.filter-desc { margin: 0 0 22px; color: var(--star-2); font-size: 15px; }
+.filter-desc:not([hidden]) { animation: fadeUp .5s var(--ease) both; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (max-width: 700px) {
+  .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(var(--gut) * -1); padding-inline: var(--gut); scroll-padding-inline: var(--gut); }
+  .filters::-webkit-scrollbar { display: none; }
+  .chip { flex: none; font-size: 17px; }
+  .filter-desc { text-align: center; }
+}
+
+.g-item[hidden] { display: none; }
+.g-item.f-in { animation: fadeUp .45s var(--ease) both; }
+
+/* ---------- Hra: zaostrite na nekonečno ---------- */
+.focus-game { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+.eyepiece { position: relative; aspect-ratio: 1; border-radius: 50%; overflow: hidden; max-width: 520px; width: 100%; justify-self: center; box-shadow: 0 0 0 1px var(--rule), 0 0 0 14px #0B0E1B, 0 0 0 15px var(--rule), 0 40px 80px -30px rgba(0,0,0,.8); transition: box-shadow .6s; }
+.eyepiece img { width: 100%; height: 100%; object-fit: cover; transition: filter .15s; }
+.eyepiece .ring { position: absolute; inset: 0; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, transparent 58%, rgba(7,9,18,.85) 72%), linear-gradient(var(--rule), var(--rule)) center / 1px 30% no-repeat, linear-gradient(var(--rule), var(--rule)) center / 30% 1px no-repeat; }
+.eyepiece.sharp { box-shadow: 0 0 0 1px var(--gold), 0 0 0 14px #0B0E1B, 0 0 0 15px rgba(232,182,90,.5), 0 0 80px -10px rgba(232,182,90,.4); }
+.game-text { display: flex; flex-direction: column; gap: 18px; }
+.game-msg { margin: 0; font-weight: 600; transition: color .3s; }
+.game-msg.win { color: var(--gold); }
+
+/* ---------- Na stenách ---------- */
+.walls-sec { padding-top: 0; }
+.walls { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.walls img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r); }
+@media (max-width: 900px) {
+  .walls { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--gut) * -1); padding-inline: var(--gut); scroll-padding-inline: var(--gut); }
+  .walls::-webkit-scrollbar { display: none; }
+  .walls img { flex: 0 0 82%; min-width: 0; scroll-snap-align: start; }
+}
+
+/* ---------- Pre vás: rámčeky ---------- */
+.offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; align-items: stretch; }
+.offer { display: flex; flex-direction: column; background: var(--night-2); border: 1px solid var(--rule); border-radius: var(--r); overflow: hidden; transition: border-color .3s; }
+.offer:hover { border-color: rgba(232,182,90,.4); }
+.offer-img { aspect-ratio: 4 / 3; overflow: hidden; }
+.offer-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.offer:hover .offer-img img { transform: scale(1.04); }
+.offer-text { display: flex; flex-direction: column; gap: 12px; padding: 22px; flex: 1; }
+.offer-text p { margin: 0; color: var(--star-2); }
+.offer-k { font-size: 13px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--gold) !important; }
+.offer-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--rule); }
+.offer-price { font-size: 28px; font-weight: 500; color: var(--star); }
+.gear { margin: 4px 0 0; display: grid; gap: 8px; font-size: 13px; }
+.gear div { display: grid; grid-template-columns: 7.5em 1fr; gap: 10px; }
+.gear dt { color: var(--star-2); }
+.gear dd { margin: 0; }
+@media (max-width: 1000px) { .offers { grid-template-columns: 1fr; } .offer { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); } .offer-img { aspect-ratio: auto; height: 100%; } }
+@media (max-width: 640px) { .offer { display: flex; } .offer-img { aspect-ratio: 16 / 10; height: auto; } }
+
+/* ---------- Poukaz ---------- */
+.gift { width: var(--wide); margin: 0 auto clamp(72px, 10vw, 140px); }
+.gift-inner { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; padding: clamp(48px, 8vw, 96px) clamp(20px, 5vw, 64px); border: 1px solid rgba(232,182,90,.35); border-radius: var(--r); background: radial-gradient(60% 80% at 50% 0%, rgba(232,182,90,.14), transparent 70%), radial-gradient(50% 60% at 50% 120%, rgba(122,104,232,.16), transparent 70%), var(--night-2); }
+.gift-inner .lead { margin-inline: auto; }
+
+/* ---------- Vitajte ---------- */
+.welcome { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 96px); align-items: center; padding-top: 0; }
+.welcome figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.welcome img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 70%; border-radius: var(--r); }
+.welcome > div { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
+.welcome p { margin: 0; color: var(--star-2); max-width: 34em; }
+.welcome .welcome-more { font-size: 15px; }
+@media (max-width: 800px) { .welcome { grid-template-columns: 1fr; } .welcome figure { width: min(300px, 80%); margin: 0 auto; } .welcome > div { align-items: center; text-align: center; } }
+
+/* ---------- Otázky ---------- */
+.faq { max-width: 860px; border-top: 1px solid var(--rule); }
+.faq details { border-bottom: 1px solid var(--rule); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 0; font-family: var(--display); font-size: clamp(20px, 2vw, 26px); font-weight: 500; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; font-family: var(--sans); font-size: 24px; color: var(--gold); transition: transform .3s var(--ease); }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0 0 22px; color: var(--star-2); max-width: 46em; }
+
+/* ---------- Pätička ---------- */
+.site-foot { border-top: 1px solid var(--rule); padding: clamp(56px, 8vw, 110px) var(--gut) 30px; background: radial-gradient(60% 80% at 100% 100%, rgba(122,104,232,.1), transparent 70%), var(--night); }
+.foot-grid { width: min(1360px, 100%); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 40px; align-items: end; }
+.foot-name { margin: 0; font-size: clamp(52px, 7vw, 112px); font-weight: 500; line-height: .95; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 16px; font-size: 15px; color: var(--star-2); }
+.foot-links a { text-decoration: none; }
+.foot-links a:hover { color: var(--gold); }
+.foot-cross { display: flex; flex-direction: column; gap: 6px; padding: 22px 26px; border: 1px solid var(--rule); border-radius: var(--r); text-decoration: none; transition: border-color .3s, background-color .3s; }
+.foot-cross:hover { border-color: rgba(236,234,228,.4); background: rgba(236,234,228,.03); }
+.foot-cross span { font-size: 14px; color: var(--star-2); }
+.logo17 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 34px; line-height: 1; display: inline-flex; align-items: center; gap: 9px; -webkit-text-stroke: .028em currentColor; paint-order: stroke fill; }
+.logo17 i { width: 9px; height: 9px; border-radius: 50%; background: #E4521F; display: inline-block; }
+.foot-legal { width: min(1360px, 100%); margin: 48px auto 0; padding-top: 20px; border-top: 1px solid var(--rule); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px; color: var(--star-2); }
+@media (max-width: 760px) { .foot-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Stupnica ostrenia (desktop) ---------- */
+.focus-scale { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); z-index: 900; height: min(58vh, 520px); display: none; color: var(--star); }
+.focus-scale ol { list-style: none; margin: 0; padding: 0; height: 100%; display: flex; flex-direction: column; justify-content: space-between; position: relative; }
+.focus-scale ol::before { content: ''; position: absolute; right: 7px; top: 0; bottom: 0; width: 1px; background: currentColor; opacity: .25; }
+.focus-scale a { display: flex; align-items: center; justify-content: flex-end; gap: 10px; text-decoration: none; font-size: 12px; font-variant-numeric: tabular-nums; padding: 2px 0; }
+.focus-scale .fs-l { opacity: 0; transform: translateX(6px); transition: opacity .25s, transform .25s; white-space: nowrap; background: var(--star); color: var(--night); padding: 3px 9px; border-radius: 4px; pointer-events: none; }
+.focus-scale .fs-d { min-width: 2.2em; text-align: right; opacity: .6; }
+.focus-scale a::after { content: ''; width: 15px; height: 1px; background: currentColor; opacity: .6; }
+.focus-scale a:hover .fs-l, .focus-scale a:focus-visible .fs-l { opacity: 1; transform: none; }
+.focus-scale a.active .fs-d { opacity: 1; font-weight: 700; color: var(--gold); }
+.focus-scale .fs-inf .fs-d { font-size: 20px; line-height: 1; }
+.fs-needle { position: fixed; right: 22px; top: calc(50% - min(58vh, 520px) / 2); z-index: 901; width: 15px; height: 2px; background: var(--gold); box-shadow: 0 0 10px rgba(232,182,90,.8); pointer-events: none; display: none; transform: translateY(calc(var(--fs, 0) * (min(58vh, 520px) - 2px))); }
+@media (min-width: 1180px) and (hover: hover) { .focus-scale, .fs-needle { display: block; } }
+
+/* ---------- Okno (detail obrazu, ponuky, košík) ---------- */
+body.modal-open { overflow: hidden; }
+.modal { position: fixed; inset: 0; z-index: 5000; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(4,5,10,.8); backdrop-filter: blur(8px); opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s; }
+.modal.open { opacity: 1; visibility: visible; }
+.modal-panel { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); width: min(1120px, 100%); max-height: 92vh; overflow: hidden; background: var(--night-2); border: 1px solid var(--rule); border-radius: var(--r); box-shadow: 0 40px 100px rgba(0,0,0,.6); transform: translateY(16px) scale(.985); transition: transform .45s var(--ease); }
+.modal.open .modal-panel { transform: none; }
+.modal-panel.no-img { grid-template-columns: 1fr; width: min(560px, 100%); }
+.modal-img { position: relative; background: #05060C; display: flex; align-items: center; justify-content: center; min-height: 300px; }
+.modal-img[hidden] { display: none; }
+.modal-img img { width: 100%; height: 100%; max-height: 92vh; object-fit: contain; transition: opacity .3s; }
+.modal-info { overflow-y: auto; max-height: 92vh; padding: 34px 30px 30px; display: flex; flex-direction: column; gap: 16px; }
+.modal-info h2 { margin: 0; padding-right: 90px; font-size: clamp(32px, 3.4vw, 44px); font-weight: 500; line-height: 1.02; }
+.modal-sub { margin: -8px 0 0; color: var(--gold); font-size: 15px; }
+.modal-desc { margin: 0; color: var(--star-2); }
+.modal-close { position: absolute; top: 14px; right: 14px; z-index: 3; min-height: 38px; padding: 0 16px; border-radius: var(--r); border: 1px solid var(--rule); background: rgba(7,9,18,.7); cursor: pointer; font-size: 14px; font-weight: 550; }
+.modal-close:hover { background: var(--star); color: var(--night); }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 13px; font-weight: 600; color: var(--star-2); }
+.field select, .field input, .field textarea { font: inherit; font-size: 16px; color: var(--star); background: var(--night); border: 1px solid var(--rule); border-radius: var(--r); padding: 12px 14px; width: 100%; }
+.field select:focus, .field input:focus, .field textarea:focus { outline: none; border-color: var(--gold); }
+.price-now { font-size: 40px; font-weight: 500; color: var(--gold-2); line-height: 1; }
+.pricing { margin: 0; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.pricing > div { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.pricing dt { font-weight: 600; }
+.pricing dd { margin: 0; font-family: var(--display); font-size: 22px; color: var(--gold-2); }
+.pricing .note { grid-column: 1 / -1; margin: 0; font-size: 14px; color: var(--star-2); }
+.pricing a { text-decoration: none; }
+.materials h3 { margin: 10px 0 6px; font-size: 16px; color: var(--gold); }
+.materials ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; color: var(--star-2); }
+.materials b { color: var(--star); }
+.cart-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.cart-list li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.cart-list small { display: block; color: var(--star-2); }
+.cart-remove { background: none; border: 0; padding: 0; color: var(--star-2); text-decoration: underline; cursor: pointer; font-size: 13px; }
+.cart-total { display: flex; justify-content: space-between; font-size: 26px; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--star-2); }
+.check input { margin-top: 4px; accent-color: var(--gold); }
+@media (max-width: 860px) {
+  .modal { padding: 0; align-items: stretch; }
+  .modal-panel { grid-template-columns: 1fr; max-height: 100%; height: 100%; border-radius: 0; overflow-y: auto; display: block; }
+  .modal-img { min-height: 0; max-height: 46vh; }
+  .modal-img img { max-height: 46vh; }
+  .modal-info { max-height: none; overflow: visible; padding: 26px 20px 40px; }
+  .modal-panel.no-img .modal-info { padding-top: 64px; }
+}
+
+/* Náhľad na stene: izba v mierke (240 × 240 cm) */
+.wall-k { margin: 4px 0 -6px; font-size: 13px; font-weight: 600; color: var(--star-2); }
+.wall { position: relative; width: 100%; max-width: 440px; aspect-ratio: 1; border-radius: var(--r); overflow: hidden; border: 1px solid var(--rule); container-type: inline-size; }
+.wall-scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.wall-print { position: absolute; left: 50%; transform: translateX(-50%); background: center / cover no-repeat #000; border: max(2px, 1.2cqi) solid #141414; box-shadow: 0 1.5cqi 3cqi rgba(0,0,0,.35); transition: width .55s var(--ease), height .55s var(--ease); }
+.wall-cap { position: absolute; left: 10px; top: 10px; font-size: 12px; font-weight: 600; color: #3A342C; background: rgba(255,255,255,.55); padding: 3px 8px; border-radius: 4px; }
+/* Oznam o košíku */
+.toast { position: fixed; left: 50%; bottom: 20px; z-index: 6000; display: flex; align-items: center; gap: 14px; padding: 12px 14px 12px 18px; border-radius: var(--r); background: var(--star); color: var(--night); box-shadow: 0 20px 50px rgba(0,0,0,.5); transform: translate(-50%, 200%); visibility: hidden; transition: transform .35s var(--ease), visibility 0s linear .35s; font-size: 15px; font-weight: 550; }
+.toast.visible { transform: translate(-50%, 0); visibility: visible; transition: transform .35s var(--ease), visibility 0s; }
+.toast button { min-height: 38px; padding: 0 14px; border-radius: var(--r); border: 0; background: var(--night); color: var(--star); cursor: pointer; font-weight: 600; font-size: 14px; }
+
+/* ---------- Ohľaduplný pohyb ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .fp { filter: none !important; transform: none !important; opacity: 1; }
+  .hero-trails { display: none; }
+}
+.logo { white-space: nowrap; }
+@media (max-width: 520px) { .logo { font-size: 19px; } .icon-btn { padding: 0 10px; min-height: 40px; } .nav { gap: 10px; padding-inline: 16px; } .nav-tools { gap: 6px; } }
+
+.foot-brand { width: 150px; height: auto; margin-bottom: 18px; opacity: .9; }
+@media (max-width: 380px) { .logo { font-size: 17px; } .icon-btn { padding: 0 8px; } .nav { gap: 8px; padding-inline: 12px; } }
+.modal-info > * { flex-shrink: 0; }
+
+/* =========================================================
+   v2 — fialová ako hlavná farba, živý vesmír, súhvezdia,
+   fakty. Zlatá ostáva pre ceny a hviezdy.
+========================================================= */
+:root {
+  --violet:   #8D6BFF;   /* hlavná farba značky Donor Astro */
+  --violet-2: #B8A4FF;
+  --violet-3: #5B3FE0;
+  --magenta:  #C658F0;
+  --teal:     #45D1C1;   /* len pre polárnu žiaru */
+}
+::selection { background: var(--violet); color: #fff; }
+:focus-visible { outline-color: var(--violet-2); }
+
+/* Hviezdne nebo a hmloviny cez celú stránku */
+.sky-bg { position: fixed; inset: 0; z-index: -2; width: 100%; height: 100%; pointer-events: none; }
+.nebulae { position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+.nebulae i { position: absolute; border-radius: 50%; filter: blur(60px); opacity: .5; will-change: transform; }
+.nebulae i:nth-child(1) { width: 60vmax; height: 46vmax; left: -18vmax; top: 30vh; background: radial-gradient(closest-side, rgba(141,107,255,.45), transparent); animation: neb1 34s ease-in-out infinite alternate; }
+.nebulae i:nth-child(2) { width: 50vmax; height: 40vmax; right: -16vmax; top: 120vh; background: radial-gradient(closest-side, rgba(198,88,240,.30), transparent); animation: neb2 41s ease-in-out infinite alternate; }
+.nebulae i:nth-child(3) { width: 44vmax; height: 34vmax; left: 30vw; top: -10vmax; background: radial-gradient(closest-side, rgba(70,90,230,.28), transparent); animation: neb3 29s ease-in-out infinite alternate; }
+@keyframes neb1 { to { transform: translate(14vw, -18vh) scale(1.15); } }
+@keyframes neb2 { to { transform: translate(-16vw, -70vh) scale(.9); } }
+@keyframes neb3 { to { transform: translate(-12vw, 40vh) scale(1.2); } }
+body { background: var(--night); }
+
+/* Tlačidlá a akcenty vo fialovej */
+.btn-gold, .btn-star { background: linear-gradient(135deg, #9A7BFF, var(--violet-3)); color: #fff; box-shadow: 0 10px 30px -10px rgba(141,107,255,.8), inset 0 1px 0 rgba(255,255,255,.25); }
+.btn-gold:hover, .btn-star:hover { background: linear-gradient(135deg, #AD93FF, #6A4FF0); box-shadow: 0 14px 40px -10px rgba(141,107,255,1), inset 0 1px 0 rgba(255,255,255,.3); }
+.btn-ghost:hover { border-color: var(--violet-2); }
+.chip.is-on { background: linear-gradient(135deg, #9A7BFF, var(--violet-3)); color: #fff; border-color: transparent; box-shadow: 0 8px 24px -10px rgba(141,107,255,.9); }
+.offer:hover { border-color: rgba(141,107,255,.5); box-shadow: 0 30px 60px -36px rgba(141,107,255,.8); }
+.offer-k { color: var(--violet-2) !important; }
+.nav-links a::after { background: var(--violet); }
+.focus-scale a.active .fs-d { color: var(--violet-2); }
+.fs-needle { background: var(--violet-2); box-shadow: 0 0 12px rgba(141,107,255,.9); }
+.divider span { color: var(--violet-2); text-shadow: 0 0 14px rgba(141,107,255,.9); animation: twinkle 3.2s ease-in-out infinite; }
+@keyframes twinkle { 0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 50% { opacity: .45; transform: translate(-50%, -50%) scale(.75); } }
+.cart-count { background: var(--violet); color: #fff; }
+#sound-btn[aria-pressed="true"] { border-color: var(--violet); color: var(--violet-2); }
+.eyepiece.sharp { box-shadow: 0 0 0 1px var(--violet-2), 0 0 0 14px #0B0E1B, 0 0 0 15px rgba(141,107,255,.6), 0 0 90px -10px rgba(141,107,255,.6); }
+.game-msg.win { color: var(--violet-2); }
+.faq summary::after { color: var(--violet-2); }
+.field select:focus, .field input:focus, .field textarea:focus { border-color: var(--violet); }
+.modal-sub { color: var(--violet-2); }
+.materials h3 { color: var(--violet-2); }
+.check input { accent-color: var(--violet); }
+.mobile-menu { background: radial-gradient(70% 50% at 50% 0%, rgba(141,107,255,.28), transparent 70%), radial-gradient(60% 40% at 100% 100%, rgba(198,88,240,.18), transparent 70%), var(--night); }
+.mm-link:hover, .mm-link:focus-visible { color: var(--violet-2); }
+
+/* Úvod: „Nekonečna“ sa trblieta medzi zlatou a fialovou, hmlovina dýcha za nadpisom */
+#hero-title em { background: linear-gradient(100deg, var(--gold-2) 0%, #fff4d6 22%, var(--violet-2) 48%, var(--gold-2) 74%, #fff4d6 100%); background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 9s ease-in-out infinite; padding-right: .08em; }
+@keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.hero-inner { position: relative; }
+.hero-inner::before { content: ''; position: absolute; left: -10%; bottom: 10%; width: 80%; height: 90%; z-index: -1; pointer-events: none; background: radial-gradient(closest-side, rgba(141,107,255,.32), transparent); filter: blur(20px); animation: breathe 7s ease-in-out infinite; }
+@keyframes breathe { 0%, 100% { opacity: .55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+.hero-sky::after { background: linear-gradient(180deg, rgba(7,9,18,.55) 0%, rgba(7,9,18,.1) 30%, rgba(20,12,48,.45) 62%, var(--night) 100%), linear-gradient(90deg, rgba(7,9,18,.75), transparent 70%); }
+
+/* Súhvezdia pri nadpisoch */
+.const line { stroke: rgba(184,164,255,.55); stroke-width: .8; stroke-dasharray: 60; stroke-dashoffset: 60; transition: stroke-dashoffset 1.6s var(--ease); }
+.const.drawn line { stroke-dashoffset: 0; }
+.const .cs { fill: #fff; filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 4px rgba(141,107,255,.9)); transform-box: fill-box; transform-origin: center; animation: twinkleStar 3s ease-in-out infinite; animation-delay: var(--d); }
+@keyframes twinkleStar { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(.7); } }
+.no-js .const line { stroke-dashoffset: 0; }
+
+
+/* Vedeli ste? */
+.facts-sec { padding-top: 0; }
+.fact-card { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; padding: clamp(32px, 6vw, 72px); min-height: 340px; border: 1px solid rgba(141,107,255,.35); border-radius: var(--r); background: radial-gradient(70% 90% at 100% 0%, rgba(141,107,255,.22), transparent 70%), radial-gradient(60% 70% at 0% 100%, rgba(198,88,240,.12), transparent 70%), rgba(14,18,34,.85); }
+.fact-body { position: relative; z-index: 2; max-width: 40em; }
+.fact-txt { margin: 18px 0 0; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.55; color: var(--star); max-width: 34em; }
+.fact-card.swap .fact-body { animation: factIn .7s var(--ease) both; }
+@keyframes factIn { from { opacity: 0; filter: blur(10px); transform: translateY(10px); } to { opacity: 1; filter: none; transform: none; } }
+.fact-nav { position: relative; z-index: 2; display: flex; align-items: center; gap: 14px; }
+.fact-btn { width: 46px; height: 46px; display: grid; place-items: center; border-radius: var(--r); border: 1px solid var(--rule); background: rgba(7,9,18,.5); cursor: pointer; transition: border-color .25s, background-color .25s; }
+.fact-btn:hover { border-color: var(--violet-2); background: rgba(141,107,255,.15); }
+.fact-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.fact-i { font-size: 14px; color: var(--star-2); font-variant-numeric: tabular-nums; min-width: 3.5em; text-align: center; }
+.fact-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(236,234,228,.08); }
+.fact-bar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--violet), var(--magenta)); transform-origin: left; transform: scaleX(0); }
+.fact-bar i.run { animation: factBar 8s linear both; }
+@keyframes factBar { to { transform: scaleX(1); } }
+.fact-orbit { position: absolute; right: -60px; top: 50%; width: 360px; height: 360px; transform: translateY(-50%); pointer-events: none; opacity: .8; }
+.fact-orbit i { position: absolute; inset: 0; border: 1px solid rgba(184,164,255,.22); border-radius: 50%; animation: orbit 24s linear infinite; }
+.fact-orbit i::after { content: ''; position: absolute; top: -4px; left: 50%; width: 8px; height: 8px; border-radius: 50%; background: var(--violet-2); box-shadow: 0 0 12px var(--violet); }
+.fact-orbit i:nth-child(2) { inset: 60px; animation-duration: 15s; animation-direction: reverse; }
+.fact-orbit i:nth-child(2)::after { background: var(--gold-2); box-shadow: 0 0 12px var(--gold); width: 6px; height: 6px; }
+.fact-orbit i:nth-child(3) { inset: 125px; border-color: transparent; background: radial-gradient(circle, #fff3d0 0 18%, var(--gold) 34%, rgba(232,182,90,.3) 60%, transparent 70%); animation: breathe 5s ease-in-out infinite; }
+.fact-orbit i:nth-child(3)::after { display: none; }
+@keyframes orbit { to { transform: rotate(360deg); } }
+@media (max-width: 700px) { .fact-orbit { right: -150px; top: 30%; opacity: .45; } .fact-card { min-height: 380px; } }
+
+/* Polárna žiara pri poukaze */
+.gift-inner { border-color: rgba(141,107,255,.4); background: radial-gradient(60% 80% at 50% 120%, rgba(141,107,255,.25), transparent 70%), rgba(14,18,34,.9); }
+.gift-inner > *:not(.aurora) { position: relative; z-index: 2; }
+.aurora { position: absolute; inset: -20% -10% 30% -10%; z-index: 0; pointer-events: none; filter: blur(28px); opacity: .75; }
+.aurora i { position: absolute; left: 0; right: 0; height: 60%; border-radius: 50%; mix-blend-mode: screen; will-change: transform; }
+.aurora i:nth-child(1) { top: 10%; background: linear-gradient(90deg, transparent, rgba(69,209,193,.55), rgba(141,107,255,.6), transparent); animation: aur1 11s ease-in-out infinite alternate; }
+.aurora i:nth-child(2) { top: 25%; background: linear-gradient(90deg, transparent, rgba(198,88,240,.5), rgba(69,209,193,.35), transparent); animation: aur2 14s ease-in-out infinite alternate; }
+.aurora i:nth-child(3) { top: 0; background: linear-gradient(90deg, transparent 10%, rgba(141,107,255,.5), transparent 90%); animation: aur3 9s ease-in-out infinite alternate; }
+@keyframes aur1 { from { transform: translateX(-12%) skewX(-14deg) scaleY(.8); } to { transform: translateX(12%) skewX(10deg) scaleY(1.15); } }
+@keyframes aur2 { from { transform: translateX(15%) skewX(12deg) scaleY(1.1); } to { transform: translateX(-10%) skewX(-8deg) scaleY(.75); } }
+@keyframes aur3 { from { transform: translateX(-6%) scaleY(.6); opacity: .5; } to { transform: translateX(8%) scaleY(1); opacity: 1; } }
+
+/* Detail obrazu: ako dlho letelo svetlo */
+.lightbox { position: relative; display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; align-items: center; padding: 16px; border-radius: var(--r); border: 1px solid rgba(141,107,255,.35); background: linear-gradient(120deg, rgba(141,107,255,.14), rgba(14,18,34,.4)); overflow: hidden; }
+.lightbox .lb-k { grid-column: 1 / -1; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--violet-2); }
+.lightbox .lb-v { font-family: var(--display); font-size: 30px; font-weight: 500; line-height: 1; white-space: nowrap; }
+.lightbox .lb-t { font-size: 14px; color: var(--star-2); line-height: 1.45; }
+.lightbox .lb-beam { grid-column: 1 / -1; position: relative; height: 2px; margin-top: 6px; background: rgba(236,234,228,.08); border-radius: 2px; overflow: hidden; }
+.lightbox .lb-beam::after { content: ''; position: absolute; top: 0; left: 0; width: 30%; height: 100%; background: linear-gradient(90deg, transparent, #fff, var(--violet-2)); animation: beam 2.4s linear infinite; }
+@keyframes beam { from { transform: translateX(-100%); } to { transform: translateX(340%); } }
+@media (max-width: 480px) { .lightbox { grid-template-columns: 1fr; } .lightbox .lb-v { font-size: 26px; } }
+
+/* Svetielko za kurzorom (desktop) */
+.cursor-glow { position: fixed; left: 0; top: 0; z-index: 0; width: 560px; height: 560px; margin: -280px 0 0 -280px; border-radius: 50%; pointer-events: none; background: radial-gradient(closest-side, rgba(141,107,255,.07), rgba(141,107,255,.025) 55%, transparent); transform: translate3d(var(--cx, -999px), var(--cy, -999px), 0); transition: opacity .6s; }
+.cursor-glow.off { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .nebulae i, .aurora i, .fact-orbit i, .divider span, .const .cs, #hero-title em, .hero-inner::before { animation: none !important; }
+  .cursor-glow { display: none; }
+}
+/* Logo Donor Astro: podpis pod názvom a v pätičke */
+.foot-brand { width: clamp(200px, 24vw, 320px); height: auto; margin: 0 0 14px; opacity: 1; }
+.foot-who { margin: 0; font-family: var(--display); font-size: clamp(20px, 2vw, 26px); font-weight: 400; color: var(--star); }
+.foot-brand { width: clamp(220px, 26vw, 340px); }
+
+/* =========================================================
+   v3 — „Prvé svetlo“, väčšia galéria, plánovač oblohy
+   Celá stránka stojí na jednom motíve: ostrenie a svetlo.
+   Úvod sa otvorí ako clona ďalekohľadu, nadpisy zaostria,
+   hra zaostrí okulár a odomkne zľavu v galérii.
+========================================================= */
+
+/* ---------- Úvod: obloha sa „vyvolá“ ako dlhá expozícia, nadpis zaostrí ---------- */
+.hero-sky { animation: none; }
+.hero-inner { gap: 18px; }
+#hero-title .w1, #hero-title em { display: inline-block; }
+.intro .hero-sky { animation: expose 2.6s cubic-bezier(.3, 0, .2, 1) both; }
+.intro .hero-trails { animation: fadeIn 2.4s ease 1.4s both; }
+.intro #hero-title .w1 { animation: focusIn 1.4s var(--ease) .35s both; }
+.intro #hero-title em { animation: focusIn 1.6s var(--ease) .7s both, shimmer 9s ease-in-out 2.3s infinite; }
+.intro .hero-by { animation: rise 1s var(--ease) 1.3s both; }
+.intro .hero-lead { animation: rise 1s var(--ease) 1.45s both; }
+.intro .hero-actions { animation: rise 1s var(--ease) 1.6s both; }
+.intro .hero-inner::before { animation: fadeIn 2s ease .6s both, breathe 7s ease-in-out 2.6s infinite; }
+.nav { animation: fadeIn 1s ease 1.6s both; }
+@keyframes expose { 0% { opacity: 0; filter: blur(10px) brightness(.4); transform: scale(1.12); } 35% { opacity: 1; } 100% { opacity: 1; filter: none; transform: scale(1.04); } }
+@keyframes focusIn { 0% { opacity: 0; filter: blur(16px); transform: translateY(.08em); } 45% { opacity: 1; } 100% { opacity: 1; filter: blur(0); transform: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Donor Astro ako podpis, menší a tichší */
+.hero-by { margin: -4px 0 2px; display: flex; align-items: center; gap: 10px; }
+.hero-by span { font-family: var(--display); font-style: italic; font-size: clamp(16px, 1.3vw, 20px); color: var(--star-2); line-height: 1; }
+.hero-by img { width: clamp(108px, 9vw, 148px); height: auto; filter: drop-shadow(0 2px 14px rgba(7,9,18,.7)); }
+.hero-lead { max-width: 26em; }
+
+/* ---------- Súhvezdia: tvar za nadpisom, bez názvu ---------- */
+.sh-title { position: relative; isolation: isolate; display: block; }
+.const { position: absolute; z-index: -1; left: -34px; top: 50%; width: clamp(140px, 15vw, 190px); transform: translateY(-58%); pointer-events: none; opacity: .8; }
+.const svg { display: block; width: 100%; height: auto; aspect-ratio: 1; overflow: visible; }
+.const line { stroke: rgba(184,164,255,.42); stroke-width: .5; }
+.const .cs { fill: #F4F0FF; filter: drop-shadow(0 0 1.5px #fff) drop-shadow(0 0 3px rgba(141,107,255,.9)); }
+@media (max-width: 700px) { .const { left: 50%; transform: translate(-50%, -58%); width: 150px; } }
+
+/* ---------- Galéria: kategórie ako karusely, fotky v prirodzenom pomere ---------- */
+.g-cats { display: flex; flex-direction: column; gap: clamp(44px, 6vw, 80px); }
+.g-cat { --gh: clamp(300px, 32vw, 440px); }
+.g-cat-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; margin-bottom: 18px; }
+.g-cat-desc { margin: 6px 0 0; font-size: 15px; color: var(--star-2); max-width: 34em; }
+.g-arrows { display: flex; gap: 8px; flex: none; }
+.g-arrows .fact-btn:disabled { opacity: .3; cursor: default; }
+.g-track { display: flex; align-items: center; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; padding-bottom: 4px; }
+/* fotky visia ako v galérii: stredy na jednej výške */
+@media (max-width: 1179px) { .g-track { margin-right: calc(var(--gut) * -1); padding-right: var(--gut); } }
+.g-track::-webkit-scrollbar { display: none; }
+.g-item { flex: 0 0 auto; width: min(calc(var(--ar, .75) * var(--gh)), 86vw); padding: 0; border: 0; background: none; color: inherit; text-align: left; cursor: pointer; scroll-snap-align: start; -webkit-tap-highlight-color: transparent; }
+.g-item:focus-visible { outline: none; }
+.g-item:focus-visible .g-img { outline: 2px solid var(--violet-2); outline-offset: 3px; }
+.g-img { position: relative; display: block; overflow: hidden; border-radius: var(--r); background: #0A0D1A; box-shadow: 0 0 0 1px var(--rule); transition: box-shadow .45s; }
+.g-img img { width: 100%; height: auto; aspect-ratio: var(--ar); object-fit: cover; transition: transform 1.4s var(--ease); }
+.g-item:hover .g-img { box-shadow: 0 0 0 1px rgba(184,164,255,.55), 0 26px 60px -30px rgba(141,107,255,.95); }
+.g-item:hover .g-img img { transform: scale(1.025); }
+/* pri prechode myšou: ako dlho k nám letelo svetlo z tejto fotky */
+.g-ly { position: absolute; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; gap: 1px; padding: 40px 16px 14px; background: linear-gradient(180deg, transparent, rgba(7,9,18,.85)); opacity: 0; transform: translateY(8px); transition: opacity .4s, transform .5s var(--ease); pointer-events: none; }
+.g-ly small { font-size: 12px; color: var(--violet-2); font-weight: 600; }
+.g-ly b { font-family: var(--display); font-weight: 500; font-size: 22px; line-height: 1.1; }
+.g-item:hover .g-ly, .g-item:focus-visible .g-ly { opacity: 1; transform: none; }
+.g-cap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 14px; padding: 12px 2px 0; min-height: 76px; align-content: start; }
+.g-title { font-size: clamp(18px, 1.5vw, 21px); font-weight: 500; line-height: 1.2; }
+.g-meta { grid-column: 1; font-size: 13px; line-height: 1.4; color: var(--star-2); }
+.g-buy { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.g-price { font-family: var(--display); font-size: 19px; line-height: 1.2; color: var(--gold-2); white-space: nowrap; }
+.g-more { font-size: 13px; font-weight: 600; color: var(--violet-2); opacity: 0; transition: opacity .3s; }
+.g-item:hover .g-more, .g-item:focus-visible .g-more { opacity: 1; }
+@media (hover: none) { .g-more { opacity: 1; } }
+.g-cat.rv { opacity: 0; transform: translateY(20px); }
+.g-cat.rv.in { opacity: 1; transform: none; transition: opacity .9s var(--ease), transform .9s var(--ease); }
+@media (max-width: 700px) {
+  .g-cat { --gh: min(52svh, 108vw); }
+  .g-cat-head { align-items: center; }
+  .g-cat-head .h3 { font-size: 27px; }
+  .g-track { gap: 12px; margin-left: calc(var(--gut) * -1); padding-left: var(--gut); scroll-padding-inline: var(--gut); }
+  .g-cap { min-height: 70px; }
+  .section-head + .g-discount, .g-discount { text-align: center; }
+}
+
+/* zľava z hry sa prepíše priamo do cien */
+.g-discount { margin: 0 0 28px; padding: 12px 16px; border: 1px dashed rgba(141,107,255,.6); border-radius: var(--r); background: rgba(141,107,255,.08); font-size: 15px; }
+.g-discount:not([hidden]) { animation: fadeUp .6s var(--ease) both; }
+.g-discount b { font-family: var(--display); font-weight: 500; color: var(--violet-2); letter-spacing: .02em; }
+.g-old { position: relative; margin-right: 6px; font-size: .78em; color: var(--star-2); }
+.g-old::after { content: ''; position: absolute; left: -2px; right: -2px; top: 52%; height: 1.5px; background: var(--violet-2); transform: scaleX(0); transform-origin: left; transition: transform .7s var(--ease) var(--sd, .3s); }
+.disc-on .g-old::after { transform: scaleX(1); }
+
+/* ---------- Zaostrite na nekonečno ---------- */
+.focus-game { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 88px); align-items: center; padding: clamp(28px, 5vw, 64px); border: 1px solid rgba(141,107,255,.3); border-radius: var(--r); background: radial-gradient(55% 80% at 15% 50%, rgba(141,107,255,.18), transparent 70%), rgba(14,18,34,.72); }
+.eyepiece { max-width: 440px; }
+.game-text { gap: 20px; max-width: 34em; }
+.lens { display: flex; flex-direction: column; gap: 8px; }
+.lens-k { font-size: 13px; font-weight: 600; color: var(--star-2); }
+.lens input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 46px; margin: 0; border: 1px solid var(--rule); border-radius: var(--r); cursor: grab; touch-action: pan-y;
+  background: repeating-linear-gradient(90deg, rgba(236,234,228,.2) 0 1px, transparent 1px 7px) calc(var(--v, 0) * -2px) 0 / auto 100%, linear-gradient(180deg, #1B2036, #0B0E1B); }
+.lens input[type=range]:active { cursor: grabbing; }
+.lens input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 6px; height: 46px; border-radius: 3px; background: var(--violet-2); box-shadow: 0 0 0 3px rgba(141,107,255,.25), 0 0 18px rgba(141,107,255,.9); }
+.lens input[type=range]::-moz-range-thumb { width: 6px; height: 46px; border: 0; border-radius: 3px; background: var(--violet-2); box-shadow: 0 0 0 3px rgba(141,107,255,.25), 0 0 18px rgba(141,107,255,.9); }
+.lens input[type=range]:focus-visible { outline: 2px solid var(--violet-2); outline-offset: 3px; }
+.lens input[type=range]:disabled { cursor: default; opacity: .6; }
+.lens-scale { position: relative; height: 20px; margin: 0 3px; font-size: 12px; color: var(--star-2); font-variant-numeric: tabular-nums; }
+.lens-scale span { position: absolute; top: 0; transform: translateX(-50%); }
+.lens-scale span:first-child { transform: none; }
+.lens-scale .inf { top: -3px; font-size: 19px; line-height: 1; color: var(--violet-2); }
+.game-msg { margin: 0; min-height: 1.6em; font-weight: 600; transition: color .3s; }
+.game-msg.win { color: var(--violet-2); }
+.code-box { display: none; flex-direction: column; align-items: flex-start; gap: 14px; padding: 18px 20px; border: 1px dashed rgba(141,107,255,.6); border-radius: var(--r); background: rgba(141,107,255,.08); }
+.code-box.visible { display: flex; animation: fadeUp .6s var(--ease) both; }
+.code-txt { display: flex; flex-direction: column; gap: 2px; }
+.code-txt span { font-size: 15px; color: var(--star-2); }
+.code-txt strong { font-family: var(--display); font-size: 28px; font-weight: 500; color: var(--violet-2); letter-spacing: .03em; }
+@media (max-width: 900px) {
+  .focus-game { grid-template-columns: 1fr; }
+  .eyepiece { max-width: 280px; }
+  .game-text { text-align: center; align-items: stretch; margin-inline: auto; }
+  .game-text .lead { margin-inline: auto; }
+  .lens-k { text-align: left; }
+  .code-box { align-items: center; text-align: center; }
+}
+
+/* ---------- Nočná obloha: plánovač podľa Mesiaca ---------- */
+.sky-sec { padding-top: 0; }
+.sky-card { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(28px, 5vw, 80px); align-items: center; padding: clamp(28px, 5vw, 64px); border: 1px solid var(--rule); border-radius: var(--r); background: radial-gradient(45% 90% at 8% 50%, rgba(236,234,228,.07), transparent 70%), rgba(14,18,34,.75); }
+.moon-wrap { position: relative; width: clamp(150px, 19vw, 250px); aspect-ratio: 1; }
+.moon-wrap::before { content: ''; position: absolute; inset: -30%; border-radius: 50%; background: radial-gradient(closest-side, rgba(236,234,228,calc(var(--lit, .5) * .22)), transparent); pointer-events: none; }
+.moon { position: relative; width: 100%; height: 100%; }
+.moon svg { display: block; width: 100%; height: 100%; }
+.sky-body { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; max-width: 40em; }
+.sky-k { margin: 0; font-size: 14px; font-weight: 600; color: var(--violet-2); }
+.sky-note { margin: 0; color: var(--star-2); }
+.sky-next { margin: 4px 0 0; width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.sky-next div { padding: 14px 16px; border: 1px solid var(--rule); border-radius: var(--r); background: rgba(7,9,18,.45); }
+.sky-next div:first-child { border-color: rgba(141,107,255,.5); background: rgba(141,107,255,.08); }
+.sky-next dt { font-size: 13px; color: var(--star-2); }
+.sky-next dd { margin: 3px 0 0; font-family: var(--display); font-size: clamp(19px, 1.7vw, 23px); line-height: 1.2; }
+.sky-next dd small { display: block; margin-top: 2px; font-family: var(--sans); font-size: 13px; color: var(--star-2); }
+.sky-hint { margin: 0; font-size: 15px; color: var(--star-2); }
+@media (max-width: 760px) {
+  .sky-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .sky-body { align-items: center; }
+  .sky-next { text-align: left; }
+}
+@media (max-width: 380px) { .sky-next { grid-template-columns: 1fr; } }
+
+/* ---------- Vedeli ste? číslo a jednotka v samostatných riadkoch ---------- */
+.fact-num { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+#fact-num { display: block; padding: .06em .08em .14em 0; font-family: var(--display); font-size: clamp(64px, 11vw, 150px); font-weight: 500; line-height: 1; letter-spacing: -.02em; white-space: nowrap; font-variant-numeric: lining-nums;
+  background: linear-gradient(100deg, #fff, var(--violet-2) 60%, var(--gold-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.fact-unit { font-family: var(--display); font-style: italic; font-size: clamp(22px, 2.6vw, 34px); line-height: 1.15; color: var(--violet-2); }
+.fact-txt { margin-top: 14px; }
+.fact-link { margin-top: 20px; min-height: 44px; padding: 0 18px; border-radius: var(--r); border: 1px solid rgba(184,164,255,.5); background: rgba(141,107,255,.12); color: var(--star); font-size: 14px; font-weight: 600; cursor: pointer; transition: background-color .25s, border-color .25s; }
+.fact-link:hover { background: rgba(141,107,255,.25); border-color: var(--violet-2); }
+.fact-link[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro .hero-sky, .intro .hero-trails, .intro #hero-title .w1, .intro #hero-title em, .intro .hero-by, .intro .hero-lead, .intro .hero-actions, .intro .hero-inner::before, .nav { animation: none !important; }
+  .g-cat.rv { opacity: 1; transform: none; }
+}
+.price-now s { margin-left: 10px; font-size: .5em; color: var(--star-2); }
+.price-now small { display: block; margin-top: 6px; font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--violet-2); }
+.cart-total s { font-size: .65em; color: var(--star-2); margin-right: 8px; }
+
+/* =========================================================
+   v4 — menu, tlačidlá v úvode, meteor do košíka
+========================================================= */
+/* Menu: položky oddelené linkou, krátky popis, odozva na ťuknutie */
+.mobile-menu { gap: 0; justify-content: center; }
+.mm-link { position: relative; display: flex; flex-direction: column; gap: 2px; padding: 14px 0 15px; overflow: hidden; font-size: clamp(30px, 8vw, 46px); line-height: 1.05;
+  background: linear-gradient(var(--rule), var(--rule)) left bottom / 100% 1px no-repeat; transition: opacity .3s, padding-left .4s var(--ease), color .3s; }
+.mm-t { display: block; }
+.mm-s { display: block; font-family: var(--sans); font-size: 14px; font-weight: 500; letter-spacing: 0; color: var(--star-2); font-style: normal; }
+.mm-link::after { content: '✦'; position: absolute; right: 2px; top: 50%; font-family: var(--sans); font-size: 15px; color: var(--violet-2); opacity: .3; transform: translateY(-50%) scale(.8); transition: opacity .3s, transform .4s var(--ease), text-shadow .3s; }
+.mm-link::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(141,107,255,.28) 50%, transparent); transform: translateX(-100%); pointer-events: none; }
+.mm-link:hover, .mm-link:focus-visible { font-style: normal; color: var(--star); }
+.mm-link:hover::after { opacity: 1; }
+.mobile-menu.is-opening .mm-link { animation: mmIn .6s var(--ease) both, mmLine .8s var(--ease) both; animation-delay: calc(.28s + var(--i, 0) * .055s); }
+@keyframes mmLine { from { background-size: 0 1px; } to { background-size: 100% 1px; } }
+.mm-link.is-picked { color: var(--violet-2); padding-left: 14px; }
+.mm-link.is-picked .mm-t { font-style: italic; }
+.mm-link.is-picked::before { animation: mmSweep .55s ease-out both; }
+.mm-link.is-picked::after { opacity: 1; transform: translateY(-50%) scale(1.5) rotate(90deg); text-shadow: 0 0 12px var(--violet); }
+.mobile-menu.picking .mm-link:not(.is-picked) { opacity: .25; }
+@keyframes mmSweep { to { transform: translateX(100%); } }
+
+/* Úvod: tlačidlá s odstupom, hlavné obieha svetlo */
+@property --orb { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+.hero-actions { margin-top: clamp(16px, 4vh, 40px); gap: 12px; }
+.hero-actions .btn { min-height: 54px; padding: 0 28px; font-size: 16px; transition: transform .35s var(--ease), box-shadow .35s, background-color .25s, border-color .25s; }
+.hero-actions .btn:hover { transform: translateY(-2px); }
+.hero-actions .btn-gold { position: relative; }
+.hero-actions .btn-gold::before { content: ''; position: absolute; inset: -1px; padding: 1.5px; border-radius: calc(var(--r) + 1px); pointer-events: none;
+  background: conic-gradient(from var(--orb), transparent 0 62%, rgba(255,255,255,.95) 74%, var(--violet-2) 82%, transparent 92%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); animation: orb 3.6s linear infinite; }
+@keyframes orb { to { --orb: 360deg; } }
+.hero-actions .btn-ghost { background: rgba(7,9,18,.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-color: rgba(236,234,228,.28); }
+.hero-actions .btn-ghost:hover { background: rgba(141,107,255,.16); border-color: var(--violet-2); }
+@media (max-width: 700px) {
+  .hero-actions { flex-direction: row; flex-wrap: wrap; }
+  .hero-actions .btn { width: auto; padding: 0 20px; min-height: 52px; font-size: 15px; }
+  .hero-actions .btn-gold { flex: 1 1 auto; }
+}
+
+/* Texty v oknách: menšie a pokojnejšie */
+.modal-desc { font-size: 15.5px; line-height: 1.6; text-wrap: pretty; max-width: 36em; }
+
+/* Meteor, ktorý vletí do košíka */
+.meteor { position: fixed; left: 0; top: 0; z-index: 9000; width: 0; height: 0; pointer-events: none; }
+.meteor i { position: absolute; right: -4px; top: -2px; width: 90px; height: 4px; border-radius: 4px; transform-origin: 100% 50%;
+  background: linear-gradient(90deg, transparent, rgba(184,164,255,.35) 40%, rgba(255,255,255,.9) 92%, #fff); filter: drop-shadow(0 0 6px rgba(141,107,255,.9)); }
+.meteor b { position: absolute; left: -5px; top: -5px; width: 10px; height: 10px; border-radius: 50%; background: #fff; box-shadow: 0 0 10px 3px #fff, 0 0 26px 8px rgba(141,107,255,.85); }
+.cart-btn.hit { animation: cartHit .7s var(--ease); }
+@keyframes cartHit { 0% { box-shadow: 0 0 0 0 rgba(184,164,255,.9); border-color: var(--violet-2); } 100% { box-shadow: 0 0 0 16px rgba(184,164,255,0); } }
+.cart-burst { position: fixed; z-index: 9001; width: 4px; height: 4px; margin: -2px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px var(--violet); pointer-events: none; animation: burst .6s ease-out forwards; }
+@keyframes burst { to { opacity: 0; transform: translate(var(--bx), var(--by)) scale(.3); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-actions .btn-gold::before { animation: none; }
+  .mm-link.is-picked::before { animation: none; }
+}
+
+/* =========================================================
+   v5 — kamera v náhľade izby, vaša stena, tichší údaj o svetle
+========================================================= */
+/* Údaj o svetle: pod popisom, menší a tichý, aby neťahal pozornosť */
+.modal-desc { color: var(--star); }
+.lightbox { display: flex; flex-direction: column; gap: 3px; padding: 12px 0 0 14px; border: 0; border-left: 2px solid rgba(141,107,255,.45); border-radius: 0; background: none; overflow: visible; }
+.lightbox .lb-k { font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--star-2); }
+.lightbox .lb-k b { font-family: var(--display); font-weight: 500; font-size: 17px; color: var(--violet-2); }
+.lightbox .lb-t { font-size: 13px; line-height: 1.5; color: var(--star-2); opacity: .85; }
+.lightbox { padding-top: 0; align-items: flex-start; text-align: left; }
+
+/* Náhľad izby: kamera sa priblíži k menším formátom */
+.wall-print { border-width: 1cqi; }
+.wall[hidden], .mywall[hidden] { display: none; }
+.wall-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin: 4px 0 -4px; }
+.wall-bar .wall-k { margin: 0; }
+.wall-tabs { display: inline-flex; padding: 3px; border: 1px solid var(--rule); border-radius: var(--r); background: rgba(7,9,18,.5); }
+.wall-tabs button { min-height: 34px; padding: 0 12px; border: 0; border-radius: 4px; background: none; color: var(--star-2); font-size: 13px; font-weight: 600; cursor: pointer; transition: background-color .25s, color .25s; }
+.wall-tabs button[aria-selected="true"] { background: var(--violet); color: #fff; }
+
+/* Vaša stena */
+.mywall { display: flex; flex-direction: column; gap: 12px; max-width: 440px; }
+.mw-stage { position: relative; border-radius: var(--r); overflow: hidden; border: 1px solid var(--rule); background: #000; user-select: none; -webkit-user-select: none; }
+.mw-stage img { width: 100%; height: auto; display: block; pointer-events: none; }
+.mw-print { position: absolute; transform: translate(-50%, -50%); background: center / cover no-repeat #000; border: 2px solid #141414; box-shadow: 0 6px 18px rgba(0,0,0,.45); cursor: grab; touch-action: none; transition: width .4s var(--ease), height .4s var(--ease); }
+.mw-print:active { cursor: grabbing; }
+.mw-line { position: absolute; height: 2px; margin-top: -1px; transform-origin: 0 50%; background: var(--violet-2); box-shadow: 0 0 8px rgba(141,107,255,.9); pointer-events: none; }
+.mw-line span { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); padding: 2px 7px; border-radius: 4px; background: rgba(7,9,18,.8); color: #fff; font-size: 12px; font-weight: 600; white-space: nowrap; }
+.mw-h { position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; padding: 0; border-radius: 50%; border: 2px solid #fff; background: rgba(141,107,255,.55); box-shadow: 0 0 0 4px rgba(141,107,255,.3); cursor: grab; touch-action: none; }
+.mw-tools { display: flex; flex-direction: column; gap: 6px; }
+.mw-cm { font-size: 14px; color: var(--star-2); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.mw-cm input { width: 86px; font: inherit; font-size: 16px; color: var(--star); background: var(--night); border: 1px solid var(--rule); border-radius: var(--r); padding: 8px 10px; }
+.mw-hint { margin: 0; font-size: 13px; line-height: 1.5; color: var(--star-2); }
+.mw-new { align-self: flex-start; font-size: 13px; }
+
+/* Pripomenutie novu */
+.sky-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.sky-cal { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 16px; font-size: 14px; color: var(--star-2); }
+.sky-cal a { color: var(--violet-2); text-underline-offset: 4px; }
+.sky-cal a:hover { color: #fff; }
+@media (max-width: 760px) { .sky-actions, .sky-cal { align-items: center; justify-content: center; } }
+
+/* =========================================================
+   v6 — dve izby v mierke, nekonečno s meteorom, žiariace
+   kategórie, hviezdy v predeloch, Hviezda vášho roku
+========================================================= */
+/* Náhľad izby: komoda pre A3/A2, pohovka pre A1/A0, pevná mierka */
+.wall-scene { transition: opacity .5s ease; }
+.wall[data-scene="komoda"] .scene-sofa, .wall[data-scene="sofa"] .scene-komoda { opacity: 0; }
+.wall-print { transform: none; transition: width .55s var(--ease), height .55s var(--ease), left .55s var(--ease), bottom .55s var(--ease); border-style: solid; border-color: #161616; }
+.wall-print.m-frame { box-shadow: 0 .6cqi 1.6cqi rgba(0,0,0,.35); }
+.wall-print.m-canvas { box-shadow: .5cqi .8cqi 0 rgba(0,0,0,.35), 0 1cqi 2.4cqi rgba(0,0,0,.3); }
+.wall-print.m-flat { box-shadow: 0 1.2cqi 2.6cqi rgba(0,0,0,.32); }
+.wall-print.m-alu { box-shadow: 0 1.2cqi 2.6cqi rgba(0,0,0,.32); }
+.wall-print.m-alu::after { content: ''; position: absolute; inset: 0; background: linear-gradient(125deg, rgba(255,255,255,.18), transparent 35%, transparent 70%, rgba(255,255,255,.08)); }
+.wall-tabs label { display: inline-flex; align-items: center; min-height: 34px; padding: 0 12px; border-radius: 4px; color: var(--star-2); font-size: 13px; font-weight: 600; cursor: pointer; transition: background-color .25s, color .25s; }
+.wall-tabs label[aria-selected="true"] { background: var(--violet); color: #fff; }
+.wall-tabs label:focus-visible { outline: 2px solid var(--violet-2); outline-offset: 2px; }
+
+/* Údaj o svetle: tenká linka, po ktorej pomaly letí lúč */
+.lightbox { position: relative; overflow: hidden; border-left: 0; padding-left: 16px; }
+.lightbox::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: rgba(141,107,255,.28); }
+.lightbox::after { content: ''; position: absolute; left: 0; top: 0; width: 2px; height: 45%; background: linear-gradient(180deg, transparent, rgba(255,255,255,.95) 70%, var(--violet-2)); box-shadow: 0 0 8px rgba(184,164,255,.9); animation: lbBeam 4.2s cubic-bezier(.45, 0, .55, 1) infinite; }
+@keyframes lbBeam { 0% { transform: translateY(-110%); opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { transform: translateY(240%); opacity: 0; } }
+
+/* Nekonečno za nadpisom a meteor, ktorý ho obkreslí raz za 7 sekúnd */
+#hero-title .w2 { display: inline-flex; align-items: center; gap: .14em; white-space: nowrap; }
+.inf { width: .78em; height: auto; flex: none; overflow: visible; margin-top: .12em; }
+.inf path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.inf-base { stroke: rgba(184,164,255,.32); stroke-width: .035; }
+.inf-m { opacity: 0; animation: 7s linear 3s infinite both; }
+.inf-t { stroke: rgba(141,107,255,.55); stroke-width: .05; stroke-dasharray: 14 86; animation-name: infT; }
+.inf-b { stroke: rgba(205,190,255,.9); stroke-width: .065; stroke-dasharray: 6 94; animation-name: infB; }
+.inf-h { stroke: #fff; stroke-width: .09; stroke-dasharray: 1.2 98.8; animation-name: infH; filter: drop-shadow(0 0 .04px #fff) drop-shadow(0 0 .08px var(--violet)); }
+@keyframes infT { 0% { stroke-dashoffset: 14; opacity: 0; } 4% { opacity: 1; } 24% { opacity: 1; } 30% { stroke-dashoffset: -101; opacity: 0; } 100% { stroke-dashoffset: -101; opacity: 0; } }
+@keyframes infB { 0% { stroke-dashoffset: 6; opacity: 0; } 4% { opacity: 1; } 24% { opacity: 1; } 30% { stroke-dashoffset: -109; opacity: 0; } 100% { stroke-dashoffset: -109; opacity: 0; } }
+@keyframes infH { 0% { stroke-dashoffset: 1.2; opacity: 0; } 4% { opacity: 1; } 24% { opacity: 1; } 30% { stroke-dashoffset: -113.8; opacity: 0; } 100% { stroke-dashoffset: -113.8; opacity: 0; } }
+.intro .inf { animation: fadeIn 1.4s ease 1.6s both; }
+
+/* Kategórie galérie: väčší nadpis a žiariaci pás pod ním */
+.g-cat-head > div:first-child { position: relative; padding-bottom: 14px; }
+.g-cat-head .h3 { font-size: clamp(34px, 4vw, 54px); line-height: 1; text-shadow: 0 0 28px rgba(141,107,255,.55); }
+.g-cat-head > div:first-child::after { content: ''; position: absolute; left: 0; bottom: 0; width: min(100%, 340px); height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, var(--violet-2), var(--magenta) 55%, transparent); box-shadow: 0 0 12px rgba(141,107,255,.9), 0 0 26px rgba(198,88,240,.45); animation: bandPulse 3.6s ease-in-out infinite; }
+@keyframes bandPulse { 0%, 100% { opacity: .55; filter: brightness(.9); } 50% { opacity: 1; filter: brightness(1.25); } }
+.g-cat-desc { margin-top: 10px; }
+@media (max-width: 700px) { .g-cat-head .h3 { font-size: 36px; } .g-cat-head > div:first-child::after { width: 70%; } }
+
+/* Predely: hviezda bez čierneho štvorca, pulzuje jej žiara v tvare hviezdy */
+.divider { background: linear-gradient(90deg, transparent, var(--rule) 12%, var(--rule) calc(50% - 26px), transparent calc(50% - 26px), transparent calc(50% + 26px), var(--rule) calc(50% + 26px), var(--rule) 88%, transparent); }
+.divider span { background: none; padding: 0; color: var(--violet-2); font-size: 16px; text-shadow: none; animation: none; }
+.divider span::before { content: '✦'; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) scale(1); color: var(--violet); filter: blur(5px); font-size: 2.4em; opacity: .7; animation: starGlow 3.2s ease-in-out infinite; pointer-events: none; }
+@keyframes starGlow { 0%, 100% { opacity: .35; transform: translate(-50%, -50%) scale(.8); } 50% { opacity: .95; transform: translate(-50%, -50%) scale(1.25); } }
+
+/* Nočná obloha: pripomenutie v dlaždici novu, poznámka v zátvorke */
+.sky-next .sky-cal { margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12.5px; color: var(--star-2); }
+.sky-next .sky-cal a { color: var(--violet-2); text-underline-offset: 3px; }
+.sky-hint { font-size: 13px; opacity: .8; margin-top: -4px; }
+
+/* Pätička */
+.foot-note { margin: 10px 0 0; font-size: 14px; color: var(--star-2); }
+.foot-note a { color: inherit; }
+.foot-note a:hover { color: var(--violet-2); }
+
+/* Hviezda vášho roku */
+.year-sec { padding-top: 0; }
+.year-card { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 72px); align-items: center; padding: clamp(28px, 5vw, 64px); border: 1px solid rgba(141,107,255,.3); border-radius: var(--r);
+  background: radial-gradient(50% 80% at 85% 40%, rgba(242,202,126,.12), transparent 70%), radial-gradient(60% 80% at 0% 100%, rgba(141,107,255,.16), transparent 70%), rgba(14,18,34,.75); }
+.year-form { display: flex; flex-direction: column; gap: 18px; }
+.year-form .h2 { font-size: clamp(40px, 5vw, 72px); }
+.year-in { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; }
+.year-in label { width: 100%; font-size: 13px; font-weight: 600; color: var(--star-2); }
+.year-in input { width: 150px; min-height: 50px; padding: 0 14px; font: inherit; font-family: var(--display); font-size: 24px; color: var(--star); background: var(--night); border: 1px solid var(--rule); border-radius: var(--r); }
+.year-in input:focus { outline: none; border-color: var(--violet); }
+.year-out { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding-left: 0; }
+.year-out[hidden] { display: none; }
+.year-out.show > * { animation: rise .8s var(--ease) both; }
+.year-out.show > *:nth-child(2) { animation-delay: .1s; } .year-out.show > *:nth-child(3) { animation-delay: .2s; } .year-out.show > *:nth-child(4) { animation-delay: .3s; } .year-out.show > *:nth-child(5) { animation-delay: .4s; } .year-out.show > *:nth-child(6) { animation-delay: .5s; }
+.year-star { width: 56px; height: 56px; position: relative; }
+.year-star i { position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px 3px #fff, 0 0 24px 8px rgba(242,202,126,.7), 0 0 50px 16px rgba(141,107,255,.35); animation: polaris 3s ease-in-out infinite; }
+.year-k { margin: 0; font-size: 14px; font-weight: 600; color: var(--gold-2); }
+.year-out .h3 { font-size: clamp(36px, 4vw, 54px); }
+.year-txt { margin: 0; font-size: clamp(17px, 1.5vw, 19px); line-height: 1.55; color: var(--star); max-width: 30em; }
+.year-when { margin: 0; font-size: 14px; color: var(--star-2); }
+.year-out .btn { margin-top: 6px; }
+@keyframes polaris { 50% { opacity: .75; transform: scale(.85); } }
+@media (max-width: 860px) { .year-card { grid-template-columns: 1fr; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox::after, .inf-m, .g-cat-head > div:first-child::after, .divider span::before { animation: none !important; }
+}
+.wall-cap { top: auto; bottom: 8px; left: 8px; z-index: 2; background: rgba(255,255,255,.78); color: #2E2822; }
+.year-in input { -moz-appearance: textfield; appearance: textfield; }
+.year-in input::-webkit-outer-spin-button, .year-in input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.mobile-menu { overflow-y: auto; justify-content: safe center; }
+@media (max-height: 760px) { .mm-link { padding: 10px 0 11px; font-size: 28px; } }
+
+/* Hviezda vášho roku v2: dnešná hviezda a časová os príchodu svetla */
+.year-occ { width: 100%; display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+.year-occ .chip { min-height: 40px; font-size: 16px; }
+.year-out { gap: 12px; }
+.year-now { display: flex; align-items: center; gap: 16px; }
+.year-star { flex: none; }
+.year-now .h3 { font-size: clamp(32px, 3.6vw, 50px); }
+.year-tl { width: 100%; margin-top: 8px; padding-top: 16px; border-top: 1px solid var(--rule); }
+.year-tl-k { margin: 0 0 12px; font-size: 14px; font-weight: 600; color: var(--violet-2); }
+.year-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.yl-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.yl-top b { font-family: var(--display); font-weight: 500; font-size: 20px; }
+.yl-y { font-family: var(--display); font-size: 20px; color: var(--gold-2); font-variant-numeric: lining-nums; }
+.yl-bar { position: relative; height: 3px; margin: 6px 0 5px; border-radius: 3px; background: rgba(236,234,228,.1); overflow: visible; }
+.yl-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 3px; background: linear-gradient(90deg, rgba(141,107,255,.35), var(--violet-2)); }
+.yl-bar i::after { content: ''; position: absolute; right: -3px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: #fff; box-shadow: 0 0 8px 2px rgba(184,164,255,.9); }
+.year-out.show .yl-bar i { animation: ylFill 1.6s var(--ease) .4s both; }
+@keyframes ylFill { from { width: 0; } to { width: var(--w); } }
+.year-out:not(.show) .yl-bar i { width: var(--w); }
+.yl-sub { margin: 0; font-size: 13px; color: var(--star-2); }
+@media (prefers-reduced-motion: reduce) { .yl-bar i { animation: none !important; width: var(--w); } }
+/* Hviezda vášho roku: viditeľnosť nad Slovenskom a termín fotenia */
+.year-con { margin: 4px 0 0; font-size: 14px; color: var(--star-2); }
+.year-sky { width: 100%; margin: 4px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.year-sky div { padding: 12px 14px; border: 1px solid var(--rule); border-radius: var(--r); background: rgba(7,9,18,.45); }
+.year-sky dt { font-size: 12.5px; font-weight: 600; color: var(--violet-2); }
+.year-sky dd { margin: 4px 0 0; font-size: 14px; line-height: 1.5; color: var(--star); }
+.year-plan { width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 16px; border: 1px solid rgba(141,107,255,.5); border-radius: var(--r); background: rgba(141,107,255,.1); }
+.year-plan[hidden] { display: none; }
+.year-plan-k { margin: 0; font-size: 12.5px; font-weight: 600; color: var(--violet-2); }
+.year-plan-t { margin: 0; font-size: 15px; line-height: 1.5; }
+.year-plan .btn { min-height: 44px; padding: 0 18px; font-size: 14px; }
+.year-note { margin: -2px 0 0; font-size: 12px; color: var(--star-2); opacity: .75; }
+@media (max-width: 520px) { .year-sky { grid-template-columns: 1fr; } }
+
+/* ── Darčeková karta, pripomienky a rezervácia fotenia s hviezdou ── */
+.card-cv { width: 100%; height: auto; aspect-ratio: 1748 / 1240; display: block; border-radius: var(--r); border: 1px solid rgba(141,107,255,.35); background: #0b0a1d; box-shadow: 0 24px 60px -24px rgba(91,63,224,.7); }
+.card-act { display: flex; flex-wrap: wrap; gap: 10px; }
+.card-act .btn { flex: 1 1 150px; }
+.year-act { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.year-act .btn { margin-top: 0; }
+.year-list .sky-cal { margin: 6px 0 0; font-size: 12.5px; gap: 4px 14px; }
+.modal-info a.btn { text-decoration: none; text-align: center; justify-content: center; }
+.card-print { display: none; }
+@media print {
+  @page { size: A6 landscape; margin: 0; }
+  body > *:not(.card-print) { display: none !important; }
+  html, body { background: #fff !important; }
+  .card-print { display: block !important; width: 100%; height: auto; margin: 0; }
+}
+.year-list .sky-cal { justify-content: flex-start; align-items: baseline; }
+
+/* ── Objednávka v krokoch ── */
+.step { display: flex; flex-direction: column; gap: 10px; }
+.step-h { display: flex; align-items: center; gap: 10px; margin: 6px 0 0; font-family: var(--sans); font-size: 15px; font-weight: 600; color: var(--star); }
+.step-h i { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(141,107,255,.2); border: 1px solid rgba(141,107,255,.55); color: var(--violet-2); font-style: normal; font-size: 12.5px; font-variant-numeric: lining-nums; }
+.mat-grp { display: grid; gap: 6px; margin-bottom: 8px; }
+.mat-gl { margin: 0; font-size: 12.5px; color: var(--star-2); }
+.mat-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+/* nepárny posledný materiál (Plátno) zaberie celý riadok, nech vedľa neostane prázdne miesto */
+.mat-row > .mat-c:last-child:nth-child(odd) { grid-column: 1 / -1; grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px; }
+.mat-row > .mat-c:last-child:nth-child(odd) b, .mat-row > .mat-c:last-child:nth-child(odd) small { grid-column: 1; }
+.mat-row > .mat-c:last-child:nth-child(odd) span { grid-column: 2; grid-row: 1 / span 2; align-self: end; }
+.mat-c, .size-c { position: relative; display: grid; gap: 3px; text-align: left; padding: 11px 12px; border: 1px solid var(--rule); border-radius: var(--r); background: rgba(7,9,18,.5); color: var(--star); font: inherit; cursor: pointer; transition: border-color .25s, background-color .25s, box-shadow .3s, transform .2s var(--ease); }
+.mat-c b, .size-c b { font-size: 15px; font-weight: 600; }
+.mat-c small, .size-c small { font-size: 12.5px; line-height: 1.35; color: var(--star-2); }
+.mat-c span, .size-c span { font-family: var(--display); font-size: 16px; color: var(--gold-2); }
+.mat-c:hover, .size-c:hover { border-color: rgba(184,164,255,.6); transform: translateY(-1px); }
+.mat-c[aria-checked="true"], .size-c[aria-checked="true"] { border-color: var(--violet); background: rgba(141,107,255,.16); box-shadow: 0 0 0 1px var(--violet), 0 10px 28px -14px rgba(141,107,255,.9); }
+.mat-c[aria-checked="true"]::after, .size-c[aria-checked="true"]::after { content: ''; position: absolute; right: 10px; top: 10px; width: 8px; height: 8px; border-radius: 50%; background: #fff; box-shadow: 0 0 10px 2px rgba(184,164,255,.9); }
+.size-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 520px) { .size-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.size-c span s { font-size: 12px; color: var(--star-2); }
+.buy-bar { position: sticky; bottom: -30px; margin: 6px -30px -30px; padding: 14px 30px 18px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  background: linear-gradient(180deg, rgba(14,18,34,0), rgba(14,18,34,.96) 22%); border-top: 1px solid rgba(141,107,255,.3); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 3; }
+.buy-sum { display: grid; gap: 2px; }
+.buy-what { font-size: 13px; color: var(--star-2); }
+.buy-bar .price-now { font-size: 32px; }
+.buy-bar .price-now small { margin-top: 2px; }
+@media (max-width: 860px) { .buy-bar { bottom: 0; margin: 6px -20px -40px; padding: 12px 20px 20px; flex-wrap: nowrap; gap: 12px; } .buy-bar .btn { flex: 0 0 auto; padding: 0 18px; min-height: 48px; } .buy-bar .price-now { font-size: 28px; } .buy-what { font-size: 12px; } }
+.steps { list-style: none; margin: 0; padding: 0; display: flex; gap: 6px; counter-reset: st; }
+.steps li { counter-increment: st; flex: 1; position: relative; padding-top: 12px; font-size: 13px; color: var(--star-2); border-top: 2px solid var(--rule); transition: color .3s, border-color .3s; }
+.steps li::before { content: counter(st) '. '; font-variant-numeric: lining-nums; }
+.steps li.is-done { color: var(--violet-2); border-top-color: rgba(141,107,255,.55); }
+.steps li.is-cur { color: var(--star); border-top-color: var(--violet); box-shadow: 0 -8px 16px -10px rgba(141,107,255,.9); }
+.order-form { display: flex; flex-direction: column; gap: 12px; }
+.os { display: flex; flex-direction: column; gap: 12px; }
+.os[hidden] { display: none; }
+.cs-act { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.cs-act .btn { flex: 1 1 180px; }
+.cs-k { display: flex; justify-content: space-between; align-items: baseline; margin: 6px 0 -4px; font-size: 13px; font-weight: 600; color: var(--violet-2); }
+.sum-rows { display: grid; gap: 6px; padding: 12px 0; font-size: 15px; }
+.sum-rows > div { display: flex; justify-content: space-between; gap: 12px; }
+.sum-save { color: var(--violet-2); }
+.sum-total { padding-top: 8px; border-top: 1px solid var(--rule); font-family: var(--display); font-size: 26px; color: var(--gold-2); }
+.sum-addr { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--star); }
+.cl-old { font-size: .85em; color: var(--star-2); }
+@media (prefers-reduced-motion: reduce) { .mat-c, .size-c { transition: none; } }
+
+/* ── Mapa oblohy ── */
+.map-card { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: start; margin-top: clamp(24px, 4vw, 48px); padding: clamp(20px, 4vw, 48px); border: 1px solid rgba(141,107,255,.3); border-radius: var(--r);
+  background: radial-gradient(60% 80% at 20% 30%, rgba(91,63,224,.2), transparent 70%), linear-gradient(180deg, rgba(14,18,34,.82), rgba(10,12,26,.9)); }
+.map-main { position: relative; width: 100%; max-width: 640px; margin-inline: auto; }
+/* mapa stojí pokojne na mieste, zvislo vycentrovaná oproti textu vedľa nej */
+@media (min-width: 861px) { .map-main { align-self: center; } }
+#sky-map { display: block; width: 100%; aspect-ratio: 1; height: auto; border-radius: 50%; touch-action: manipulation; }
+.map-pop { position: absolute; z-index: 5; display: grid; gap: 4px; min-width: 190px; max-width: 250px; padding: 12px 14px; border: 1px solid rgba(141,107,255,.5); border-radius: var(--r); background: rgba(10,12,26,.94); backdrop-filter: blur(8px); box-shadow: 0 16px 40px -12px rgba(0,0,0,.8); font-size: 13.5px; color: var(--star-2); }
+.map-pop[hidden] { display: none; }
+.map-pop b { font-family: var(--display); font-weight: 500; font-size: 18px; color: var(--star); }
+.map-pop .btn { min-height: 40px; margin-top: 6px; padding: 0 14px; font-size: 14px; }
+.map-side { display: flex; flex-direction: column; gap: 12px; }
+.map-when { margin: 0; font-size: 15px; line-height: 1.5; color: var(--star-2); }
+.map-when b { color: var(--star); font-weight: 600; }
+.map-ctl { display: grid; gap: 6px; }
+#map-t { width: 100%; accent-color: var(--violet); height: 28px; }
+.map-ends { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; color: var(--star-2); font-variant-numeric: lining-nums; }
+.map-btns { display: inline-flex; gap: 16px; }
+.map-k { margin: 8px 0 -4px; font-size: 13px; font-weight: 600; color: var(--violet-2); }
+.map-list { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--rule); }
+.map-list li { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 12px; padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: 14.5px; }
+.map-list .ml-n { color: var(--star); font-weight: 550; }
+.map-list .ml-s { grid-column: 1; font-size: 13px; color: var(--star-2); }
+.map-list li.is-up .ml-s { color: var(--violet-2); }
+.map-list .ml-go { grid-column: 2; grid-row: 1 / span 2; min-height: 34px; padding: 0 12px; border: 1px solid rgba(141,107,255,.5); border-radius: var(--r); background: rgba(141,107,255,.12); color: var(--violet-2); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; transition: background-color .25s, color .25s; }
+.map-list .ml-go:hover { background: var(--violet); color: #fff; }
+.map-note { margin: 4px 0 0; font-size: 12.5px; color: var(--star-2); opacity: .8; }
+@media (max-width: 860px) { .map-card { grid-template-columns: 1fr; } }
+
+/* ── Ako obraz vzniká ── */
+.make-card { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; padding: clamp(20px, 4vw, 48px); border: 1px solid rgba(141,107,255,.3); border-radius: var(--r);
+  background: radial-gradient(60% 80% at 80% 20%, rgba(141,107,255,.16), transparent 70%), rgba(10,12,26,.7); }
+.make-view { margin: 0; display: grid; gap: 10px; }
+#make-cv { display: block; width: 100%; height: auto; aspect-ratio: 1; border-radius: var(--r); background: #05060f; box-shadow: 0 30px 70px -30px rgba(91,63,224,.7), 0 0 0 1px rgba(141,107,255,.25); }
+.make-note { font-size: 12.5px; color: var(--star-2); opacity: .85; }
+.make-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: mk; }
+.make-steps li { counter-increment: mk; }
+.make-steps button { position: relative; width: 100%; display: grid; gap: 4px; text-align: left; padding: 16px 18px 16px 58px; border: 1px solid var(--rule); border-radius: var(--r); background: rgba(7,9,18,.45); color: var(--star); font: inherit; cursor: pointer; transition: border-color .3s, background-color .3s, box-shadow .4s; }
+.make-steps button::before { content: counter(mk); position: absolute; left: 16px; top: 16px; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; border: 1px solid rgba(141,107,255,.5); color: var(--violet-2); font-size: 13px; font-variant-numeric: lining-nums; transition: background-color .3s, color .3s; }
+.make-steps button b { font-family: var(--display); font-weight: 500; font-size: 21px; }
+.make-steps button span { font-size: 14.5px; line-height: 1.5; color: var(--star-2); max-height: 0; opacity: 0; overflow: hidden; transition: max-height .5s var(--ease), opacity .4s; }
+.make-steps button[aria-current="step"] { border-color: var(--violet); background: rgba(141,107,255,.14); box-shadow: 0 14px 36px -16px rgba(141,107,255,.9); }
+.make-steps button[aria-current="step"]::before { background: var(--violet); color: #fff; }
+.make-steps button[aria-current="step"] span { max-height: 9em; opacity: 1; }
+.make-steps button:hover { border-color: rgba(184,164,255,.6); }
+@media (max-width: 860px) { .make-card { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .make-steps button span { transition: none; } }
+
+/* ── Hviezdny kalendár ── */
+.cal-card { margin-top: clamp(24px, 4vw, 48px); padding: clamp(20px, 4vw, 48px); border: 1px solid rgba(141,107,255,.3); border-radius: var(--r); background: linear-gradient(180deg, rgba(14,18,34,.82), rgba(10,12,26,.9)); display: grid; gap: 16px; }
+.cal-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 28px; flex-wrap: wrap; }
+.cal-head .sky-k { margin-bottom: 4px; }
+.cal-filter { display: flex; gap: 8px; flex-wrap: wrap; }
+.cal-filter .chip { min-height: 38px; padding: 0 14px; font-size: 14.5px; }
+.cal-filter .chip.is-on { background: var(--violet); border-color: var(--violet); color: #fff; }
+.cal-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.cal-more { justify-self: start; min-height: 46px; padding: 0 20px; font-size: 15px; }
+.cal-more[hidden] { display: none; }
+.cal-m { position: sticky; top: 0; z-index: 2; padding: 10px 0 8px; background: rgba(12,15,30,.96); font-size: 13px; font-weight: 600; color: var(--violet-2); border-bottom: 1px solid var(--rule); }
+.cal-m::first-letter { text-transform: uppercase; }
+.cal-r { display: grid; grid-template-columns: 62px minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.cal-d { display: grid; justify-items: center; line-height: 1.1; }
+.cal-d b { font-family: var(--display); font-weight: 500; font-size: 20px; font-variant-numeric: lining-nums; color: var(--gold-2); }
+.cal-d span { font-size: 12px; color: var(--star-2); }
+.cal-t { display: grid; gap: 2px; }
+.cal-t b { font-size: 16px; font-weight: 600; }
+.cal-t span { font-size: 13.5px; line-height: 1.45; color: var(--star-2); }
+.cal-moon .cal-t b::before, .cal-meteor .cal-t b::before, .cal-planet .cal-t b::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 9px; border-radius: 50%; vertical-align: 1px; }
+.cal-moon .cal-t b::before { background: #fff3d0; box-shadow: 0 0 8px 1px rgba(255,243,208,.7); }
+.cal-meteor .cal-t b::before { background: var(--violet-2); box-shadow: 0 0 8px 1px rgba(184,164,255,.8); }
+.cal-planet .cal-t b::before { background: #ffb98a; box-shadow: 0 0 8px 1px rgba(255,185,138,.7); }
+.cal-r.is-good .cal-t span { color: var(--violet-2); }
+.cal-a { font-size: 13px; color: var(--violet-2); text-underline-offset: 4px; white-space: nowrap; }
+.cal-a:hover { color: #fff; }
+@media (max-width: 560px) { .cal-r { grid-template-columns: 52px minmax(0, 1fr); } .cal-a { grid-column: 2; justify-self: start; } .cal-head { flex-direction: column; align-items: flex-start; } }
+
+/* ── Poukaz online ── */
+.v-lab { font-size: 13px; font-weight: 600; color: var(--star-2); }
+.v-types { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; }
+.field[hidden] { display: none; }
+
+/* ── Obrazy u zákazníkov (zobrazí sa len so skutočnými recenziami) ── */
+.reviews-sec[hidden] { display: none; }
+.rev-grid { display: grid; align-items: start; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.rev { margin: 0; display: grid; align-content: start; gap: 12px; padding: 16px; border: 1px solid var(--rule); border-radius: var(--r); background: rgba(10,12,26,.7); }
+.rev img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--r); }
+.rev blockquote { margin: 0; display: grid; gap: 6px; }
+.rev blockquote p { margin: 0; font-size: 16px; line-height: 1.55; }
+.rev-st { color: var(--gold-2); letter-spacing: 2px; font-size: 15px; }
+.rev figcaption { display: grid; gap: 2px; font-size: 14px; }
+.rev figcaption span { color: var(--star-2); font-size: 13px; }
+.share-btn { align-self: flex-start; margin-top: -6px; }
+
+picture { display: contents; }
+picture > source { display: none; }
+
+/* Logo v hlavičke sa pri posune zmenší */
+.logo { transition: font-size .35s var(--ease); }
+.nav.is-solid .logo { font-size: 21px; }
+@media (max-width: 520px) { .nav.is-solid .logo { font-size: 17px; } }
+@media (max-width: 380px) { .nav.is-solid .logo { font-size: 16px; } }
+
+/* Nadpis v úvode: „Nekonečna“ aj s nekonečnom sa vždy zmestí do šírky mobilu */
+@media (max-width: 600px) { #hero-title { font-size: min(64px, calc((100vw - 48px) / 5.8)); } }
+/* Malé odkazy na pripomienky: väčšia dotyková plocha na mobile */
+@media (pointer: coarse) {
+  .cal-a { display: inline-flex; align-items: center; min-height: 36px; padding-inline: 4px; }
+  .sky-cal a { display: inline-block; padding-block: 7px; }
+}
+/* Na mobile sa v galérii zobrazuje jeden obraz naraz: zarovnať hore, nech nad ním neostáva prázdne miesto */
+@media (max-width: 700px) { .g-track { align-items: flex-start; } }
+/* Detail obrazu: náhľad na stene na celú šírku stĺpca, bez prázdneho pruhu vpravo */
+.modal-info .wall, .modal-info .mywall { max-width: none; }
+
+/* ── Úvod na mobile: plynulý prechod do stránky ──
+   Fotka v úvode sa dole rozplynie do hviezdneho pozadia celej stránky (žiadna ostrá hrana),
+   hlavné tlačidlo je jedno a na celú šírku, druhá voľba je tichší odkaz pod ním. */
+@media (max-width: 700px) {
+  .hero { padding-bottom: 8px; }
+  .hero-sky { -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 64%, rgba(0,0,0,.55) 82%, transparent 100%); mask-image: linear-gradient(180deg, #000 0%, #000 64%, rgba(0,0,0,.55) 82%, transparent 100%); }
+  .hero-sky::after { background: linear-gradient(180deg, rgba(7,9,18,.55) 0%, rgba(7,9,18,.1) 28%, rgba(20,12,48,.5) 58%, rgba(7,9,18,.35) 100%), linear-gradient(90deg, rgba(7,9,18,.7), transparent 75%); }
+  .hero-inner { padding-bottom: 12px; }
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 4px; margin-top: 10px; }
+  .hero-actions .btn-gold { width: 100%; flex: none; }
+  .hero-actions .btn-ghost { width: auto; align-self: center; min-height: 46px; padding: 0 8px; background: none; border-color: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; color: var(--star-2); text-decoration: underline; text-decoration-color: rgba(184,164,255,.5); text-underline-offset: 6px; box-shadow: none; }
+  .hero-actions .btn-ghost:hover { background: none; color: var(--star); }
+  .welcome { padding-top: 40px; }
+}
+
+/* ── Časti stránky v odtieňoch nočnej oblohy ──
+   Každá časť (úvod, galéria, pre vás, obloha, darček a otázky) má vlastný odtieň tej istej tmavomodrej
+   až fialovej. Pásy presahujú cez okraje a prelínajú sa, takže prechod je plynulý, bez ostrej hrany.
+   Hviezdy v pozadí cez ne stále presvitajú. */
+.part { position: relative; --fade: clamp(140px, 18vw, 260px); }
+.part::before { content: ''; position: absolute; z-index: -1; left: 0; right: 0; top: calc(var(--fade) / -2); bottom: calc(var(--fade) / -2); pointer-events: none;
+  background: var(--tone-glow, none), var(--tone, transparent);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%); }
+.part[data-part="uvod"]    { --tone: rgba(9,10,24,.35); }
+.part[data-part="galeria"] { --tone: rgba(3,5,17,.96); --tone-glow: radial-gradient(70% 26% at 15% 5%, rgba(40,72,190,.08), transparent 70%); }
+.part[data-part="pre-vas"] { --tone: rgba(30,19,66,.84); --tone-glow: radial-gradient(60% 50% at 85% 30%, rgba(141,107,255,.14), transparent 70%); }
+.part[data-part="obloha"]  { --tone: rgba(5,11,30,.9);   --tone-glow: radial-gradient(60% 25% at 50% 8%, rgba(80,130,220,.12), transparent 70%); }
+.part[data-part="darcek"]  { --tone: rgba(32,15,48,.82); --tone-glow: radial-gradient(60% 40% at 50% 20%, rgba(232,182,90,.06), transparent 70%); }
+/* úvod je na mobile hneď pod fotkou, pás začína až pod ňou, aby fotka zostala čistá */
+.part[data-part="uvod"]::before { top: 0; -webkit-mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - var(--fade)), transparent 100%); mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - var(--fade)), transparent 100%); }
+
+/* Striedajúce sa slová nad nadpisom v úvode */
+.hero-kicker { margin: 0 0 -6px; font-size: clamp(17px, 2vw, 30px); font-weight: 500; letter-spacing: .01em; line-height: 1.3; color: var(--violet-2); text-shadow: 0 0 24px rgba(7,9,18,.9); }
+.hero-kicker span { display: inline-block; transition: opacity .55s ease, filter .55s ease, transform .55s var(--ease); }
+.hero-kicker span.out { opacity: 0; filter: blur(6px); transform: translateY(-4px); }
+.intro .hero-kicker { animation: rise 1s var(--ease) .15s both; }
+@media (prefers-reduced-motion: reduce) { .hero-kicker span { transition: opacity .25s linear; } .hero-kicker span.out { filter: none; transform: none; } .intro .hero-kicker { animation: none; } }
+
+/* ── Mobil: plynulosť ──
+   Hviezdne pozadie má výšku najväčšieho výrezu obrazovky, takže sa pri skrývaní panela s adresou nemení.
+   Úvod sa do stránky prelína farbou (nie maskou), čo mobilné prehliadače vykresľujú spoľahlivo. */
+.sky-bg { height: 100vh; height: 100lvh; bottom: auto; }
+@media (max-width: 700px) {
+  .hero-sky { -webkit-mask-image: none; mask-image: none; }
+  .hero-sky::after { background: linear-gradient(180deg, rgba(7,9,18,.55) 0%, rgba(7,9,18,.1) 28%, rgba(20,12,48,.5) 58%, rgba(7,9,18,.88) 88%, var(--night) 100%), linear-gradient(90deg, rgba(7,9,18,.7), transparent 75%); }
+  .part[data-part="uvod"]::before { background: linear-gradient(180deg, var(--night) 0, var(--night) 40px, transparent 260px), var(--tone); }
+}
+@media (pointer: coarse), (max-width: 760px) {
+  /* nepretržité animácie s rozmazaním a prelievaním textu idú na mobile mimo: stoja veľa výkonu */
+  .nebulae i { animation: none !important; will-change: auto; }
+  #hero-title em, .intro #hero-title em { animation: focusIn 1.6s var(--ease) .7s both !important; background-position: 30% 50%; }
+  .hero-inner::before, .intro .hero-inner::before { animation: fadeIn 2s ease .6s both !important; filter: none; opacity: .8; }
+  .inf-h { filter: none; }
+  .hero-kicker span { transition: opacity .45s ease, transform .45s var(--ease); }
+  .hero-kicker span.out { filter: none; }
+  .hero-sky { will-change: transform; }
+}
+/* Fotky sa po načítaní plynulo objavia (namiesto ostrého „skoku“) */
+img.lz { opacity: 0; transition: opacity .8s ease, transform 1.4s var(--ease); }
+img.lz.ld { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { img.lz { opacity: 1; transition: none; } }
+.no-js img.lz { opacity: 1; }
+/* Ako obraz vzniká na mobile: popisy krokov sú stále rozbalené (len neaktívne stlmené),
+   takže sa pri zmene kroku nič neposúva a stránka neposkakuje */
+@media (max-width: 860px) {
+  .make-steps button span { max-height: none; opacity: .5; transition: opacity .5s ease; }
+  .make-steps button[aria-current="step"] span { opacity: 1; }
+  .make-steps button b { transition: color .4s; }
+  .make-steps button:not([aria-current="step"]) b { color: var(--star-2); }
+}
+.map-list li.is-down .ml-n { color: var(--star-2); }
+/* Mesiac a planéty v dvoch stĺpcoch, nech je karta kompaktnejšia */
+@media (min-width: 1100px) { #map-list2 { grid-template-columns: 1fr 1fr; column-gap: 24px; } }
+@media (max-width: 700px) { .g-item { width: min(calc(var(--ar, .75) * var(--gh)), 90vw); } }
+/* Mesiac a planéty v dvoch stĺpcoch aj na mobile (krátke názvy) */
+@media (max-width: 1099px) { #map-list2 { grid-template-columns: 1fr 1fr; column-gap: 16px; } #map-list2 li { grid-template-columns: 1fr; } }
+/* Mobil: popis pod fotkou v galérii pod sebou (názov, údaj, cena), aby sa názov nelámal na tri riadky vedľa ceny */
+@media (max-width: 700px) {
+  .g-cap { grid-template-columns: 1fr; min-height: 0; }
+  .g-buy { grid-column: 1; grid-row: auto; flex-direction: row; align-items: baseline; justify-content: space-between; margin-top: 4px; }
+}
+
+/* ── Úvod: plynulosť animácií (v12) ──
+   Rozmazanie celej fotky pri nábehu, neustále prekresľovaný obrys tlačidla, rozmazané pozadie pod tlačidlom
+   a prelínanie stôp hviezd cez fotku boli najdrahšie operácie. Nahradené lacnými (priehľadnosť, posun, mierka),
+   ktoré prehliadač robí na grafickej karte. */
+@keyframes expose2 { 0% { opacity: 0; transform: scale(1.12); } 40% { opacity: 1; } 100% { opacity: 1; transform: scale(1.04); } }
+.intro .hero-sky { animation: expose2 2.6s cubic-bezier(.3, 0, .2, 1) both; will-change: transform, opacity; }
+.hero-trails { mix-blend-mode: normal; }
+.hero-inner::before { will-change: transform, opacity; }
+#hero-title .w1, #hero-title em { will-change: filter, opacity, transform; }
+/* „Nekonečna“: prelievanie farby len krátko raz za čas, inak stojí (prekresľuje sa iba počas preliatia) */
+@keyframes shimmer2 { 0%, 72% { background-position: 0% 50%; } 86% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.intro #hero-title em { animation: focusIn 1.6s var(--ease) .7s both, shimmer2 14s ease-in-out 3s infinite; }
+
+/* ── Tlačidlá v úvode: obe s polopriehľadným rámikom okolo, „Fotenie pod hviezdami“ so zlatým nádychom ── */
+.hero-actions { gap: 18px; }
+.hero-actions .btn-gold::before { content: none; animation: none; }
+.hero-actions .btn { outline: 1px solid rgba(184,164,255,.42); outline-offset: 4px; transition: transform .35s var(--ease), box-shadow .35s, background-color .25s, border-color .25s, outline-color .25s, outline-offset .25s; }
+.hero-actions .btn:hover { outline-offset: 6px; outline-color: rgba(184,164,255,.7); }
+.hero-actions .btn-ghost { background: linear-gradient(135deg, rgba(242,202,126,.16), rgba(232,182,90,.07)); border-color: rgba(242,202,126,.55); color: #F6DDA6; backdrop-filter: none; -webkit-backdrop-filter: none; outline-color: rgba(242,202,126,.32); box-shadow: inset 0 1px 0 rgba(255,244,214,.12); }
+.hero-actions .btn-ghost:hover { background: linear-gradient(135deg, rgba(242,202,126,.24), rgba(232,182,90,.12)); border-color: rgba(242,202,126,.85); color: #FFF0CC; outline-color: rgba(242,202,126,.55); }
+@media (max-width: 700px) {
+  .hero-actions { gap: 16px; margin-top: 14px; }
+  .hero-actions .btn-ghost { width: 100%; align-self: stretch; min-height: 50px; padding: 0 20px; text-decoration: none; color: #F6DDA6;
+    background: linear-gradient(135deg, rgba(242,202,126,.16), rgba(232,182,90,.07)); border-color: rgba(242,202,126,.55); }
+}
+/* Hviezda vášho roku: deň, mesiac a rok */
+.year-in label { width: auto; }
+.year-fields { display: flex; flex-wrap: wrap; gap: 10px; width: 100%; }
+.yf { display: grid; gap: 6px; }
+.yf label { font-size: 13px; font-weight: 600; color: var(--star-2); }
+.year-in .yf input, .yf select { min-height: 50px; padding: 0 14px; font: inherit; font-family: var(--display); font-size: 22px; color: var(--star); background: var(--night); border: 1px solid var(--rule); border-radius: var(--r); }
+.yf-d input { width: 84px !important; }
+.yf-m select { width: 168px; appearance: none; -webkit-appearance: none; padding-right: 34px; background-image: linear-gradient(45deg, transparent 50%, var(--violet-2) 50%), linear-gradient(135deg, var(--violet-2) 50%, transparent 50%); background-position: calc(100% - 18px) 52%, calc(100% - 12px) 52%; background-size: 6px 6px; background-repeat: no-repeat; cursor: pointer; }
+.yf-y input { width: 120px !important; }
+.yf select:focus, .year-in .yf input:focus { outline: none; border-color: var(--violet); }
+.yf select option { font-family: var(--sans); font-size: 16px; background: var(--night-2); }
+.year-err { width: 100%; margin: 0; font-size: 14px; color: #FFB4A8; }
+.year-err[hidden] { display: none; }
+@media (max-width: 420px) { .yf-m select { width: 150px; } .yf-y input { width: 104px !important; } .yf-d input { width: 70px !important; } }
+.year-fields { display: grid; grid-template-columns: 84px 168px 120px; }
+.year-in .yf input, .yf select { width: 100% !important; }
+@media (max-width: 520px) { .year-fields { grid-template-columns: 62px minmax(0, 1fr) 90px; gap: 8px; } .year-in .yf input, .yf select { font-size: 19px; padding: 0 10px; } .yf-m select { padding-right: 30px; } }
+
+/* ── Okno s detailom obrazu: plynulosť (v14) ──
+   Rozmazané pozadie za oknom a pod pruhom s cenou sa prepočítavalo pri každej snímke animovanej oblohy.
+   Teraz je pozadie len stmavené, obloha sa za otvoreným oknom zastaví a fotka sa plynulo objaví. */
+.modal { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(3,4,10,.9); }
+.buy-bar { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: linear-gradient(180deg, rgba(14,18,34,0), rgba(14,18,34,.98) 22%) !important; }
+.modal-panel { will-change: transform; contain: layout paint; }
+.modal-open .nebulae i, .modal-open .aurora i, .modal-open #hero-title em, .modal-open .hero-inner::before, .modal-open .inf-m, .modal-open .divider span::before { animation-play-state: paused !important; }
+.modal-img { overflow: hidden; }
+.modal-img img.mi-lo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity .4s ease; }
+.modal-img img.mi-lo.in { opacity: .85; }
+.modal-img img.mi { position: relative; opacity: 0; transition: opacity .8s ease; }
+.modal-img img.mi.in { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .modal-img img.mi { transition: opacity .2s linear; transform: none; } }
+
+/* ── Tlačidlá v úvode: bez rámika, obe polopriehľadné (v14) ── */
+.hero-actions .btn { outline: none; }
+.hero-actions .btn:hover { outline: none; }
+.hero-actions { gap: 12px; }
+.hero-actions .btn-gold { background: linear-gradient(135deg, rgba(154,123,255,.55), rgba(106,79,240,.42)); border: 1px solid rgba(200,184,255,.5); color: #fff; box-shadow: 0 10px 30px -14px rgba(141,107,255,.9), inset 0 1px 0 rgba(255,255,255,.18); }
+.hero-actions .btn-gold:hover { background: linear-gradient(135deg, rgba(173,147,255,.72), rgba(106,79,240,.6)); border-color: rgba(220,208,255,.8); }
+.hero-actions .btn-ghost { background: linear-gradient(135deg, rgba(242,202,126,.14), rgba(232,182,90,.06)); border-color: rgba(242,202,126,.42); }
+.hero-actions .btn-ghost:hover { background: linear-gradient(135deg, rgba(242,202,126,.22), rgba(232,182,90,.1)); border-color: rgba(242,202,126,.75); }
+@media (max-width: 700px) { .hero-actions { gap: 10px; } .hero-actions .btn-ghost { background: linear-gradient(135deg, rgba(242,202,126,.14), rgba(232,182,90,.06)); border-color: rgba(242,202,126,.42); } }
+
+/* ── Dôvera pri cenách, termín na Vianoce, upozornenia e-mailom ── */
+.trust { list-style: none; margin: -8px 0 22px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; font-size: 14.5px; color: var(--star-2); }
+.trust li { display: inline-flex; align-items: center; gap: 9px; }
+.trust svg { width: 20px; height: 20px; flex: none; fill: none; stroke: var(--violet-2); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.xmas { margin: 0 0 26px; display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; border: 1px solid rgba(242,202,126,.4); border-radius: var(--r); background: linear-gradient(135deg, rgba(242,202,126,.12), rgba(232,182,90,.04)); color: #F6DDA6; font-size: 15px; }
+.xmas::before { content: '✦'; color: var(--gold-2); font-size: 13px; }
+.xmas b { font-weight: 650; color: #FFF0CC; }
+.xmas[hidden] { display: none; }
+.xmas-sm { margin: 4px 0 0; font-size: 13.5px; padding: 8px 12px; }
+@media (max-width: 700px) { .trust { justify-content: center; text-align: left; gap: 8px 18px; font-size: 13.5px; } #galeria .xmas { display: flex; justify-content: center; text-align: center; } }
+.notify { display: grid; gap: 12px; padding: 18px; border: 1px solid rgba(141,107,255,.35); border-radius: var(--r); background: rgba(141,107,255,.07); }
+.notify-k { margin: 0 0 4px; font-size: 13px; font-weight: 600; color: var(--violet-2); }
+.notify-t p:last-child { margin: 0; font-size: 15px; color: var(--star-2); max-width: 46em; }
+.notify-f { display: flex; flex-wrap: wrap; gap: 10px; }
+.notify-f input { flex: 1 1 220px; min-height: 48px; padding: 0 14px; font: inherit; font-size: 16px; color: var(--star); background: var(--night); border: 1px solid var(--rule); border-radius: var(--r); }
+.notify-f input:focus { outline: none; border-color: var(--violet); }
+.notify-f .btn { min-height: 48px; }
+.notify-ok { margin: 0; font-size: 14px; color: var(--violet-2); }
+.notify-ok[hidden] { display: none; }
+
+@keyframes nbIn { from { opacity: .35; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.xmas { display: inline-block; }
+.xmas::before { margin-right: 8px; }
+@media (max-width: 700px) { #galeria .xmas { display: block; text-align: center; } }
+
+/* ── Astrozápisník 2027 (v3: verné tlači) ──
+   Každá strana má presný pomer A5 (148 × 210 mm) a všetko vnútri sa škáluje s jej šírkou (cqw),
+   takže ukážka zodpovedá vytlačenej strane. Fotky sú tlačené do strany na spadávku, nič sa nelepí. */
+.nb { --paper: #F1EBDD; --ink: #2B2357; --ink-2: #5B5390; --nb-gold: #9C7A2E; --nb-vio: #6A4FF0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.nb-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px; }
+.nb-views { display: inline-flex; padding: 3px; border: 1px solid var(--rule); border-radius: var(--r); background: rgba(7,9,18,.5); }
+.nb-views button { min-height: 38px; padding: 0 16px; border: 0; border-radius: 4px; background: none; color: var(--star-2); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; transition: background-color .25s, color .25s; }
+.nb-views button[aria-selected="true"] { background: var(--violet); color: #fff; }
+.nb-months { display: flex; flex-wrap: wrap; gap: 4px; }
+.nb-months button { min-height: 32px; padding: 0 9px; border: 1px solid var(--rule); border-radius: var(--r); background: rgba(7,9,18,.5); color: var(--star-2); font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; transition: background-color .25s, color .25s, border-color .25s; }
+.nb-months button:hover { border-color: rgba(184,164,255,.6); color: var(--star); }
+.nb-months button[aria-selected="true"] { background: var(--violet); border-color: var(--violet); color: #fff; }
+.nb-months.is-off { visibility: hidden; }
+.nb-view[hidden] { display: none !important; }
+.nb-view.flip .nb-page, .nb-view.flip .nb-cover { animation: nbIn .5s var(--ease) both; }
+.nb-view.flip .nb-right { animation-delay: .06s; }
+
+/* dvojstrana */
+.nb-book { position: relative; display: grid; grid-template-columns: 1fr 1fr; width: min(1040px, 100%); margin: 0 auto; aspect-ratio: 296 / 210; border-radius: 4px; overflow: hidden; box-shadow: 0 40px 80px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.06); }
+.nb-book::after { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 8%; transform: translateX(-50%); pointer-events: none; background: linear-gradient(90deg, rgba(43,35,87,0), rgba(43,35,87,.13) 42%, rgba(43,35,87,.22) 50%, rgba(43,35,87,.13) 58%, rgba(43,35,87,0)); }
+.nb-page { position: relative; container-type: inline-size; overflow: hidden; background: var(--paper); color: var(--ink); display: flex; flex-direction: column; min-height: 0; }
+.nb-page > * { flex-shrink: 0; }
+.nb-k { margin: 0; font-size: 2.4cqw; font-weight: 700; color: var(--ink-2); }
+
+/* mesiac: ľavá strana s fotkou na spadávku */
+.nb-bleed { position: relative; height: 56%; background: #0A0D1A; }
+.nb-bleed img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .6s ease; }
+.nb-bleed img.in { opacity: 1; }
+.nb-ph-cap { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; padding: 8cqw 6cqw 3cqw; background: linear-gradient(180deg, transparent, rgba(7,9,18,.75)); color: #F1EBDD; font-size: 2.3cqw; line-height: 1.35; display: grid; }
+.nb-ph-cap b { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 3.6cqw; }
+.nb-ph-cap span { opacity: .8; }
+.nb-open-body { flex: 1; display: flex; flex-direction: column; gap: 2.6cqw; padding: 5cqw 7cqw 6cqw; min-height: 0; }
+.nb-month { margin: 0; font-family: var(--display); font-size: 9.5cqw; font-weight: 500; line-height: 1; color: var(--ink); }
+.nb-month span { color: var(--nb-gold); font-style: italic; font-weight: 400; }
+.nb-sky { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.6cqw; font-size: 2.55cqw; line-height: 1.42; }
+.nb-sky li { padding-left: 3.4cqw; position: relative; }
+.nb-sky li::before { content: '✦'; position: absolute; left: 0; top: 0; color: var(--nb-gold); font-size: 2.2cqw; }
+.nb-sky b { color: var(--ink); }
+.nb-whim { margin: auto 0 0; padding-top: 2.4cqw; border-top: 1px solid rgba(43,35,87,.2); font-family: var(--display); font-style: italic; font-size: 3cqw; line-height: 1.4; color: var(--nb-vio); }
+
+/* mesiac: kalendár na celú pravú stranu */
+.nb-calp { padding: calc(var(--pu) * 7) calc(var(--pu) * 6) calc(var(--pu) * 5); gap: calc(var(--pu) * 2.4); }
+.nb-cal { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); grid-template-rows: auto auto repeat(var(--rows, 5), minmax(0, 1fr)); gap: .9cqw; }
+.nb-cal-t { grid-column: 1 / -1; margin: 0 0 1.4cqw; font-family: var(--display); font-style: italic; font-size: 5cqw; line-height: 1; color: var(--nb-gold); }
+.nb-dh { font-size: 2.2cqw; font-weight: 700; color: var(--ink-2); text-align: left; padding: 0 0 .6cqw 1cqw; }
+.nb-d { position: relative; border: 1px solid rgba(43,35,87,.2); border-radius: .6cqw; padding: 1cqw 1.2cqw; display: flex; flex-direction: column; justify-content: space-between; min-height: 0; }
+.nb-d b { font-size: 2.6cqw; font-weight: 700; line-height: 1; }
+.nb-d.is-empty { border-color: transparent; }
+.nb-d.is-dark { background: rgba(43,35,87,.09); border-color: rgba(43,35,87,.3); }
+.nb-d .nb-moon { width: 2.8cqw; height: 2.8cqw; align-self: flex-end; }
+.nb-d em { position: absolute; right: 1cqw; top: .7cqw; font-style: normal; font-size: 2.6cqw; color: var(--nb-gold); }
+.nb-legend { margin: 0; display: flex; flex-wrap: wrap; gap: .8cqw 3cqw; font-size: 2.1cqw; color: var(--ink-2); }
+.nb-legend span { display: inline-flex; align-items: center; gap: 1cqw; }
+.nb-legend b { color: var(--nb-gold); font-weight: 400; }
+.nb-moon { display: inline-block; width: 2.3cqw; height: 2.3cqw; border-radius: 50%; border: 1px solid var(--ink); background: var(--paper); flex: none; }
+.nb-moon.m-new { background: var(--ink); }
+.nb-moon.m-full { background: #FBF6E8; box-shadow: 0 0 0 .5cqw rgba(156,122,46,.2); }
+.nb-dark { display: inline-block; width: 2.3cqw; height: 2.3cqw; border-radius: .4cqw; background: rgba(43,35,87,.14); border: 1px solid rgba(43,35,87,.3); }
+
+/* týždeň */
+.nb-wkp { padding: calc(var(--pu) * 7) calc(var(--pu) * 6) calc(var(--pu) * 5); gap: calc(var(--pu) * 2.4); }
+.nb-wk { margin: 0 0 1cqw; font-family: var(--display); font-size: 5.4cqw; font-weight: 500; line-height: 1.1; }
+.nb-wk span { color: var(--nb-gold); font-style: italic; font-weight: 400; }
+.nb-days { list-style: none; margin: 0; padding: 0; flex: 1; min-height: 0; display: grid; grid-auto-rows: minmax(0, 1fr); }
+.nb-days li { display: grid; grid-template-columns: 17cqw 15cqw 1fr; gap: 2cqw; align-items: start; padding: 1.8cqw 0; border-top: 1px solid rgba(43,35,87,.22); min-height: 0; }
+.nb-dl b { display: block; font-size: 2.7cqw; }
+.nb-dl span { font-size: 2.3cqw; color: var(--ink-2); }
+.nb-dm { display: grid; justify-items: start; gap: .6cqw; }
+.nb-dm small { font-size: 1.95cqw; line-height: 1.3; color: var(--ink-2); }
+.nb-ms { width: 4cqw; height: 4cqw; }
+.nb-ms circle.d { fill: var(--ink); stroke: var(--ink); stroke-width: 1; }
+.nb-ms .l { fill: #FBF6E8; }
+.nb-dn { display: grid; gap: 3.4cqw; padding-top: .6cqw; }
+.nb-dn em { font-family: var(--display); font-size: 2.6cqw; color: var(--nb-vio); line-height: 1.1; }
+.nb-dn i { display: block; height: 1px; background: rgba(43,35,87,.16); }
+.nb-wk-foot { display: grid; grid-template-columns: 1.25fr 1fr; gap: 4cqw; padding-top: 2.4cqw; border-top: 1px solid rgba(43,35,87,.22); }
+.nb-tip { padding: 2.4cqw 2.8cqw; border: 1px dashed rgba(106,79,240,.5); border-radius: 1cqw; background: rgba(106,79,240,.05); }
+.nb-tip .nb-k { margin: 0 0 .8cqw; color: var(--nb-vio); }
+.nb-tip p:last-child { margin: 0; font-size: 2.25cqw; line-height: 1.42; }
+.nb-todo { list-style: none; margin: 1.4cqw 0 0; padding: 0; display: grid; gap: 3cqw; }
+.nb-todo li { display: flex; align-items: center; gap: 1.6cqw; }
+.nb-todo li::before { content: ''; width: 2.6cqw; height: 2.6cqw; border: 1px solid var(--ink); border-radius: .4cqw; flex: none; }
+.nb-todo li::after { content: ''; flex: 1; height: 1px; background: rgba(43,35,87,.2); }
+
+/* poznámky */
+.nb-dots { padding: calc(var(--pu) * 7) calc(var(--pu) * 6); background-image: radial-gradient(rgba(43,35,87,.3) calc(var(--pu) * .28), transparent calc(var(--pu) * .32)); background-size: calc(var(--pu) * 5) calc(var(--pu) * 5); background-position: calc(var(--pu) * 2.5) calc(var(--pu) * 2.5); }
+.nb-hand { margin: 5cqw 0 0; font-family: var(--display); font-style: italic; font-size: 3.6cqw; line-height: 10cqw; color: #3A2F7A; transform: rotate(-1deg); }
+.nb-hand span { color: var(--nb-gold); }
+.nb-notesp { padding: calc(var(--pu) * 7) calc(var(--pu) * 6) calc(var(--pu) * 6); gap: calc(var(--pu) * 3); }
+.nb-month-sm { font-size: 6.4cqw; }
+.nb-form p { margin: 0 0 2.6cqw; display: flex; align-items: flex-end; gap: 1.6cqw; font-size: 2.5cqw; color: var(--ink-2); }
+.nb-form i { flex: 1; height: 1px; background: rgba(43,35,87,.3); }
+.nb-form b { font-weight: 400; color: var(--ink); letter-spacing: .1em; }
+.nb-box { display: inline-block; width: 2.6cqw; height: 2.6cqw; border: 1px solid var(--ink); border-radius: .4cqw; }
+.nb-draw { flex: 1; min-height: 0; display: grid; place-items: center; }
+.nb-draw::before { content: ''; grid-area: 1 / 1; height: min(100%, 52cqw); aspect-ratio: 1; border-radius: 50%; border: 1px dashed rgba(43,35,87,.45); }
+.nb-draw span { grid-area: 1 / 1; max-width: 26cqw; text-align: center; font-size: 2.2cqw; color: var(--ink-2); }
+
+/* obal */
+.nb-covers { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 360px); justify-content: center; align-items: center; gap: 24px clamp(24px, 5vw, 64px); }
+.nb-cover { position: relative; container-type: inline-size; width: 100%; aspect-ratio: 148 / 210; border-radius: 3px 8px 8px 3px; overflow: hidden; color: #E7C77C;
+  background: radial-gradient(90% 60% at 50% 42%, rgba(91,63,224,.22), transparent 70%), repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0 1px, transparent 1px 3px), repeating-linear-gradient(0deg, rgba(0,0,0,.07) 0 1px, transparent 1px 3px), #12142F;
+  box-shadow: inset 5px 0 8px -5px rgba(0,0,0,.7), 0 50px 80px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.06); }
+.nbc-art { position: absolute; inset: 0; width: 100%; height: 100%; }
+.nbc-art image { transition: opacity .6s ease; }
+.nbc-line { fill: none; stroke: url(#nbc-gold); stroke-width: 1.1; stroke-linejoin: round; }
+.nbc-dot { fill: #F3DCA0; }
+.nbc-stars circle { fill: #E7C77C; opacity: .7; }
+.nbc-text { position: absolute; left: 0; right: 0; top: 64%; text-align: center; }
+.nbc-title { margin: 0; font-family: var(--display); font-size: 12cqw; font-weight: 500; line-height: .98; background: linear-gradient(100deg, #B8893A, #F3DCA0 35%, #C9A45A 55%, #F7E6B8 75%, #B8893A); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.nbc-title em { display: block; font-style: italic; font-weight: 400; font-size: 1.1em; }
+.nbc-sub { margin: 3cqw 0 0; font-size: 3.4cqw; letter-spacing: .04em; color: rgba(231,199,124,.75); }
+.nbc-sub b { font-weight: 600; color: #E7C77C; }
+.nbc-logo { position: absolute; left: 50%; bottom: 6.5%; width: 26cqw; aspect-ratio: 1000 / 496; transform: translateX(-50%); background: linear-gradient(100deg, #B8893A, #F3DCA0 40%, #C9A45A 60%, #F7E6B8); -webkit-mask: url(assets/img/donor-astro.png) center / contain no-repeat; mask: url(assets/img/donor-astro.png) center / contain no-repeat; }
+.nb-cover-notes .nb-k2 { margin: 0 0 10px; font-size: 13px; font-weight: 600; color: var(--violet-2); }
+.nb-cover-notes ul { margin: 0; padding: 0 0 0 18px; display: grid; gap: 10px; font-size: 15px; color: var(--star-2); }
+.nb-cover-notes b { color: var(--star); font-weight: 600; }
+
+/* obsah a cena pod ukážkou */
+.nb-info { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 24px clamp(24px, 5vw, 64px); align-items: start; margin-top: 12px; }
+.nb-in { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.nb-in li { display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: baseline; font-size: 15px; color: var(--star-2); }
+.nb-in b { font-family: var(--display); font-weight: 500; font-size: 28px; line-height: 1; color: var(--star); text-align: right; }
+.nb-buy { display: flex; flex-direction: column; gap: 16px; }
+.nb-buy .btn { align-self: flex-start; }
+.nb-spec { margin: 0; font-size: 14px; color: var(--star-2); }
+.nb-ed { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.nb-e { padding: 14px; border: 1px solid var(--rule); border-radius: var(--r); background: rgba(7,9,18,.45); }
+.nb-e.is-ltd { border-color: rgba(242,202,126,.45); background: linear-gradient(135deg, rgba(242,202,126,.1), rgba(232,182,90,.03)); }
+.nb-e p { margin: 0; }
+.nb-e-t { font-weight: 650; font-size: 14.5px; }
+.nb-price { font-family: var(--display); font-size: 32px; color: var(--gold-2); line-height: 1.2; }
+.nb-e-s { font-size: 12.5px; color: var(--star-2); line-height: 1.4; }
+.nb-e-s b { color: var(--gold-2); white-space: nowrap; }
+.nb-e-s[hidden] { display: none; }
+.nb-note { margin: 0; font-size: 13.5px; color: var(--star-2); }
+.nb-total { margin: 0; font-size: 15px; color: var(--star-2); }
+.nb-total b { font-family: var(--display); font-size: 26px; font-weight: 500; color: var(--gold-2); margin-left: 6px; }
+
+@media (max-width: 860px) {
+  .nb-info { grid-template-columns: minmax(0, 1fr); }
+  .nb-covers { grid-template-columns: minmax(0, 340px); }
+}
+/* mobil: strany pod sebou, každá v pomere A5 */
+@media (max-width: 700px) {
+  .nb-top { flex-direction: column; align-items: stretch; }
+  .nb-top > .nb-views { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; min-width: 0; }
+  .nb-views button { padding: 0 4px; font-size: 13px; min-width: 0; }
+  .nb-top > .nb-months { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; width: calc(100% + var(--gut) * 2); min-width: 0; margin-inline: calc(var(--gut) * -1); padding-inline: var(--gut); }
+  .nb-months::-webkit-scrollbar { display: none; }
+  .nb-months button { flex: none; }
+  .nb-months.is-off { display: none; }
+  .nb-book { grid-template-columns: minmax(0, 1fr); aspect-ratio: auto; gap: 14px; overflow: visible; box-shadow: none; }
+  .nb-book::after { display: none; }
+  .nb-page { aspect-ratio: 148 / 210; border-radius: 3px; box-shadow: 0 24px 50px -24px rgba(0,0,0,.85); }
+}
+@media (prefers-reduced-motion: reduce) { .nb-view.flip .nb-page, .nb-view.flip .nb-cover { animation: none; } .nb-bleed img, .nbc-art image { transition: none; } }
+/* týždeň: celý riadok dňa sú linky na písanie (rozostup 6 mm v tlači) */
+.nb-days li { align-items: stretch; }
+.nb-dn { align-content: start; gap: 0; height: 100%; padding-top: 0; background: repeating-linear-gradient(180deg, transparent 0 calc(5.4cqw - 1px), rgba(43,35,87,.17) calc(5.4cqw - 1px) 5.4cqw); }
+.nb-dn i { display: none; }
+.nb-dn em { line-height: 5.4cqw; }
+/* poznámky: bodky 5 mm, jemné */
+.nb-dots { background-image: radial-gradient(rgba(43,35,87,.32) calc(var(--pu) * .2), transparent calc(var(--pu) * .24)); background-size: calc(var(--pu) * 3.4) calc(var(--pu) * 3.4); background-position: calc(var(--pu) * 1.7) calc(var(--pu) * 1.7); }
+.nb-hand { line-height: 6.8cqw; }
+
+/* vlastné rozmery strany (okraje, bodky) sa počítajú zo šírky strany: --pu = 1 % šírky strany */
+.nb-book { container-type: inline-size; }
+.nb-page { --pu: .5cqw; }
+.nb-dm { align-content: start; }
+@media (max-width: 700px) { .nb-page { --pu: 1cqw; } }
+
+/* ── Obal v4: striedmy, dve varianty ── */
+.nb-covers { grid-template-columns: repeat(2, minmax(0, 300px)) minmax(0, 300px); align-items: start; }
+.nb-cv { margin: 0; display: grid; gap: 12px; }
+.nb-cv figcaption { font-size: 14px; color: var(--star-2); line-height: 1.5; }
+.nb-cv figcaption b { display: block; color: var(--star); font-weight: 600; }
+.nb-cover { background: #11132A; color: #ECE6D6; box-shadow: inset 4px 0 6px -4px rgba(0,0,0,.7), 0 40px 70px -30px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.07); border-radius: 2px 6px 6px 2px; }
+.cv-title { margin: 0; font-family: var(--display); font-weight: 400; font-size: 7.4cqw; letter-spacing: .01em; line-height: 1.1; color: #ECE6D6; }
+.cv-year { margin: 1.6cqw 0 0; font-size: 3.2cqw; letter-spacing: .3em; color: rgba(236,230,214,.7); }
+.cv-logo { position: absolute; left: 50%; bottom: 7%; width: 20cqw; aspect-ratio: 1000 / 496; transform: translateX(-50%); background: #ECE6D6; opacity: .9; -webkit-mask: url(assets/img/donor-astro.png) center / contain no-repeat; mask: url(assets/img/donor-astro.png) center / contain no-repeat; }
+/* A: malý štvorcový výrez fotky, veľa tmavej plochy */
+.cv-a { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: 30%; }
+.cva-pic { width: 40cqw; aspect-ratio: 1; overflow: hidden; margin-bottom: 9cqw; }
+.cva-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* B: fotka na celý obal, dole tmavý pás */
+.cv-b { display: flex; flex-direction: column; }
+.cvb-pic { width: 100%; flex: 1; min-height: 0; object-fit: cover; display: block; }
+.cvb-band { position: relative; height: 30%; background: #11132A; padding: 6cqw 8cqw 0; text-align: left; }
+.cvb-band .cv-logo { left: auto; right: 8cqw; bottom: 7cqw; transform: none; width: 17cqw; }
+.cvb-band .cv-year { letter-spacing: .14em; }
+@media (max-width: 1000px) { .nb-covers { grid-template-columns: repeat(2, minmax(0, 300px)); } .nb-cover-notes { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .nb-covers { grid-template-columns: minmax(0, 1fr); } .nb-cv { max-width: 320px; margin-inline: auto; width: 100%; } }
+.nb-tip { padding: 0 0 0 2.6cqw; border: 0; border-left: 2px solid rgba(106,79,240,.55); border-radius: 0; background: none; }
+.nb-days li { grid-template-columns: 15cqw 19cqw 1fr; } .nb-dm small { white-space: nowrap; }
+
+/* Mobilné menu: 10 položiek sa nesmie stláčať cez seba (podnadpisy boli orezané) */
+.mm-link { flex-shrink: 0; padding: 10px 0 11px; font-size: clamp(26px, 7vw, 40px); }
+@media (max-height: 760px) { .mm-link { padding: 8px 0 9px; font-size: 25px; } .mm-s { font-size: 13px; } }
+.mobile-menu { padding-top: 92px; padding-bottom: 28px; }
+
+/* ── Obal v5: „Nezabudni svoj Kúsok Nekonečna“ ── */
+.nb-covers { grid-template-columns: minmax(0, 360px) minmax(0, 340px); }
+.cv-n { display: flex; flex-direction: column; align-items: center; text-align: center;
+  background: radial-gradient(70% 40% at 50% 44%, rgba(141,107,255,.16), transparent 70%), radial-gradient(90% 50% at 50% 110%, rgba(91,63,224,.14), transparent 70%), #080A16; }
+.cvn-pre { position: absolute; left: 0; right: 0; top: 33%; margin: 0; font-family: var(--sans); font-weight: 400; font-size: 3.4cqw; letter-spacing: .14em; color: rgba(236,234,228,.28); }
+.cvn-title { position: absolute; left: 0; right: 0; top: 39%; display: grid; place-items: center; }
+.cvn-inf { position: absolute; width: 112cqw; left: 50%; top: 50%; transform: translate(-50%, -46%); overflow: visible; opacity: .55; }
+.cvn-inf path { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.cvn-base { stroke: rgba(242,202,126,.22); stroke-width: .014; }
+.cvn-t { stroke: rgba(232,182,90,.45); stroke-width: .02; stroke-dasharray: 14 86; stroke-dashoffset: -49.25; }
+.cvn-b { stroke: rgba(242,202,126,.75); stroke-width: .026; stroke-dasharray: 6 94; stroke-dashoffset: -57.25; }
+.cvn-h { stroke: #FFF4D6; stroke-width: .036; stroke-dasharray: 1.2 98.8; stroke-dashoffset: -62.05; }
+.cvn-h1 { position: relative; margin: 0; font-family: var(--display); font-weight: 500; font-size: 15cqw; line-height: .9; letter-spacing: -.02em; color: var(--star); }
+.cvn-h1 span { display: block; }
+.cvn-h1 em { display: block; font-style: italic; font-weight: 400; padding-right: .08em;
+  background: linear-gradient(100deg, var(--gold-2) 0%, #fff4d6 22%, var(--violet-2) 48%, var(--gold-2) 74%, #fff4d6 100%); background-size: 220% 100%; background-position: 30% 50%; -webkit-background-clip: text; background-clip: text; color: transparent; }
+.cv-n .cv-logo { bottom: 8%; width: 22cqw; background: #ECEAE4; opacity: .85; }
+@media (max-width: 1000px) { .nb-covers { grid-template-columns: minmax(0, 340px); } }
+
+/* Tri hviezdičky ako predel v zápisníku (ako v príspevkoch) */
+.nb-stars { margin: 0; text-align: center; font-family: var(--display); font-size: 3.4cqw; letter-spacing: .5em; padding-left: .5em; line-height: 1; color: var(--nb-gold); }
+.nb-whim { border-top: 0; padding-top: 0; margin-top: 0; }
+.nb-open-body .nb-stars { margin-top: auto; }
+.nb-wk-foot { border-top: 0; padding-top: 0; }
+.cvn-inf { width: 94cqw; }
+.cvn-h { stroke-width: .026; }
+.cvn-b { stroke-width: .02; }
+
+/* ── Obal v6: ako skutočný diár ── */
+.nb-covers { grid-template-columns: minmax(0, 360px) minmax(0, 320px); align-items: center; }
+.nb-book3d { position: relative; width: 100%; padding: 0 10px 10px 0; }
+/* blok strán, ktorý vykúka spod dosiek (vpravo a dole) */
+.nb-book3d::before { content: ''; position: absolute; left: 10px; top: 8px; right: 2px; bottom: 2px; border-radius: 3px 6px 6px 3px; background: repeating-linear-gradient(90deg, #E9E1CF 0 1px, #D8CFBA 1px 2px); box-shadow: 0 30px 60px -24px rgba(0,0,0,.9); }
+.nb-book3d::after { content: ''; position: absolute; left: 10px; right: 2px; bottom: 2px; height: 10px; border-radius: 0 0 6px 3px; background: repeating-linear-gradient(180deg, #E9E1CF 0 1px, #D3C9B3 1px 2px); }
+.cv-n { position: relative; z-index: 1; border-radius: 3px 8px 8px 3px;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.45) 0, rgba(0,0,0,.12) 2.2%, rgba(255,255,255,.05) 3.4%, rgba(0,0,0,.25) 4.6%, transparent 7%),
+    radial-gradient(60% 34% at 50% 47%, rgba(232,182,90,.10), transparent 72%),
+    linear-gradient(155deg, rgba(255,255,255,.05), transparent 38%, rgba(0,0,0,.18)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.012) 0 1px, transparent 1px 3px),
+    #0B1030;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05), inset -2px 0 3px rgba(255,255,255,.04), 0 2px 0 rgba(0,0,0,.4); }
+.cvn-pre { top: 30%; font-size: 3.1cqw; letter-spacing: .16em; color: rgba(242,214,160,.26); }
+.cvn-title { top: 36%; }
+.cvn-inf { width: 76cqw; top: 46%; transform: translate(-50%, -50%); opacity: 1; }
+.cvn-trail path { fill: none; stroke: #E9C77F; stroke-linecap: round; }
+.cvn-h1 { font-size: 14.5cqw; color: transparent; background: linear-gradient(100deg, #E9CB8C 0%, #FFF1D2 24%, #D6C3F2 50%, #E9CB8C 76%, #FFF1D2 100%); background-size: 220% 100%; background-position: 28% 50%; -webkit-background-clip: text; background-clip: text; text-shadow: none; }
+.cvn-h1 span { color: transparent; }
+.cvn-h1 em { background: inherit; background-size: 220% 100%; background-position: 28% 50%; -webkit-background-clip: text; background-clip: text; }
+.cvn-year { position: relative; margin: 3.6cqw 0 0; font-family: var(--display); font-style: italic; font-weight: 400; font-size: 6.4cqw; line-height: 1; color: transparent; background: linear-gradient(100deg, #E9CB8C, #FFF1D2 50%, #E9CB8C); -webkit-background-clip: text; background-clip: text; }
+.cv-n .cv-logo { background: #E9DDC0; opacity: .8; width: 20cqw; }
+/* gumička a stužka */
+.cvn-band { position: absolute; top: 0; bottom: 0; right: 7%; width: 2.6cqw; background: linear-gradient(90deg, #05071A, #1A1E44 45%, #0A0C24); box-shadow: -1px 0 2px rgba(0,0,0,.6), 1px 0 1px rgba(255,255,255,.05); }
+.cvn-ribbon { position: absolute; z-index: 2; left: 30%; bottom: -8px; width: 11px; height: 30px; background: linear-gradient(90deg, #4F3BBE, #6A4FF0 50%, #4F3BBE); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); }
+@media (max-width: 1000px) { .nb-covers { grid-template-columns: minmax(0, 330px); } }
+.cv-n { background:
+    linear-gradient(90deg, rgba(0,0,0,.45) 0, rgba(0,0,0,.12) 2.2%, rgba(255,255,255,.045) 3.4%, rgba(0,0,0,.25) 4.6%, transparent 7%),
+    radial-gradient(60% 34% at 50% 47%, rgba(232,182,90,.08), transparent 72%),
+    linear-gradient(155deg, rgba(255,255,255,.04), transparent 38%, rgba(0,0,0,.2)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.01) 0 1px, transparent 1px 3px),
+    #080B24; }
+.cvn-trail path { stroke-linecap: butt; opacity: .055; }
+
+/* ── Mobil: otvorený zápisník, ktorým sa listuje prstom ──
+   Obe strany ležia vedľa seba ako v skutočnom diári, každá skoro na celú šírku displeja,
+   v strede je väzba. Potiahnutím sa presuniete na druhú stranu dvojstrany. */
+@media (max-width: 700px) {
+  .nb-book { display: flex; gap: 0; aspect-ratio: auto; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain;
+    width: auto; margin-inline: calc(var(--gut) * -1); padding: 0 var(--gut) 18px; border-radius: 0; box-shadow: none; }
+  .nb-book::-webkit-scrollbar { display: none; }
+  .nb-book::after { display: none; }
+  .nb-page { --pu: .88cqw; flex: 0 0 88%; aspect-ratio: 148 / 210; scroll-snap-align: center; border-radius: 0; box-shadow: 0 26px 40px -26px rgba(0,0,0,.9); }
+  .nb-left { border-radius: 4px 0 0 4px; }
+  .nb-right { border-radius: 0 4px 4px 0; border-top: 0; }
+  .nb-left::after, .nb-right::before { content: ''; position: absolute; top: 0; bottom: 0; width: 9%; pointer-events: none; z-index: 2; }
+  .nb-left::after { right: 0; background: linear-gradient(90deg, rgba(43,35,87,0), rgba(43,35,87,.2)); }
+  .nb-right::before { left: 0; background: linear-gradient(90deg, rgba(43,35,87,.22), rgba(43,35,87,0)); }
+  .nb-swipe { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: -4px; font-size: 13px; color: var(--star-2); }
+  .nb-swipe i { width: 7px; height: 7px; border-radius: 50%; background: rgba(236,234,228,.25); transition: background-color .3s, transform .3s; }
+  .nb-swipe i.on { background: var(--violet-2); transform: scale(1.2); }
+}
+@media (min-width: 701px) { .nb-swipe { display: none; } }
+.nb-swipe[hidden] { display: none !important; }
+
+/* Týždeň v8: hlavička dňa v jednom riadku (deň, dátum, poznámka, západ slnka a Mesiac), pod ňou linky */
+.nb-days li { display: flex; flex-direction: column; gap: 1cqw; padding: 1.6cqw 0 0; align-items: stretch; }
+.nb-dh2 { display: flex; align-items: center; gap: 1.8cqw; min-height: 5cqw; }
+.nb-dh2 b { font-size: 2.8cqw; }
+.nb-dd { font-size: 2.5cqw; color: var(--ink-2); }
+.nb-dh2 em { font-family: var(--display); font-style: italic; font-size: 2.6cqw; color: var(--nb-vio); }
+.nb-dsun { margin-left: auto; font-size: 1.9cqw; line-height: 1.25; color: var(--ink-2); text-align: right; }
+.nb-dh2 .nb-ms { width: 4.2cqw; height: 4.2cqw; flex: none; }
+.nb-dn { flex: 1; min-height: 0; height: auto; }
+.nb-wk { font-size: 6cqw; }
+.nb-wk span { display: block; margin-top: 1cqw; font-size: 2.8cqw; font-style: italic; }
+/* Hviezda vášho roku: výber mesiaca sa zmestí celý */
+@media (max-width: 520px) { .year-fields { grid-template-columns: 22% minmax(0, 1fr) 30%; } .yf-m select { padding: 0 26px 0 10px; font-size: 18px; background-position: calc(100% - 15px) 52%, calc(100% - 10px) 52%; } }
+.nb-dh2 b { font-size: 3.2cqw; }
+.nb-dd { font-size: 2.9cqw; }
+.nb-dh2 em { font-size: 3cqw; }
+.nb-dsun { font-size: 2.3cqw; }
+.nb-dh2 .nb-ms { width: 4.8cqw; height: 4.8cqw; }
+.nb-wk { font-size: 7cqw; }
+.nb-wk span { font-size: 3.2cqw; }
+
+/* ── v22: poštovné, zápisník v košíku a ako darček ── */
+.gift-acts { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+.nb-rows { padding: 4px 0 0; }
+.nb-cartbox { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; border-radius: 12px; background: rgba(141,107,255,.08); border: 1px solid rgba(141,107,255,.18); }
+.nb-cartbox .btn { align-self: flex-start; }
+.nb-or { margin-top: 10px; }
+.field .opt { font-weight: 400; color: var(--star-3, rgba(220,220,240,.55)); }
+@media (max-width: 560px) { .gift-acts { flex-direction: column; align-items: stretch; } .gift-acts .btn { justify-content: center; } }
+
+/* ── v23: zápisník – poznámky ako linajky, týždeň bez zoznamu ── */
+.nb-wk-foot { grid-template-columns: minmax(0, 1fr); }
+.nb-form p { align-items: center; min-height: 5.2cqw; margin: 0; padding: 1.4cqw 0 .5cqw; border-bottom: 1px solid rgba(43,35,87,.26); line-height: 1.2; }
+.nb-form i { display: none; }
+.nb-form { margin-bottom: 4cqw; }
+/* veľkosti priamo pod náhľadom na stene */
+.wall-sizes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 3px; margin-top: 10px; padding: 3px; border: 1px solid var(--rule); border-radius: var(--r); background: rgba(7,9,18,.5); }
+.ws-c { display: flex; flex-direction: column; align-items: center; gap: 1px; min-height: 44px; padding: 6px 4px; border: 0; border-radius: 4px; background: none; color: var(--star-2); cursor: pointer; transition: background-color .25s, color .25s; }
+.ws-c b { font-size: 14px; font-weight: 600; }
+.ws-c small { font-size: 11px; opacity: .75; white-space: nowrap; }
+.ws-c:hover { background: rgba(141,107,255,.12); color: var(--star); }
+.ws-c[aria-checked="true"] { background: var(--violet); color: #fff; }
+.ws-c:focus-visible { outline: 2px solid var(--violet-2); outline-offset: 1px; }
+/* ── v23: jasnejšie oddelené sekcie ── */
+.divider + .section, .divider + .part > .section:first-child { padding-top: clamp(64px, 9vw, 120px); }
+
+/* ── v24: právne odkazy, darček v košíku, potvrdenie objednávky ── */
+.foot-law { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+.foot-law a { color: inherit; text-underline-offset: 3px; }
+.foot-law a:hover { color: var(--star); }
+.check a { color: var(--violet-2); text-underline-offset: 2px; }
+.gift-opt { display: grid; gap: 12px; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 12px; background: rgba(141,107,255,.06); }
+.gift-more { display: grid; gap: 12px; }
+.gift-more .field { margin: 0; }
+.sum-gift { margin: -4px 0 0; font-size: 14px; color: var(--violet-2); }
+.ty-box { display: grid; gap: 10px; margin: 4px 0 8px; padding: 16px 18px; border: 1px solid rgba(141,107,255,.35); border-radius: 12px; background: rgba(141,107,255,.08); }
+.ty-no { margin: 0; font-size: 14px; color: var(--star-2); }
+.ty-no b { display: block; margin-top: 2px; font-family: var(--display); font-size: 26px; font-weight: 500; letter-spacing: .02em; color: var(--star); }
+.ty-box ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 14px; color: var(--star-2); }
+.ty-sum { display: flex; justify-content: space-between; margin: 0; padding-top: 8px; border-top: 1px solid var(--rule); }
+.ty-sum b { font-family: var(--display); font-size: 22px; font-weight: 500; color: var(--gold-2); }
+
+/* ── v25: súhvezdia jemne za nadpismi ── */
+.const { inset: -18% -10%; left: -10%; top: -18%; width: auto; transform: none; opacity: .42; }
+.const svg { width: 100%; height: 100%; aspect-ratio: auto; }
+.const line { stroke: rgba(184,164,255,.5); stroke-width: .8px; vector-effect: non-scaling-stroke; }
+.const .cs { filter: drop-shadow(0 0 1px #fff) drop-shadow(0 0 2.5px rgba(141,107,255,.8)); }
+@media (max-width: 700px) { .const { left: -12%; top: -22%; width: auto; transform: none; } }
+
+/* ── v25: zápisník, viac vzduchu nad číslami a hviezda žiariaca spoza čísla ── */
+.nb-info { margin-top: clamp(48px, 7vw, 80px); }
+.nb-in { gap: 16px; }
+.nb-in b { position: relative; z-index: 0; }
+.nb-in b::after { content: '✦'; position: absolute; z-index: -1; right: -.42em; top: 58%; width: 1em; text-align: center; font-family: 'Instrument Sans', sans-serif; font-size: 1.5em; line-height: 1; color: #B8A4FF; text-shadow: 0 0 10px rgba(141,107,255,.95), 0 0 22px rgba(141,107,255,.7); filter: blur(3px); opacity: .8; transform: translate(0, -50%); animation: nbGlow 4.2s ease-in-out infinite; animation-delay: calc(var(--i, 0) * -.7s); pointer-events: none; }
+.nb-in li:nth-child(2) b { --i: 1; } .nb-in li:nth-child(3) b { --i: 2; } .nb-in li:nth-child(4) b { --i: 3; } .nb-in li:nth-child(5) b { --i: 4; } .nb-in li:nth-child(6) b { --i: 5; }
+@keyframes nbGlow { 0%, 100% { opacity: .5; transform: translate(0, -50%) scale(.85); } 50% { opacity: 1; transform: translate(0, -50%) scale(1.15); } }
+@media (prefers-reduced-motion: reduce) { .nb-in b::after { animation: none; opacity: .6; } }
+.modal-open .nb-in b::after { animation-play-state: paused; }
+/* chata: výrez nižšie, aby boli celé postavy */
+.offer-img img[src*="zakazka"] { object-position: 50% 88%; }
+
+/* ── v25: rýchlejší nábeh úvodu (asi o 40 %) ── */
+.intro .hero-sky { animation-duration: 1.6s; }
+.intro .hero-trails { animation: fadeIn 1.4s ease .6s both; }
+.intro .hero-kicker { animation: rise .7s var(--ease) .05s both; }
+.intro #hero-title .w1 { animation: focusIn .9s var(--ease) .15s both; }
+.intro #hero-title em { animation: focusIn 1s var(--ease) .35s both, shimmer2 14s ease-in-out 2s infinite; }
+.intro .hero-by { animation: rise .7s var(--ease) .65s both; }
+.intro .hero-lead { animation: rise .7s var(--ease) .75s both; }
+.intro .hero-actions { animation: rise .7s var(--ease) .85s both; }
+.intro .hero-inner::before { animation: fadeIn 1.3s ease .3s both, breathe 7s ease-in-out 1.6s infinite; }
+.intro .inf { animation: fadeIn 1s ease .9s both; }
+@media (pointer: coarse), (max-width: 760px) {
+  #hero-title em, .intro #hero-title em { animation: focusIn 1s var(--ease) .35s both !important; }
+  .hero-inner::before, .intro .hero-inner::before { animation: fadeIn 1.3s ease .3s both !important; }
+}
+@media (prefers-reduced-motion: reduce) { .intro .hero-sky, .intro .hero-trails, .intro .hero-kicker, .intro #hero-title .w1, .intro #hero-title em, .intro .hero-by, .intro .hero-lead, .intro .hero-actions, .intro .hero-inner::before, .intro .inf { animation: none !important; } }
+.nav { animation: fadeIn .7s ease .5s both; }
+/* náhľad na stene: jedna izba, žiadne prelínanie scén ani bliknutie pri ťuknutí */
+.wall .scene-komoda { display: none; }
+.wall-scene { transition: none; }
+.ws-c, .size-c, .mat-c, .wall-tabs button, .wall-tabs label { -webkit-tap-highlight-color: transparent; }
+
+/* ── v25: hierarchia, čo predáva je väčšie, zvyšok o stupeň menší ── */
+#gallery-title, #offers-title, #nb-title { font-size: clamp(58px, 8.6vw, 124px); }
+#welcome-title, #game-title, #walls-title, #make-title, #facts-title, #faq-title, #sky-h, #rev-title { font-size: clamp(38px, 5vw, 70px); }
+.year-form #year-title { font-size: clamp(36px, 4.4vw, 62px); }
+#gift-title { font-size: clamp(42px, 5.8vw, 84px); }
+#galeria .section-head .lead, #pre-vas .section-head .lead, #zapisnik .lead { font-size: clamp(18px, 1.7vw, 21px); color: #CFCBDD; }
+.g-price { font-size: 21px; }
+.offer-price { font-size: 34px; color: var(--gold-2); }
+.hero-actions .btn-gold { min-height: 60px; padding: 0 34px; font-size: 17.5px; font-weight: 600; }
+.nb-price { font-size: 40px; }
+.nb-buy > .btn { min-height: 58px; padding: 0 34px; font-size: 17px; }
+.gift-acts .btn-gold { min-height: 58px; padding: 0 32px; font-size: 17px; }
+/* menu ukazuje, kde práve ste */
+.mm-link.active .mm-t { color: var(--violet-2); }
+.mm-link.active .mm-t::before { content: '✦'; display: inline-block; margin-right: .35em; font-size: .45em; vertical-align: .55em; color: var(--violet-2); font-style: normal; }
+/* späť hore */
+.to-top { position: fixed; right: 16px; bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 950; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(184,164,255,.35); background: rgba(14,18,34,.82); color: var(--star); box-shadow: 0 10px 28px -12px rgba(0,0,0,.8); opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .3s, transform .3s var(--ease), border-color .2s; -webkit-tap-highlight-color: transparent; }
+.to-top svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+.to-top:hover { border-color: var(--violet-2); }
+.modal-open .to-top { opacity: 0; pointer-events: none; }
+@media (min-width: 1180px) and (hover: hover) { .to-top { display: none; } }
+@media (min-width: 701px) { .hero-actions { align-items: center; } }
+@media (max-width: 700px) { #nb-title { font-size: min(58px, 12.4vw); } }
+
+/* ── v26: kalendár, dátum v jednom riadku ── */
+.cal-d b { white-space: nowrap; }
+.cal-r { grid-template-columns: 76px minmax(0, 1fr) auto; gap: 16px; }
+@media (max-width: 560px) { .cal-r { grid-template-columns: 66px minmax(0, 1fr); gap: 14px; } .cal-d b { font-size: 18px; } }
+
+/* zápisník: hviezdy za číslami menšie a tlmenejšie */
+.nb-in b::after { font-size: 1.2em; right: -.24em; opacity: .6; text-shadow: 0 0 8px rgba(141,107,255,.7), 0 0 16px rgba(141,107,255,.45); filter: blur(3px); }
+@keyframes nbGlow { 0%, 100% { opacity: .3; transform: translate(0, -50%) scale(.85); } 50% { opacity: .65; transform: translate(0, -50%) scale(1.08); } }
+.nb-in li { gap: 16px; }
+
+/* úvodná fotka sa veľmi pomaly približuje (100 až 115 %) */
+.hero-zoom { position: absolute; inset: 0; z-index: -2; transform-origin: 62% 38%; animation: heroZoom 45s ease-in-out 1.6s infinite alternate; will-change: transform; }
+.hero-zoom .hero-sky { z-index: 0; }
+@keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.15); } }
+.hero.is-off .hero-zoom, .modal-open .hero-zoom { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .hero-zoom { animation: none; } }
+
+/* vianočný pás pod úvodom */
+.xmas-band { position: relative; z-index: 2; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 18px; width: var(--wide); margin: 0 auto; padding: 14px 20px; border: 1px solid rgba(232,182,90,.4); border-radius: var(--r); background: linear-gradient(135deg, rgba(232,182,90,.12), rgba(141,107,255,.08)); text-align: center; }
+.xmas-band[hidden] { display: none; }
+.xb-t { margin: 0; font-size: 16px; color: #F6DDA6; }
+.xb-t::before { content: '✦'; margin-right: 8px; color: var(--gold); }
+.xb-a { font-weight: 600; color: var(--star); text-underline-offset: 3px; }
+
+/* pásik s hrou nad galériou */
+.game-strip { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; align-items: center; gap: 16px 20px; margin: 0 0 clamp(28px, 4vw, 44px); padding: 14px 18px; border: 1px solid rgba(141,107,255,.35); border-radius: var(--r); background: linear-gradient(110deg, rgba(141,107,255,.14), rgba(14,18,34,.6) 60%); }
+.game-strip[hidden] { display: none; }
+.gs-eye { width: 64px; height: 64px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 2px rgba(184,164,255,.35), 0 0 24px rgba(141,107,255,.5); }
+.gs-eye img { width: 100%; height: 100%; object-fit: cover; filter: blur(3px) saturate(1.2); transform: scale(1.15); }
+.gs-h { margin: 0 0 2px; font-family: var(--display); font-size: 22px; font-weight: 500; color: var(--star); }
+.gs-s { margin: 0; font-size: 15px; color: var(--star-2); }
+@media (max-width: 640px) { .game-strip { grid-template-columns: 56px minmax(0, 1fr); text-align: left; } .gs-eye { width: 56px; height: 56px; } .gs-btn { grid-column: 1 / -1; width: 100%; } }
+/* hra v okne */
+.modal-info .focus-game { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 0; border: 0; background: none; box-shadow: none; }
+.modal-info .focus-game .eyepiece { width: min(320px, 78vw); margin: 0 auto; }
+.modal-info .focus-game .game-text { text-align: left; }
+.modal-info #game-title { font-size: clamp(32px, 4vw, 44px); }
+.game-holder { display: none; }
+
+/* nočná obloha: záložky */
+.ob-tabs { display: flex; flex-wrap: wrap; gap: 4px; width: fit-content; max-width: 100%; margin: 0 0 clamp(24px, 3vw, 36px); padding: 4px; border: 1px solid var(--rule); border-radius: calc(var(--r) + 4px); background: rgba(7,9,18,.55); }
+.ob-tabs [role="tab"] { min-height: 44px; padding: 0 18px; border: 0; border-radius: var(--r); background: none; color: var(--star-2); font: 600 15px/1 var(--body-font, 'Instrument Sans'), sans-serif; cursor: pointer; transition: background-color .25s, color .25s; -webkit-tap-highlight-color: transparent; }
+.ob-tabs [role="tab"]:hover { color: var(--star); }
+.ob-tabs [role="tab"][aria-selected="true"] { background: var(--violet); color: #fff; }
+.ob-tabs [role="tab"]:focus-visible { outline: 2px solid var(--violet-2); outline-offset: 2px; }
+@media (max-width: 640px) { .ob-tabs { display: grid; grid-template-columns: 1fr 1fr; width: 100%; } .ob-tabs [role="tab"] { padding: 0 8px; font-size: 14px; } }
+.ob-panel[hidden] { display: none; }
+.ob-panel > * + * { margin-top: clamp(20px, 3vw, 32px); }
+.ob-lead { margin: 0 0 18px; font-size: 17px; color: var(--star-2); }
+.ob-panel .year-card, .ob-panel .fact-card, .ob-panel .cal-card { margin-top: 0; }
+
+/* nové poradie: časť hneď pod úvodom preberá prechod z fotky */
+.part.is-first::before { top: 0; -webkit-mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - var(--fade)), transparent 100%); mask-image: linear-gradient(180deg, #000 0, #000 calc(100% - var(--fade)), transparent 100%); }
+@media (max-width: 700px) { .part.is-first::before { background: linear-gradient(180deg, var(--night) 0, var(--night) 40px, transparent 260px), var(--tone-glow, none), var(--tone); } }
+.part[data-part="darcek"] { --tone: rgba(9,12,34,.92); --tone-glow: radial-gradient(60% 40% at 50% 15%, rgba(232,182,90,.07), transparent 70%); }
+.part[data-part="obloha"]  { --tone: rgba(26,17,62,.84); --tone-glow: radial-gradient(60% 25% at 50% 8%, rgba(80,130,220,.12), transparent 70%); }
+.part[data-part="omne"]    { --tone: rgba(5,7,20,.9); --tone-glow: radial-gradient(50% 30% at 80% 40%, rgba(141,107,255,.08), transparent 70%); }
+.divider + .part > .section:first-child, .divider + .section { padding-top: clamp(64px, 9vw, 120px); }
+.welcome { padding-top: clamp(64px, 9vw, 120px); }
+.game-strip { text-align: left; }
+/* v27: zápisník hneď po galérii, služby a poukaz za ním */
+.part[data-part="zapisnik"] { --tone: rgba(30,19,66,.84); --tone-glow: radial-gradient(60% 40% at 80% 20%, rgba(141,107,255,.14), transparent 70%); }
+.part[data-part="pre-vas"]  { --tone: rgba(9,12,34,.92); --tone-glow: radial-gradient(60% 40% at 50% 15%, rgba(232,182,90,.07), transparent 70%); }
+
+/* ── v28 ── */
+/* fotka v okne služby vyplní celý priestor, bez čiernych okrajov */
+.modal-img.is-cover { min-height: 340px; }
+.modal-img.is-cover img.mi, .modal-img.is-cover img.mi-lo { position: absolute; inset: 0; width: 100%; height: 100%; max-height: none; object-fit: cover; object-position: 50% 40%; }
+@media (max-width: 700px) { .modal-img.is-cover { height: 44vh; min-height: 260px; max-height: none; } }
+
+/* plynulosť okien: stránka za oknom sa nehýbe a na mobile sa vôbec nekreslí */
+.modal-open main *, .modal-open main *::before, .modal-open main *::after, .modal-open .site-foot *, .modal-open .focus-scale *, .modal-open .divider span::before { animation-play-state: paused !important; }
+@media (max-width: 700px) {
+  .modal-open main, .modal-open .site-foot, .modal-open .nebulae, .modal-open .sky-bg, .modal-open .nav, .modal-open .focus-scale, .modal-open .to-top, .modal-open .xmas-band { visibility: hidden; }
+  .modal-panel { will-change: auto; }
+  .modal-img img.mi { transition: opacity .45s ease; }
+}
+
+/* pásik s hrou po výhre */
+.game-strip.is-won { border-color: rgba(232,182,90,.45); background: linear-gradient(110deg, rgba(232,182,90,.12), rgba(14,18,34,.6) 60%); }
+.game-strip.is-won .gs-eye img { filter: none; transform: scale(1.05); }
+.game-strip.is-won .gs-s b { font-family: var(--display); font-weight: 500; letter-spacing: .02em; color: var(--violet-2); }
+.game-strip.is-won .gs-btn { background: transparent; border: 1px solid rgba(184,164,255,.45); box-shadow: none; color: var(--star); }
+/* v29: obálka s názvom Hviezdopis, bez riadku nad nadpisom */
+.cvn-title { top: 40%; }
+.cvn-one { font-size: 15.5cqw; }
+.cvn-one em { padding-right: .1em; }
+/* obálka sa dá otvoriť potiahnutím doľava */
+.nb-book3d { touch-action: pan-y; cursor: grab; -webkit-user-select: none; user-select: none; }
+.nb-book3d:active { cursor: grabbing; }
+.nb-book3d:focus-visible { outline: 2px solid var(--violet-2); outline-offset: 8px; border-radius: 6px; }
+.nb-book3d .nb-cover { transform-origin: left center; }
+.nb-book3d.is-opening .nb-cover { animation: nbOpen .64s cubic-bezier(.5, 0, .75, .2) forwards; }
+@keyframes nbOpen { to { transform: perspective(1400px) rotateY(-82deg); opacity: .15; } }
+.nb-open-hint { position: absolute; left: 0; right: 10px; top: 100%; margin: 14px 0 0; text-align: center; font-size: 13px; color: var(--star-2); pointer-events: none; }
+.nb-open-hint::before { content: '←'; margin-right: 6px; color: var(--violet-2); animation: nbHint 2.4s ease-in-out infinite; display: inline-block; }
+@keyframes nbHint { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-5px); } }
+.nb-covers { padding-bottom: 34px; }
+@media (prefers-reduced-motion: reduce) { .nb-open-hint::before { animation: none; } }
+
+/* ── v30: Hviezdopis, fotka mesiaca celá, bez orezania ── */
+.nb-bleed { height: auto; flex: none; display: flex; flex-direction: column; background: #0A0D1A; }
+.nb-ph { position: relative; width: 100%; aspect-ratio: var(--ar, 1.5); max-height: 72cqw; display: grid; place-items: center; overflow: hidden; }
+.nb-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.nb-ph-cap { position: static; padding: 2.2cqw 6cqw 2.6cqw; background: none; display: flex; flex-wrap: wrap; align-items: baseline; gap: .4em 1em; }
+.nb-ph-cap b { font-size: 3.2cqw; }
+.nb-ph-cap span { font-size: 2.1cqw; opacity: .7; }
+
+/* ── v30: okno obrazu, každý krok má svoju jemnú farbu ── */
+.modal-info .step { padding: 16px 16px 18px; border-radius: 14px; border: 1px solid var(--rule); background: rgba(236,234,228,.025); }
+.modal-info .step[aria-labelledby="st1"] { border-color: rgba(141,107,255,.26); background: linear-gradient(180deg, rgba(141,107,255,.09), rgba(141,107,255,.03)); }
+.modal-info .step[aria-labelledby="st2"] { border-color: rgba(110,150,255,.26); background: linear-gradient(180deg, rgba(90,130,255,.09), rgba(90,130,255,.03)); }
+.modal-info .step[aria-labelledby="st3"] { border-color: rgba(236,234,228,.12); background: rgba(236,234,228,.03); }
+.modal-info .step[aria-labelledby="st2"] .step-h i { background: rgba(90,130,255,.2); border-color: rgba(120,160,255,.6); color: #AFC6FF; }
+.modal-info .step[aria-labelledby="st3"] .step-h i { background: rgba(236,234,228,.08); border-color: rgba(236,234,228,.35); color: var(--star); }
+/* materiály: štandard fialové, prémium so zlatým okrajom */
+.mat-c { background: rgba(10,9,30,.55); border-color: rgba(141,107,255,.2); }
+.mat-grp:nth-child(2) .mat-c { border-color: rgba(232,182,90,.28); background: linear-gradient(160deg, rgba(232,182,90,.07), rgba(10,9,30,.55) 60%); }
+.mat-grp:nth-child(2) .mat-gl { color: #E9CF97; }
+.mat-c[aria-checked="true"] { border-color: var(--violet); background: rgba(141,107,255,.2); box-shadow: 0 0 0 1px var(--violet), 0 10px 28px -14px rgba(141,107,255,.9); }
+.mat-grp:nth-child(2) .mat-c[aria-checked="true"] { border-color: #E3B868; background: linear-gradient(160deg, rgba(232,182,90,.2), rgba(141,107,255,.12)); box-shadow: 0 0 0 1px #E3B868, 0 10px 28px -14px rgba(232,182,90,.8); }
+/* veľkosti: modré */
+.size-c { background: rgba(8,12,34,.6); border-color: rgba(110,150,255,.22); }
+.size-c:hover { border-color: rgba(150,180,255,.65); }
+.size-c[aria-checked="true"] { border-color: #6E96FF; background: rgba(90,130,255,.2); box-shadow: 0 0 0 1px #6E96FF, 0 10px 28px -14px rgba(90,130,255,.9); }
+.size-c[aria-checked="true"]::after { box-shadow: 0 0 10px 2px rgba(150,180,255,.9); }
+.ws-c[aria-checked="true"] { background: #5D82F0; }
+.ws-c:hover { background: rgba(90,130,255,.15); }
+@media (max-width: 700px) { .modal-info .step { padding: 14px 12px 16px; } }
+.nb-open-body { padding: 4cqw 7cqw 4.5cqw; gap: 2cqw; }
+/* odkazy pod popisom obrazu */
+.p-links { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: -6px 0 0; }
+.p-links .share-btn { margin: 0; }
+.ig-link { text-decoration: underline; text-underline-offset: 3px; }
+
+/* v31: rok v popise, výraznejší odkaz na Instagram */
+.modal-desc .d-year { display: block; margin-top: .55em; color: var(--star-2); font-size: 14px; letter-spacing: .02em; }
+.p-links { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.p-links .ig-link { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 12px; border-radius: 999px;
+  border: 1px solid rgba(184,164,255,.45); color: var(--star); text-decoration: none; font-size: 14px; line-height: 1.2;
+  background: rgba(184,164,255,.08); transition: background .2s, border-color .2s; }
+.p-links .ig-link:hover, .p-links .ig-link:focus-visible { background: rgba(184,164,255,.18); border-color: rgba(184,164,255,.8); }
+
+/* v32: Hviezdopis, fotka mesiaca na celú stranu s vpísaným mesiacom a popisom; poznámky k mesiacu nad kalendárom */
+.nb-photo { position: relative; background: #05070F; color: #F4EEE1; }
+.nb-photo > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .6s ease; }
+.nb-photo > img.in { opacity: 1; }
+.nb-photo::before { content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(180deg, rgba(5,7,15,.55) 0%, rgba(5,7,15,0) 26%, rgba(5,7,15,0) 70%, rgba(5,7,15,.72) 100%); }
+.nb-ph-month { position: absolute; z-index: 2; left: 7cqw; top: 6cqw; margin: 0; font-family: var(--display); font-weight: 500; font-size: 13cqw; line-height: .95; color: #F4EEE1; text-shadow: 0 .4cqw 2cqw rgba(0,0,0,.45); }
+.nb-ph-month span { display: block; font-style: italic; color: #D9B86A; font-size: .55em; margin-top: .15em; }
+.nb-photo .nb-ph-cap { position: absolute; z-index: 2; left: 7cqw; right: 7cqw; bottom: 5.5cqw; top: auto; margin: 0; padding: 0; background: none; color: #F1EBDD; display: flex; flex-direction: column; flex-wrap: nowrap; align-items: flex-start; gap: .8cqw; }
+.nb-photo .nb-ph-cap b { font-family: var(--display); font-style: italic; font-weight: 500; font-size: 4.6cqw; }
+.nb-photo .nb-ph-cap span { font-size: 2.8cqw; opacity: .75; }
+.nb-mnotes { flex: none; display: flex; flex-direction: column; gap: 1.4cqw; margin-bottom: 1cqw; }
+.nb-mnotes .nb-sky { font-size: 2.35cqw; gap: 1cqw; }
+.nb-mnotes .nb-whim { margin: 0; padding: 0; border: 0; font-size: 2.6cqw; }
+.nb-calp .nb-cal-t { font-size: 7cqw; }
+@media (prefers-reduced-motion: reduce) { .nb-photo > img { transition: none; } }
+
+/* v33: rýchlejšie listovanie Hviezdopisu */
+.nb-photo > img { transition: opacity .2s ease; }
+.nb-view.flip .nb-page, .nb-view.flip .nb-cover { animation-duration: .3s; }
+.nb-book3d.is-opening .nb-cover { animation-duration: .42s; }
+.nb-next::before { content: '←'; margin-right: 6px; color: var(--violet-2); animation: nbHint 2.4s ease-in-out infinite; display: inline-block; }
+@media (prefers-reduced-motion: reduce) { .nb-next::before { animation: none; } }
+
+/* v34: plynulé listovanie, bez bliknutia */
+.nb-photo > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.nb-photo > #nb-img-lo { opacity: 1; transition: none; }
+.nb-photo > #nb-img { opacity: 0; transition: opacity .2s ease; }
+.nb-photo > #nb-img.in { opacity: 1; }
+@keyframes nbGoNext { from { transform: translateX(14%); } to { transform: none; } }
+@keyframes nbGoPrev { from { transform: translateX(-14%); } to { transform: none; } }
+.nb-view.go-next .nb-page { animation: nbGoNext .26s cubic-bezier(.2, .7, .2, 1) both; }
+.nb-view.go-prev .nb-page { animation: nbGoPrev .26s cubic-bezier(.2, .7, .2, 1) both; }
+@media (prefers-reduced-motion: reduce) { .nb-view.go-next .nb-page, .nb-view.go-prev .nb-page { animation: none; } }
+
+/* v35: údaje mesiaca vo fotke na rozmazanom podklade, plynulejšie listovanie, jemná žiara diára */
+.nb-photo::before { background: linear-gradient(180deg, rgba(5,7,15,.55) 0%, rgba(5,7,15,0) 24%); }
+.nb-ph-info { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding: 16cqw 7cqw 5.5cqw; display: flex; flex-direction: column; gap: 1.6cqw; color: #F1EBDD;
+  background: linear-gradient(0deg, rgba(6,8,18,.78) 0%, rgba(6,8,18,.6) 55%, rgba(6,8,18,0) 100%);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1); backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-mask-image: linear-gradient(0deg, #000 72%, transparent); mask-image: linear-gradient(0deg, #000 72%, transparent); }
+.nb-photo .nb-ph-info .nb-ph-cap { position: static; left: auto; right: auto; bottom: auto; margin: 0 0 .6cqw; gap: .5cqw; }
+.nb-photo .nb-ph-info .nb-ph-cap b { font-size: 4.4cqw; }
+.nb-photo .nb-ph-info .nb-ph-cap span { font-size: 2.5cqw; opacity: .7; }
+.nb-ph-info .nb-sky { font-size: 2.55cqw; gap: 1cqw; line-height: 1.42; color: rgba(241,235,221,.88); }
+.nb-ph-info .nb-sky b { color: #F6F0E2; }
+.nb-ph-info .nb-sky li::before { color: #D9B86A; }
+.nb-ph-info .nb-whim { margin: .4cqw 0 0; padding: 0; border: 0; font-size: 2.7cqw; line-height: 1.4; color: #C9BBFF; }
+.nb-calp .nb-cal-t { font-size: 8cqw; }
+
+/* listovanie: dlhšie, mäkké dobehnutie, len posun (GPU) */
+.nb-view .nb-page { will-change: transform; }
+@keyframes nbGoNext { from { transform: translateX(7%); opacity: .7; } to { transform: none; opacity: 1; } }
+@keyframes nbGoPrev { from { transform: translateX(-7%); opacity: .7; } to { transform: none; opacity: 1; } }
+.nb-view.go-next .nb-page, .nb-view.go-prev .nb-page { animation-duration: .6s; animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+.nb-view.go-next .nb-right, .nb-view.go-prev .nb-right { animation-delay: .04s; }
+@keyframes nbIn { from { opacity: .6; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+.nb-view.flip .nb-page, .nb-view.flip .nb-cover { animation-duration: .5s; animation-timing-function: cubic-bezier(.22, .61, .36, 1); }
+.nb-photo > #nb-img { transition: opacity .45s ease; }
+.nb-book3d.is-opening .nb-cover { animation-duration: .5s; animation-timing-function: cubic-bezier(.45, 0, .55, 1); }
+
+/* jemná žiara za diárom: fialová a zlatá, pomaly dýcha */
+.nb-stage { position: relative; isolation: isolate; }
+.nb-stage::before { content: ''; position: absolute; z-index: -1; left: 50%; top: 50%; width: min(1100px, 120%); height: 110%; transform: translate(-50%, -50%); pointer-events: none;
+  background: radial-gradient(closest-side at 40% 50%, rgba(140,115,255,.22), transparent 70%), radial-gradient(closest-side at 64% 52%, rgba(217,184,106,.12), transparent 70%);
+  filter: blur(30px); opacity: .75; animation: nbGlow 9s ease-in-out infinite; }
+@keyframes nbGlow { 0%, 100% { opacity: .6; transform: translate(-50%, -50%) scale(1); } 50% { opacity: .9; transform: translate(-50%, -50%) scale(1.04); } }
+@media (prefers-reduced-motion: reduce) { .nb-stage::before { animation: none; } }
+
+@media (max-width: 700px) { .nb-in-view .to-top { opacity: 0; pointer-events: none; } }
+
+/* v36: údaje vždy dole, silnejšie zatmavenie bez rozmazania, menšie a svetlejšie písmo */
+.nb-ph-info { padding: 14cqw 7cqw 5cqw; gap: 1.2cqw; background: linear-gradient(0deg, rgba(5,7,15,.86) 0%, rgba(5,7,15,.7) 45%, rgba(5,7,15,.35) 75%, rgba(5,7,15,0) 100%);
+  -webkit-backdrop-filter: none; backdrop-filter: none; -webkit-mask-image: none; mask-image: none; }
+.nb-ph-info, .nb-ph-info * { text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+.nb-photo .nb-ph-info .nb-ph-cap b { font-size: 3.9cqw; color: #fff; }
+.nb-photo .nb-ph-info .nb-ph-cap span { font-size: 2.2cqw; opacity: .85; color: #ECE6DA; }
+.nb-ph-info .nb-sky { font-size: 2.2cqw; gap: .8cqw; color: #F3EEE4; }
+.nb-ph-info .nb-sky b { color: #fff; }
+.nb-ph-info .nb-sky li::before { color: #E6C77E; font-size: 2cqw; }
+.nb-ph-info .nb-whim { font-size: 2.35cqw; color: #DDD3FF; }
+/* celá fotka bez orezu (Mineral Moon): na tmavej strane, okraje fotky sa do nej stratia */
+.nb-photo.fit-contain { background: #141314; }
+.nb-photo.fit-contain > img { inset: auto; left: 0; top: 47%; width: 100%; height: auto; transform: translateY(-50%); object-fit: contain; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0, #000 9%, #000 91%, transparent 100%); }
+
+/* v37: Týždeň na pravidelnej mriežke riadkov: deň = hlavička + (n-1) riadkov, deliaca čiara dňa sedí presne na linke; n dopočíta app.js podľa výšky strany */
+.nb-wkp { --L: 5.2cqw; }
+.nb-days { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+.nb-days li { flex: none; height: calc(var(--L) * var(--n, 5)); display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: var(--L) minmax(0, 1fr); gap: 0; padding: 0; border-top: 1px solid rgba(43,35,87,.24); box-sizing: border-box; }
+.nb-days li:last-child { border-bottom: 1px solid rgba(43,35,87,.17); }
+.nb-dh2 { min-height: 0; height: var(--L); align-items: center; }
+.nb-dsun { font-size: 2.05cqw; line-height: 1.12; }
+.nb-dn { height: auto; padding: 0; background: repeating-linear-gradient(180deg, rgba(43,35,87,.17) 0 1px, transparent 1px var(--L)) top / 100% calc(var(--L) * (var(--n, 5) - 1) - 1px) no-repeat; }
+.nb-dn em { line-height: var(--L); }
+/* voľné miesto pod posledným dňom pokračuje v rovnakých linkách (na poznámky) */
+.nb-wkp .nb-days { background: repeating-linear-gradient(180deg, rgba(43,35,87,.17) 0 1px, transparent 1px var(--L)); }
+.nb-days li:last-child { border-bottom: 0; }
+.nb-wkp .nb-dn { background: none; }
+.nb-view[data-view="week"] .nb-wkp { --L: inherit; }
+
+/* v38: všetky dni rovnako riadkov; pod nedeľou samostatný blok Poznámky */
+.nb-wkp .nb-days { background: none; }
+.nb-days li:last-child { border-bottom: 0; }
+.nb-wkp .nb-days li .nb-dn { background: repeating-linear-gradient(180deg, rgba(43,35,87,.17) 0 1px, transparent 1px var(--L)) top / 100% calc(var(--L) * (var(--n, 5) - 1)) no-repeat; }
+.nb-days li.nb-memo { height: auto; border-top: 1px solid rgba(43,35,87,.24); border-bottom: 1px solid rgba(43,35,87,.17); }
+.nb-days li.nb-memo .nb-dh2 b { font-family: var(--display); font-style: italic; font-weight: 500; color: var(--ink-2); }
+.nb-wkp .nb-days li.nb-memo .nb-dn { background: repeating-linear-gradient(180deg, rgba(43,35,87,.17) 0 1px, transparent 1px var(--L)); }
+#nb-days-l li:last-child { border-bottom: 1px solid rgba(43,35,87,.24); }
+
+/* v39: medzi nedeľou a poznámkami bez linky, namiesto nej hviezdičky */
+.nb-days li.nb-memo { border-top: 0; grid-template-rows: var(--L) var(--L) minmax(0, 1fr); }
+.nb-memo-st { margin: 0; height: var(--L); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 3.4cqw; letter-spacing: .5em; padding-left: .5em; line-height: 1; color: var(--nb-gold); }
+.nb-wkp .nb-stars { display: none; }
+
+/* v40: parametre Hviezdopisu, odpočet, limitovaná edícia */
+.nb-specs { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; }
+.nb-specs div { display: flex; flex-direction: column; gap: 2px; padding-top: 8px; border-top: 1px solid var(--rule); }
+.nb-specs dt { font-size: 12px; color: var(--star-3, rgba(220,220,240,.6)); }
+.nb-specs dd { margin: 0; font-size: 14.5px; color: var(--star); }
+.nb-e-l { margin-top: 8px !important; font-size: 12px; color: var(--gold-2); }
+.nb-deal { margin: 0; font-size: 14px; color: var(--star-2); }
+.nb-deal b { color: var(--gold-2); font-weight: 600; }
+.nb-deal[hidden] { display: none; }
+.nb-qhint { margin: 6px 0 0; font-size: 12.5px; }
+
+/* v41: január zadarmo za e-mail */
+.nb-lead { margin-top: 6px; padding: 16px; border: 1px dashed rgba(184,164,255,.35); border-radius: var(--r); display: flex; flex-direction: column; gap: 10px; background: rgba(141,107,255,.05); }
+.nb-lead p { margin: 0; }
+.nb-lead-t { font-family: var(--display); font-size: 19px; color: var(--star); }
+.nb-lead-s { font-size: 13.5px; color: var(--star-2); line-height: 1.45; }
+.nb-lead .check { font-size: 12.5px; }
+/* v42: časy západu a tmy sa vždy zmestia do výšky riadku hlavičky dňa */
+.nb-wkp .nb-dsun { font-size: calc(var(--L) * .34); line-height: 1.12; }
+.nb-wkp .nb-dh2 .nb-ms { width: calc(var(--L) * .66); height: calc(var(--L) * .66); }
+.nb-wkp .nb-dh2 { overflow: hidden; }
+
+/* v43: západ a tma v jednom riadku (na mobile sa malé písmo nezväčší a nepretečie riadok) */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+.nb-wkp .nb-dh2 { overflow: visible; }
+.nb-wkp .nb-dsun { font-size: max(calc(var(--L) * .46), 7px); line-height: 1; white-space: nowrap; text-align: right; }
+.nb-sep { display: inline-block; width: .9em; }
+
+/* v44: atribút hidden vždy skryje prvok (súčty v Hviezdopise, tlačidlá poukazu) */
+[hidden] { display: none !important; }
+/* v45: dekorácie (zväčšené nebo, súhvezdia, nadpisy) nesmú rozšíriť stránku na mobile */
+main { overflow-x: clip; }
+
+/* v46: Hviezdopis – ukazovateľ cesty do tlače (dieliky ako život v hre) */
+.nb-goal { margin: 0 0 16px; padding: 14px 16px 13px; border: 1px solid rgba(242,202,126,.28); border-radius: 12px; background: rgba(12,14,34,.55); }
+.nb-goal-h { display: flex; justify-content: space-between; align-items: baseline; margin: 0 0 9px; font-size: 13px; color: var(--star-2); }
+.nb-goal-h b { font-family: var(--display, serif); font-weight: 500; font-size: 19px; color: var(--gold-2); font-variant-numeric: tabular-nums; }
+.nb-goal-bar { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; height: 14px; padding: 3px; border-radius: 5px; background: #07081a; box-shadow: inset 0 0 0 1px rgba(242,202,126,.22); }
+.nb-goal-bar i { border-radius: 2px; background: rgba(236,234,228,.07); }
+.nb-goal-bar i.on { background: linear-gradient(180deg, #f6dc9c, #d9a845); box-shadow: 0 0 8px rgba(242,202,126,.45); transform-origin: left; }
+.nb-goal.is-in .nb-goal-bar i.on { animation: nbSeg .45s calc(var(--i) * 90ms) both cubic-bezier(.2,.7,.2,1); }
+@keyframes nbSeg { from { transform: scaleX(0); opacity: 0; } to { transform: none; opacity: 1; } }
+.nb-goal.is-done { border-color: rgba(242,202,126,.6); }
+.nb-goal.is-done .nb-goal-bar i { background: linear-gradient(180deg, #f6dc9c, #d9a845); }
+.nb-goal-t { margin: 9px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--star-2); }
+@media (prefers-reduced-motion: reduce) { .nb-goal.is-in .nb-goal-bar i.on { animation: none; } }

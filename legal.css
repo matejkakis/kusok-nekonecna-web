@@ -1,0 +1,87 @@
+/* Spoločný vzhľad pre obchodné podmienky, ochranu osobných údajov a odstúpenie od zmluvy */
+@font-face { font-family: 'Fraunces'; src: url(assets/fonts/fraunces-latin-wght-normal.woff2) format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0000-00FF; }
+@font-face { font-family: 'Fraunces'; src: url(assets/fonts/fraunces-latin-ext-wght-normal.woff2) format('woff2'); font-weight: 100 900; font-display: swap; unicode-range: U+0100-024F, U+1E00-1EFF, U+20AC; }
+@font-face { font-family: 'Instrument Sans'; src: url(assets/fonts/instrument-sans-latin-wght-normal.woff2) format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+0000-00FF; }
+@font-face { font-family: 'Instrument Sans'; src: url(assets/fonts/instrument-sans-latin-ext-wght-normal.woff2) format('woff2'); font-weight: 400 700; font-display: swap; unicode-range: U+0100-024F, U+1E00-1EFF, U+20AC; }
+:root { --night: #070912; --star: #ECEAE4; --star-2: #B9B6C8; --violet: #8D6BFF; --violet-2: #B8A4FF; --gold: #E8B65A; --rule: rgba(184,164,255,.18); color-scheme: dark; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: radial-gradient(80% 40% at 80% 0%, rgba(141,107,255,.12), transparent 70%), var(--night); color: var(--star); font: 400 17px/1.65 'Instrument Sans', system-ui, sans-serif; }
+a { color: var(--violet-2); text-underline-offset: 3px; }
+a:hover { color: #fff; }
+:focus-visible { outline: 2px solid var(--violet-2); outline-offset: 3px; border-radius: 3px; }
+.lg-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; max-width: 760px; margin: 0 auto; padding: 22px 20px; border-bottom: 1px solid var(--rule); }
+.lg-top a { color: var(--star); text-decoration: none; font-family: 'Fraunces', serif; font-size: 20px; font-weight: 500; }
+.lg-top .lg-back { font-family: inherit; font-size: 15px; font-weight: 500; color: var(--violet-2); }
+main { max-width: 760px; margin: 0 auto; padding: 48px 20px 80px; }
+h1 { margin: 0 0 8px; font: 500 clamp(34px, 6vw, 52px)/1.08 'Fraunces', serif; letter-spacing: -.01em; }
+.lg-meta { margin: 0 0 40px; color: var(--star-2); font-size: 15px; }
+h2 { margin: 44px 0 12px; font: 500 24px/1.25 'Fraunces', serif; color: #fff; }
+h3 { margin: 24px 0 6px; font-size: 17px; font-weight: 600; color: var(--violet-2); }
+p, li { color: #D8D5E2; }
+ol, ul { padding-left: 1.3em; }
+li { margin: 6px 0; }
+.ph { padding: 0 4px; border-radius: 3px; background: rgba(232,182,90,.18); color: var(--gold); font-weight: 600; }
+.lg-box { margin: 18px 0; padding: 18px 20px; border: 1px solid var(--rule); border-radius: 10px; background: rgba(141,107,255,.06); }
+.lg-box p { margin: 4px 0; }
+.lg-nav { display: flex; flex-wrap: wrap; gap: 8px 22px; max-width: 760px; margin: 0 auto; padding: 22px 20px 40px; border-top: 1px solid var(--rule); font-size: 15px; }
+/* formulár na odstúpenie */
+.wd-form { display: grid; gap: 16px; margin-top: 28px; padding: 24px; border: 1px solid var(--rule); border-radius: 12px; background: rgba(14,18,34,.85); }
+.wd-form label { display: grid; gap: 6px; font-size: 15px; font-weight: 600; color: var(--star); }
+.wd-form label small { font-weight: 400; color: var(--star-2); }
+.wd-form input, .wd-form textarea { width: 100%; padding: 12px 14px; border: 1px solid rgba(184,164,255,.28); border-radius: 8px; background: #0B0E1E; color: var(--star); font: inherit; }
+.wd-form input:focus, .wd-form textarea:focus { border-color: var(--violet); outline: none; box-shadow: 0 0 0 3px rgba(141,107,255,.25); }
+.wd-btn { justify-self: start; min-height: 48px; padding: 0 24px; border: 0; border-radius: 8px; background: linear-gradient(135deg, #9C7DFF, #6A4FF0); color: #fff; font: 600 16px 'Instrument Sans', sans-serif; cursor: pointer; }
+.wd-btn:disabled { opacity: .6; cursor: wait; }
+.wd-btn.ghost { background: none; border: 1px solid rgba(184,164,255,.4); color: var(--violet-2); }
+.wd-err { margin: 0; color: #FFB4A8; }
+.wd-done { margin-top: 28px; padding: 24px; border: 1px solid rgba(141,107,255,.5); border-radius: 12px; background: rgba(141,107,255,.08); }
+.wd-done h2 { margin-top: 0; }
+.wd-done pre { white-space: pre-wrap; margin: 14px 0; padding: 16px; border-radius: 8px; background: #0B0E1E; color: var(--star); font: 15px/1.6 'Instrument Sans', sans-serif; }
+.wd-acts { display: flex; flex-wrap: wrap; gap: 10px; }
+@media print { body { background: #fff; color: #000; } .lg-top, .lg-nav, .wd-form, .wd-acts, .lg-intro { display: none !important; } .wd-done { border: 0; background: none; } .wd-done pre { background: none; color: #000; } p, li, h2 { color: #000; } }
+[hidden] { display: none !important; }
+
+/* ── Stránky obrazov (obraz/<názov>/) ── */
+.op .lg-top, .op .lg-nav { max-width: 1120px; }
+.op-main { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: start; max-width: 1120px; margin: 0 auto; padding: 40px 20px 56px; }
+.op-img { position: sticky; top: 24px; margin: 0; border-radius: 12px; overflow: hidden; background: #05060C; box-shadow: 0 30px 80px -40px rgba(141,107,255,.6); }
+.op-img img { display: block; width: 100%; height: auto; }
+.op-cat { margin: 0 0 6px; font-size: 14px; font-weight: 600; color: var(--violet-2); }
+.op h1 { margin: 0; font-size: clamp(40px, 5.4vw, 68px); }
+.op-meta { margin: 8px 0 0; font-size: 15px; color: var(--star-2); }
+.op-desc { margin: 22px 0 0; font-size: 18px; line-height: 1.65; color: #D8D5E2; }
+.op-light { display: grid; gap: 4px; margin: 22px 0 0; padding: 14px 16px; border-left: 2px solid var(--violet); background: rgba(141,107,255,.07); border-radius: 0 8px 8px 0; font-size: 15px; color: var(--star-2); }
+.op-light span { color: var(--star); }
+.op-light b { font-family: 'Fraunces', serif; font-weight: 500; color: var(--violet-2); }
+.op-price { margin: 28px 0 14px; font: 500 40px/1 'Fraunces', serif; color: #F2CA7E; }
+.op-btn { display: inline-flex; align-items: center; min-height: 54px; padding: 0 28px; border-radius: 8px; background: linear-gradient(135deg, #9C7DFF, #6A4FF0); color: #fff; font-weight: 600; font-size: 17px; text-decoration: none; box-shadow: 0 12px 32px -12px rgba(141,107,255,.9); }
+.op-btn:hover { color: #fff; filter: brightness(1.08); }
+.op-note { margin: 10px 0 0; font-size: 14px; color: var(--star-2); }
+.op-txt h2 { margin-top: 40px; font-size: 22px; }
+.op-tab { width: 100%; border-collapse: collapse; font-size: 15px; }
+.op-tab th, .op-tab td { padding: 10px 8px; border-bottom: 1px solid var(--rule); text-align: left; color: #D8D5E2; }
+.op-tab thead th { font-size: 13px; font-weight: 600; color: var(--star-2); }
+.op-tab tbody th { font-family: 'Fraunces', serif; font-weight: 500; font-size: 18px; color: var(--star); }
+.op-tab td:nth-child(3), .op-tab td:nth-child(4) { color: #F2CA7E; white-space: nowrap; }
+.op-trust { margin: 24px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 15px; color: var(--star-2); }
+.op-trust li::before { content: '✦'; margin-right: 8px; color: var(--violet-2); font-size: 12px; }
+.op-more { max-width: 1120px; margin: 0 auto; padding: 0 20px 56px; }
+.op-more h2 { margin: 0 0 18px; }
+.op-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.op-card { display: grid; gap: 8px; color: var(--star); text-decoration: none; }
+.op-card img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 8px; transition: transform .4s; }
+.op-card:hover img { transform: scale(1.03); }
+.op-card span { font-family: 'Fraunces', serif; font-size: 17px; }
+@media (max-width: 860px) {
+  .op-main { grid-template-columns: minmax(0, 1fr); padding-top: 20px; }
+  .op-img { position: static; }
+  .op-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .op-btn { width: 100%; justify-content: center; }
+  .op-tab thead th:nth-child(3), .op-tab thead th:nth-child(4) { font-size: 12px; }
+}
+.op-tab td:nth-child(2) { white-space: nowrap; }
+@media (max-width: 480px) { .op-tab { font-size: 13.5px; } .op-tab th, .op-tab td { padding: 9px 5px; } .op-tab tbody th { font-size: 16px; } }
+.op-ig { margin: 8px 0 0; font-size: 15px; }
+
+.op-desc .d-year { display: block; margin-top: .55em; opacity: .75; font-size: .92em; }
