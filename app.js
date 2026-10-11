@@ -116,6 +116,12 @@
         else fpObs.observe(el);
     });
 
+    /* ── Fotky v sekciách: po načítaní stránky sa potichu stiahnu všetky, aby pri skrolovaní nebol text bez obrázka ── */
+    window.addEventListener('load', () => {
+        const go = () => $$('img[loading="lazy"]').forEach((im, i) => setTimeout(() => { im.loading = 'eager'; }, i * 60));
+        (window.requestIdleCallback || ((f) => setTimeout(f, 300)))(go, { timeout: 1500 });
+    }, { once: true });
+
     /* ── Fotky: načítajú sa vopred (asi dve obrazovky pred vami) a objavia sa plynulým prelínaním ── */
     {
         const imgs = $$('img[loading="lazy"]');
@@ -304,7 +310,7 @@
     const PANELS = {
         starcard: () => `
             <h2 id="modal-title">Darčeková karta</h2>
-            <p class="modal-sub">Hviezda vášho roku na papieri</p>
+            <p class="modal-sub">Vaša hviezda na papieri</p>
             <div class="field"><label for="card-who">Pre koho je karta (nepovinné)</label><input id="card-who" type="text" maxlength="28" placeholder="napríklad Jana" autocomplete="off"></div>
             <canvas class="card-cv" id="card-cv" width="1748" height="1240" role="img" aria-label="Náhľad darčekovej karty"></canvas>
             <div class="card-act"><button class="btn btn-star" type="button" id="card-print">Vytlačiť</button><button class="btn btn-ghost" type="button" id="card-save">Stiahnuť obrázok</button></div>
@@ -705,7 +711,7 @@
         const isPrem = (v) => v === 'pvc' || v === 'alu';
         const fromPrice = (v) => Math.min(...Object.values(isPrem(v) ? PRICES.premium : PRICES.standard));
         $('#mat-cards').innerHTML = MATERIALS.map(g => `<div class="mat-grp"><p class="mat-gl">${g.group}</p><div class="mat-row" role="radiogroup" aria-label="${g.group}">${g.items.map(([v, l]) =>
-            `<button type="button" role="radio" class="mat-c" data-v="${v}" aria-checked="false"><b>${l}</b><small>${MAT_NOTE[v]}</small><span>od ${fromPrice(v)} €</span></button>`).join('')}</div></div>`).join('');
+            `<button type="button" role="radio" class="mat-c" data-v="${v}" aria-checked="false"><b>${l}</b><small>${MAT_NOTE[v]}</small><span><i>od</i> ${fromPrice(v)} €</span></button>`).join('')}</div></div>`).join('');
         $$('.mat-c').forEach(b => b.addEventListener('click', () => { mat.value = b.dataset.v; fill(); }));
         function fill() {
             const list = isPrem(mat.value) ? PRICES.premium : PRICES.standard;
@@ -714,7 +720,7 @@
             if ([...size.options].some(o => o.value === keep)) size.value = keep;
             $('#size-cards').innerHTML = Object.entries(list).map(([s, pr]) => {
                 const [a, b] = dimOf(s);
-                return `<button type="button" role="radio" class="size-c" data-v="${s}" aria-checked="false"><b>${s}</b><small>${cmTxt(a)} × ${cmTxt(b)} cm</small><span>${disc ? `<s>${pr} €</s> ${after(pr)} €` : `${pr} €`}</span></button>`;
+                return `<button type="button" role="radio" class="size-c" data-v="${s}" aria-checked="false"><b>${s}</b><small>${cmTxt(a)}&nbsp;×&nbsp;${cmTxt(b)}&nbsp;cm</small><span>${disc ? `<s>${pr} €</s>${after(pr)}&nbsp;€` : `${pr}&nbsp;€`}</span></button>`;
             }).join('');
             $('#wall-sizes').innerHTML = Object.keys(list).map(s => {
                 const [a, b] = dimOf(s);
@@ -2047,13 +2053,28 @@
                 view = nv;
                 $$('.nb-views button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === nv)));
                 $$('.nb-view').forEach(x => { x.hidden = x.dataset.view !== nv; });
-                tabs.classList.toggle('is-off', nv === 'notes' || nv === 'cover');
+                tabs.classList.toggle('is-off', !(nv === 'month' || nv === 'week'));
+                const seas = $('#nb-seasons'); if (seas) { seas.hidden = nv !== 'maps'; tabs.hidden = nv === 'maps'; }
                 const swp = $('#nb-swipe'); if (swp) { swp.hidden = nv === 'cover'; const nx = $('.nb-next', swp); if (nx) nx.hidden = nv !== 'month'; $$('i', swp).forEach((d, k) => d.classList.toggle('on', k === 0)); }
                 $$('.nb-book').forEach(bk => { bk.scrollLeft = 0; });
                 render();
             }
             $$('button', tabs).forEach(b => b.addEventListener('click', () => { cur = Number(b.dataset.m); render(); }));
             $$('.nb-views button').forEach(b => b.addEventListener('click', () => setView(b.dataset.v)));
+            {   // mapy: ročné obdobie, predvolene to aktuálne
+                const seas = $('#nb-seasons'), img = $('#nb-map');
+                const NAME = { zima: 'zimnej', jar: 'jarnej', leto: 'letnej', jesen: 'jesennej' };
+                const pick = (k) => {
+                    $$('button', seas).forEach(b => b.setAttribute('aria-selected', String(b.dataset.s === k)));
+                    if (img) { img.src = `assets/img/hviezdopis/str-mapa-${k}.webp`; img.alt = `Mapa ${NAME[k]} oblohy nad Slovenskom s tipmi, čo na nej nájsť.`; }
+                    const v = $('.nb-view[data-view="maps"] .nb-right'); if (v) { v.classList.remove('nb-swap'); void v.offsetWidth; v.classList.add('nb-swap'); }
+                };
+                if (seas) {
+                    $$('button', seas).forEach(b => b.addEventListener('click', () => pick(b.dataset.s)));
+                    const mo = new Date().getMonth();
+                    pick(mo === 11 || mo < 2 ? 'zima' : mo < 5 ? 'jar' : mo < 8 ? 'leto' : 'jesen');
+                }
+            }
             // mobil: bodky pod zápisníkom ukazujú, či je zobrazená ľavá alebo pravá strana
             const sw = $('#nb-swipe');
             $$('.nb-book').forEach(bk => bk.addEventListener('scroll', () => {
@@ -2084,13 +2105,33 @@
                 };
                 let pre0 = false; const preJan = () => { if (pre0) return; pre0 = true; const b = bigOf(M[0][0]); if (b) new Image().src = b; };
                 new IntersectionObserver((en, ob) => { if (en.some(x => x.isIntersecting)) { preJan(); ob.disconnect(); } }, { rootMargin: '300px' }).observe(book3d);
-                book3d.addEventListener('pointerdown', (e) => { x0 = e.clientX; y0 = e.clientY; preJan(); });
-                book3d.addEventListener('pointerup', (e) => {
-                    if (x0 === null) return;
-                    const dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
-                    if (dx < -40 && Math.abs(dx) > Math.abs(dy) * 1.2) openBook();
+                // ťahanie z ktoréhokoľvek miesta obálky; obálka sa pri ťahaní pootočí za prstom/myšou, myšou stačí aj kliknúť
+                const cov = $('.nb-cover', book3d);
+                let moved = false;
+                const tilt = (dx) => { if (cov) cov.style.transform = dx < 0 ? `perspective(1400px) rotateY(${Math.max(-40, dx / 4)}deg)` : ''; };
+                book3d.addEventListener('dragstart', (e) => e.preventDefault());
+                book3d.addEventListener('pointerdown', (e) => {
+                    if (e.button > 0) return;
+                    x0 = e.clientX; y0 = e.clientY; moved = false; preJan();
+                    try { book3d.setPointerCapture(e.pointerId); } catch (_) {}
+                    if (cov) cov.style.transition = 'none';
                 });
-                book3d.addEventListener('pointercancel', () => { x0 = null; });
+                book3d.addEventListener('pointermove', (e) => {
+                    if (x0 === null || opening) return;
+                    const dx = e.clientX - x0, dy = e.clientY - y0;
+                    if (Math.abs(dx) > 6) moved = true;
+                    if (e.pointerType !== 'mouse' && Math.abs(dy) > Math.abs(dx)) return;   // na mobile nechaj skrolovať stránku
+                    tilt(dx);
+                    if (dx < -70 && Math.abs(dx) > Math.abs(dy)) { x0 = null; if (cov) { cov.style.transition = ''; cov.style.transform = ''; } openBook(); }
+                });
+                const end = (e, cancel) => {
+                    if (x0 === null) return;
+                    const dx = e.clientX - x0; x0 = null;
+                    if (cov) { cov.style.transition = 'transform .35s var(--ease)'; cov.style.transform = ''; }
+                    if (!cancel && (dx < -40 || (!moved && e.pointerType === 'mouse'))) openBook();
+                };
+                book3d.addEventListener('pointerup', (e) => end(e, false));
+                book3d.addEventListener('pointercancel', (e) => end(e, true));
                 book3d.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openBook(); } });
             }
             {   // ukazovateľ ako v hre: koľko predobjednávok chýba do tlače
@@ -2213,7 +2254,7 @@
             await sendForm(lf);   // aj keď sa e-mail neuloží, ukážku dostane
             dl();
             btn.disabled = false; btn.textContent = 'Stiahnuť január';
-            okEl.innerHTML = `Január sa sťahuje. Ak sa nestiahol, <a href="${PDF}" download>kliknite sem</a>.`; okEl.hidden = false; lf.reset();
+            okEl.innerHTML = `Január sa sťahuje. Ak sa nestiahol, <a href="${PDF}" download>kliknite sem</a>.<br>Do schránky vám príde e-mail s tlačidlom na potvrdenie prihlásenia. Ak ho nevidíte, pozrite aj Spam alebo Promo akcie.`; okEl.hidden = false; lf.reset();
         });
     }
 
@@ -2228,7 +2269,7 @@
             const ok = await sendForm(nf);
             if (ok === null) { nf.submit(); return; }
             btn.disabled = false; btn.textContent = 'Prihlásiť sa';
-            okEl.textContent = ok ? 'Hotovo. Prvý e-mail príde pred najbližším novom.' : 'Prihlásenie sa nepodarilo. Skúste to znova o chvíľu.';
+            okEl.textContent = ok ? 'Skoro hotovo. Potvrďte ešte prihlásenie tlačidlom v e-maile, ktorý vám práve prišiel. Ak ho nevidíte, pozrite aj Spam alebo Promo akcie.' : 'Prihlásenie sa nepodarilo. Skúste to znova o chvíľu.';
             okEl.hidden = false; if (ok) nf.reset();
         });
     }

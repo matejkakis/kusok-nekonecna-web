@@ -209,7 +209,7 @@ button { font: inherit; color: inherit; }
 /* ---------- Vitajte ---------- */
 .welcome { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); gap: clamp(32px, 6vw, 96px); align-items: center; padding-top: 0; }
 .welcome figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
-.welcome img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 70%; border-radius: var(--r); }
+.welcome img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; object-position: 50% 50%; border-radius: var(--r); }
 .welcome > div { display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
 .welcome p { margin: 0; color: var(--star-2); max-width: 34em; }
 .welcome .welcome-more { font-size: 15px; }
@@ -1343,7 +1343,7 @@ img.lz.ld { opacity: 1; }
 /* mobil: strany pod sebou, každá v pomere A5 */
 @media (max-width: 700px) {
   .nb-top { flex-direction: column; align-items: stretch; }
-  .nb-top > .nb-views { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); width: 100%; min-width: 0; }
+  .nb-top > .nb-views { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; min-width: 0; }
   .nb-views button { padding: 0 4px; font-size: 13px; min-width: 0; }
   .nb-top > .nb-months { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; width: calc(100% + var(--gut) * 2); min-width: 0; margin-inline: calc(var(--gut) * -1); padding-inline: var(--gut); }
   .nb-months::-webkit-scrollbar { display: none; }
@@ -1698,7 +1698,7 @@ img.lz.ld { opacity: 1; }
 .cvn-one { font-size: 15.5cqw; }
 .cvn-one em { padding-right: .1em; }
 /* obálka sa dá otvoriť potiahnutím doľava */
-.nb-book3d { touch-action: pan-y; cursor: grab; -webkit-user-select: none; user-select: none; }
+.nb-book3d { touch-action: pan-y; cursor: grab; -webkit-user-drag: none; -webkit-user-select: none; user-select: none; }
 .nb-book3d:active { cursor: grabbing; }
 .nb-book3d:focus-visible { outline: 2px solid var(--violet-2); outline-offset: 8px; border-radius: 6px; }
 .nb-book3d .nb-cover { transform-origin: left center; }
@@ -1912,3 +1912,39 @@ main { overflow-x: clip; }
 .nb-goal.is-done .nb-goal-bar i { background: linear-gradient(180deg, #f6dc9c, #d9a845); }
 .nb-goal-t { margin: 9px 0 0; font-size: 13.5px; line-height: 1.5; color: var(--star-2); }
 @media (prefers-reduced-motion: reduce) { .nb-goal.is-in .nb-goal-bar i.on { animation: none; } }
+
+/* Hviezdopis: strany ako obrázky (úvod, Polárka, mapy) */
+.nb-img { padding: 0; background: var(--paper); }
+.nb-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.nb-seasons[hidden] { display: none; }
+.nb-swap img { animation: nbIn .4s var(--ease) both; }
+@media (prefers-reduced-motion: reduce) { .nb-swap img { animation: none; } }
+.nb-book3d * { -webkit-user-drag: none; }
+.nb-open-hint .h-mouse { display: none; }
+@media (hover: hover) and (pointer: fine) { .nb-open-hint .h-mouse { display: inline; } .nb-open-hint .h-touch { display: none; } .nb-book3d { cursor: pointer; } }
+
+/* Nočná obloha: väčšie prepínače na počítači (3 záložky) */
+@media (min-width: 641px) {
+  .ob-tabs { padding: 6px; gap: 6px; border-color: rgba(141,107,255,.35); background: rgba(7,9,18,.7); box-shadow: 0 18px 40px -24px rgba(0,0,0,.8); }
+  .ob-tabs [role="tab"] { min-height: 56px; padding: 0 30px; font-size: 18px; }
+  .ob-tabs [role="tab"]:not([aria-selected="true"]):hover { background: rgba(141,107,255,.12); }
+}
+@media (max-width: 640px) { .ob-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* Vaša hviezda ako samostatná sekcia */
+.star-sec .year-card { margin-top: 0; }
+
+/* Okno tlače: jasná hierarchia (názov > cena > popis > skupina) a rozmery bez kostrbatého zalomenia */
+.mat-gl { font-size: 12px; letter-spacing: .02em; color: rgba(165,168,184,.72); }
+.mat-c b, .size-c b { font-size: 16px; font-weight: 650; color: var(--star); letter-spacing: -.005em; }
+.mat-c small, .size-c small { font-size: 12.5px; color: rgba(165,168,184,.82); }
+.mat-c span, .size-c span { font-size: 18px; }
+.mat-c span i { font: 500 12px/1 var(--sans); font-style: normal; color: rgba(165,168,184,.8); margin-right: 2px; }
+.mat-c:not([aria-checked="true"]) b, .size-c:not([aria-checked="true"]) b { color: rgba(236,234,228,.92); }
+.size-c { align-content: start; padding: 11px 10px 12px; }
+.size-c b { font-family: var(--display); font-size: 22px; font-weight: 500; line-height: 1; }
+.size-c small { white-space: nowrap; font-size: clamp(10.5px, 2.6vw, 12px); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+.size-c span { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; margin-top: 6px; line-height: 1.05; white-space: nowrap; }
+.size-c span s { font: 500 12px/1.1 var(--sans); color: rgba(165,168,184,.7); }
+.modal-info .step { container-type: inline-size; }
+@container (max-width: 470px) { .size-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .size-c { grid-template-columns: auto 1fr; column-gap: 10px; align-items: baseline; } .size-c b { grid-row: 1 / span 2; } .size-c small, .size-c span { grid-column: 2; } .size-c span { flex-direction: row; align-items: baseline; gap: 6px; margin-top: 2px; } }
+.xmas { text-wrap: pretty; }

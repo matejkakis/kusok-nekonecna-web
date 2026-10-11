@@ -602,9 +602,9 @@
     <a class="mm-link" href="#zaostri"><span class="mm-t">Zaostrite</span><span class="mm-s">Hra o zľavu na prvý obraz</span></a>
     <a class="mm-link" href="#zapisnik"><span class="mm-t">Hviezdopis 2027</span><span class="mm-s">Diár na rok 2027 s mojimi fotkami</span></a>
     <a class="mm-link" href="#pre-vas"><span class="mm-t">Pre vás</span><span class="mm-s">Fotenie pod hviezdami a mentoring</span></a>
+    <a class="mm-link" href="#hviezda"><span class="mm-t">Vaša hviezda</span><span class="mm-s">Hviezda, ktorej svetlo vyrazilo vo váš deň</span></a>
     <a class="mm-link" href="#poukaz"><span class="mm-t">Darčekový poukaz</span><span class="mm-s">Obraz alebo fotenie ako darček</span></a>
     <a class="mm-link" href="#obloha"><span class="mm-t">Nočná obloha</span><span class="mm-s">Mesiac, mapa oblohy a kalendár</span></a>
-    <a class="mm-link" href="#hviezda"><span class="mm-t">Hviezda vášho roku</span><span class="mm-s">Hviezda, ktorej svetlo vyrazilo vo váš deň</span></a>
     <a class="mm-link" href="#o-mne"><span class="mm-t">O mne</span><span class="mm-s">Kto stojí za objektívom</span></a>
     <a class="mm-link" href="#otazky"><span class="mm-t">Otázky</span><span class="mm-s">Doručenie, poštovné a materiály</span></a>
 </div>
@@ -615,6 +615,7 @@
         <li><a href="#galeria"><span class="fs-l">Galéria</span><span class="fs-d">20</span></a></li>
         <li><a href="#zapisnik"><span class="fs-l">Hviezdopis 2027</span><span class="fs-d">10</span></a></li>
         <li><a href="#pre-vas"><span class="fs-l">Pre vás</span><span class="fs-d">5</span></a></li>
+        <li><a href="#hviezda"><span class="fs-l">Vaša hviezda</span><span class="fs-d">4</span></a></li>
         <li><a href="#poukaz"><span class="fs-l">Darčekový poukaz</span><span class="fs-d">3</span></a></li>
         <li><a href="#obloha"><span class="fs-l">Nočná obloha</span><span class="fs-d">2</span></a></li>
         <li><a href="#otazky"><span class="fs-l">Otázky</span><span class="fs-d">1</span></a></li>
@@ -802,14 +803,15 @@
         <div class="nb">
             <div class="nb-top">
                 <div class="nb-views" role="tablist" aria-label="Čo si pozrieť">
-                    <button type="button" role="tab" data-v="cover" aria-selected="true">Obal</button><button type="button" role="tab" data-v="month" aria-selected="false">Mesiac</button><button type="button" role="tab" data-v="week" aria-selected="false">Týždeň</button><button type="button" role="tab" data-v="notes" aria-selected="false">Poznámky</button>
+                    <button type="button" role="tab" data-v="cover" aria-selected="true">Obal</button><button type="button" role="tab" data-v="intro" aria-selected="false">Úvod</button><button type="button" role="tab" data-v="month" aria-selected="false">Mesiac</button><button type="button" role="tab" data-v="week" aria-selected="false">Týždeň</button><button type="button" role="tab" data-v="maps" aria-selected="false">Mapy</button><button type="button" role="tab" data-v="notes" aria-selected="false">Poznámky</button>
                 </div>
                 <div class="nb-months" role="tablist" aria-label="Mesiac" id="nb-months"></div>
+                <div class="nb-months nb-seasons" role="tablist" aria-label="Ročné obdobie" id="nb-seasons" hidden><button type="button" role="tab" data-s="zima" aria-selected="false">Zima</button><button type="button" role="tab" data-s="jar" aria-selected="false">Jar</button><button type="button" role="tab" data-s="leto" aria-selected="false">Leto</button><button type="button" role="tab" data-s="jesen" aria-selected="false">Jeseň</button></div>
             </div>
             <div class="nb-stage" id="nb-stage" aria-live="polite">
                 <!-- Obal: „Hviezdopis 2027“, za nadpisom dráha hviezdy v tvare nekonečna, ktorá sa stráca, dole logo -->
                 <div class="nb-view nb-covers" data-view="cover">
-                    <div class="nb-book3d" tabindex="0" aria-label="Obálka Hviezdopisu. Potiahnite doľava alebo stlačte Enter a otvorí sa.">
+                    <div class="nb-book3d" tabindex="0" aria-label="Obálka Hviezdopisu. Kliknite, potiahnite doľava alebo stlačte Enter a otvorí sa." role="button">
                         <div class="nb-cover cv-n">
                             <div class="cvn-title">
                                 <svg class="cvn-inf" viewBox="-1.12 -0.48 2.24 0.96" aria-hidden="true">
@@ -826,7 +828,7 @@
                             <i class="cvn-band" aria-hidden="true"></i>
                         </div>
                         <i class="cvn-ribbon" aria-hidden="true"></i>
-                        <p class="nb-open-hint" aria-hidden="true">Potiahnite obálku doľava a otvorí sa</p>
+                        <p class="nb-open-hint" aria-hidden="true"><span class="h-touch">Potiahnite obálku doľava a otvorí sa</span><span class="h-mouse">Kliknite na obálku alebo ju potiahnite doľava</span></p>
                     </div>
                     <div class="nb-cover-notes">
                         <p class="nb-k2">Obal</p>
@@ -836,6 +838,10 @@
                             <li><b>Gumička a stužková záložka</b>, aby sa diár v taške neotváral a vždy ste vedeli, kde ste skončili.</li>
                         </ul>
                     </div>
+                </div>
+                <div class="nb-view nb-book" data-view="intro" hidden>
+                    <div class="nb-page nb-left nb-img"><img src="assets/img/hviezdopis/str-uvod.webp" width="1000" height="1416" loading="lazy" decoding="async" alt="Prvá strana Hviezdopisu 2027 s textom: Nech si ktokoľvek a nech veríš čomukoľvek, nech je Tvoj život akýkoľvek, nech ideš kamkoľvek a odkiaľkoľvek... v každej bunke Tvojho tela duní ozvena hviezd. Nie si iba návštevníkom kozmu, si doslova jeho výsledkom. Od vesmíru zmršteného v nekonečne malom bode, až po nekonečnú rozmanitosť Tvojich neurónov. Od vzniku prvých hmlovín a galaxií, až po úžas, ktorý cítiš, keď zakloníš hlavu hore a pozeráš na ne... Ty, ja, my, všetci sme Kúskom Nekonečna... A Nekonečnom zároveň."></div>
+                    <div class="nb-page nb-right nb-img"><img src="assets/img/hviezdopis/str-ako-citat.webp" width="1000" height="1416" loading="lazy" decoding="async" alt="Strana Ako čítať Hviezdopis: vysvetlivky k novu, splnu, padajúcim hviezdam a nociam bez Mesiaca, časy západu Slnka a tmy. Dole miesto na meno majiteľa."></div>
                 </div>
                 <div class="nb-view nb-book" data-view="month" hidden>
                     <div class="nb-page nb-left nb-photo">
@@ -860,6 +866,10 @@
                             <div class="nb-tip"><p class="nb-k">Tento týždeň na oblohe</p><p id="nb-tip"></p></div>
                         </div>
                     </div>
+                </div>
+                <div class="nb-view nb-book" data-view="maps" hidden>
+                    <div class="nb-page nb-left nb-img"><img src="assets/img/hviezdopis/str-polarka.webp" width="1000" height="1416" loading="lazy" decoding="async" alt="Strana Ako nájsť Polárku: nákres Veľkého a Malého voza a tri kroky, ako od hviezd Merak a Dubhe prísť k Polárke."></div>
+                    <div class="nb-page nb-right nb-img"><img id="nb-map" src="assets/img/hviezdopis/str-mapa-jesen.webp" width="1000" height="1416" loading="lazy" decoding="async" alt="Mapa jesennej oblohy nad Slovenskom s tipmi, čo na nej nájsť."></div>
                 </div>
                 <div class="nb-view nb-book" data-view="notes" hidden>
                     <div class="nb-page nb-left nb-dots">
@@ -965,6 +975,56 @@
         </div>
     </section>
 
+    <section class="section star-sec" id="hviezda" aria-labelledby="year-title">
+            <div class="year-card">
+                <div class="year-form">
+                    <h2 class="h2 fp" id="year-title">Vaša hviezda</h2>
+                    <p class="lead">Svetlo z hviezd k nám letí celé roky. Keď je hviezda 30 svetelných rokov ďaleko, svetlo, ktoré z nej dnes vidíte, sa na cestu vydalo pred 30 rokmi. Zadajte dátum, ktorý je pre vás dôležitý, napríklad deň narodenia alebo svadby. Nájdem hviezdu, ktorej svetlo sa vydalo na cestu práve vtedy a dnes dopadá na Zem. Ukážem vám aj hviezdy, ktorých svetlo z toho dňa k nám ešte len letí.</p>
+                    <form class="year-in" id="year-form" autocomplete="off">
+                        <div class="year-occ" role="radiogroup" aria-label="Príležitosť">
+                            <button type="button" class="chip is-on" data-o="birth" aria-pressed="true">Narodenie</button><button type="button" class="chip" data-o="wedding" aria-pressed="false">Svadba</button><button type="button" class="chip" data-o="other" aria-pressed="false">Iná udalosť</button>
+                        </div>
+                        <div class="year-fields">
+                            <div class="yf yf-d"><label for="year-day">Deň</label><input id="year-day" type="number" inputmode="numeric" min="1" max="31" placeholder="14"></div>
+                            <div class="yf yf-m"><label for="year-month">Mesiac</label><select id="year-month"><option value="">Mesiac</option><option value="1">január</option><option value="2">február</option><option value="3">marec</option><option value="4">apríl</option><option value="5">máj</option><option value="6">jún</option><option value="7">júl</option><option value="8">august</option><option value="9">september</option><option value="10">október</option><option value="11">november</option><option value="12">december</option></select></div>
+                            <div class="yf yf-y"><label for="year-input">Rok</label><input id="year-input" type="number" inputmode="numeric" min="1900" max="2026" placeholder="1990" required></div>
+                        </div>
+                        <p class="year-err" id="year-err" role="alert" hidden></p>
+                        <button class="btn btn-gold" type="submit">Nájsť hviezdy</button>
+                    </form>
+                </div>
+                <div class="year-out" id="year-out" aria-live="polite" hidden>
+                    <div class="year-now">
+                        <div class="year-star" aria-hidden="true"><i></i></div>
+                        <div>
+                            <p class="year-k" id="year-k"></p>
+                            <h3 class="h3" id="year-name"></h3>
+                            <p class="year-con" id="year-con"></p>
+                        </div>
+                    </div>
+                    <p class="year-txt" id="year-txt"></p>
+                    <dl class="year-sky">
+                        <div><dt>Dnes v noci</dt><dd id="year-tonight"></dd></div>
+                        <div><dt>Najlepšie mesiace</dt><dd id="year-best"></dd></div>
+                    </dl>
+                    <div class="year-plan" id="year-plan" hidden>
+                        <p class="year-plan-k">Fotenie s hviezdou v zábere</p>
+                        <p class="year-plan-t" id="year-plan-t"></p>
+                        <button class="btn btn-gold" type="button" onclick="openStarShoot()">Rezervovať tento termín</button>
+                    </div>
+                    <p class="year-note">Výpočet platí pre oblohu nad Slovenskom.</p>
+                    <div class="year-tl">
+                        <p class="year-tl-k" id="year-tl-k"></p>
+                        <ol class="year-list" id="year-list"></ol>
+                    </div>
+                    <div class="year-act">
+                        <button class="btn btn-gold" type="button" onclick="openStarCard()">Darčeková karta s touto hviezdou</button>
+                        <button class="btn btn-ghost" type="button" onclick="openPanel('voucher')">Darovať fotenie pod hviezdami</button>
+                    </div>
+                </div>
+            </div>
+    </section>
+
     <section class="gift" id="poukaz" aria-labelledby="gift-title" data-land=".gift-inner" data-gap="52">
         <div class="gift-inner"><div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
             <h2 class="h2 fp" id="gift-title">Darujte kúsok nekonečna</h2>
@@ -985,7 +1045,6 @@
         <div class="ob-tabs" role="tablist" aria-label="Nočná obloha">
             <button type="button" role="tab" id="obt-dnes" aria-controls="ob-dnes" aria-selected="true">Dnes v noci</button>
             <button type="button" role="tab" id="obt-kal" aria-controls="ob-kal" aria-selected="false" tabindex="-1">Kalendár</button>
-            <button type="button" role="tab" id="obt-hviezda" aria-controls="hviezda" aria-selected="false" tabindex="-1">Hviezda vášho roku</button>
             <button type="button" role="tab" id="obt-fakty" aria-controls="fakty" aria-selected="false" tabindex="-1">Vedeli ste?</button>
         </div>
         <div class="ob-panel" id="ob-dnes" role="tabpanel" aria-labelledby="obt-dnes">
@@ -1049,55 +1108,6 @@
                 <p class="map-note">Termíny nov a spln sú vypočítané. Meteorické roje majú vrchol v rovnakých dňoch každý rok, rušenie Mesiacom sa počíta pre vrcholnú noc.</p>
             </div>
         </div>
-        <div class="ob-panel" id="hviezda" role="tabpanel" aria-labelledby="obt-hviezda" hidden>
-            <div class="year-card">
-                <div class="year-form">
-                    <h2 class="h2" id="year-title">Hviezda vášho roku</h2>
-                    <p class="lead">Svetlo z hviezd k nám letí celé roky. Keď je hviezda 30 svetelných rokov ďaleko, svetlo, ktoré z nej dnes vidíte, sa na cestu vydalo pred 30 rokmi. Zadajte dátum, ktorý je pre vás dôležitý, napríklad deň narodenia alebo svadby. Nájdem hviezdu, ktorej svetlo sa vydalo na cestu práve vtedy a dnes dopadá na Zem. Ukážem vám aj hviezdy, ktorých svetlo z toho dňa k nám ešte len letí.</p>
-                    <form class="year-in" id="year-form" autocomplete="off">
-                        <div class="year-occ" role="radiogroup" aria-label="Príležitosť">
-                            <button type="button" class="chip is-on" data-o="birth" aria-pressed="true">Narodenie</button><button type="button" class="chip" data-o="wedding" aria-pressed="false">Svadba</button><button type="button" class="chip" data-o="other" aria-pressed="false">Iná udalosť</button>
-                        </div>
-                        <div class="year-fields">
-                            <div class="yf yf-d"><label for="year-day">Deň</label><input id="year-day" type="number" inputmode="numeric" min="1" max="31" placeholder="14"></div>
-                            <div class="yf yf-m"><label for="year-month">Mesiac</label><select id="year-month"><option value="">Mesiac</option><option value="1">január</option><option value="2">február</option><option value="3">marec</option><option value="4">apríl</option><option value="5">máj</option><option value="6">jún</option><option value="7">júl</option><option value="8">august</option><option value="9">september</option><option value="10">október</option><option value="11">november</option><option value="12">december</option></select></div>
-                            <div class="yf yf-y"><label for="year-input">Rok</label><input id="year-input" type="number" inputmode="numeric" min="1900" max="2026" placeholder="1990" required></div>
-                        </div>
-                        <p class="year-err" id="year-err" role="alert" hidden></p>
-                        <button class="btn btn-gold" type="submit">Nájsť hviezdy</button>
-                    </form>
-                </div>
-                <div class="year-out" id="year-out" aria-live="polite" hidden>
-                    <div class="year-now">
-                        <div class="year-star" aria-hidden="true"><i></i></div>
-                        <div>
-                            <p class="year-k" id="year-k"></p>
-                            <h3 class="h3" id="year-name"></h3>
-                            <p class="year-con" id="year-con"></p>
-                        </div>
-                    </div>
-                    <p class="year-txt" id="year-txt"></p>
-                    <dl class="year-sky">
-                        <div><dt>Dnes v noci</dt><dd id="year-tonight"></dd></div>
-                        <div><dt>Najlepšie mesiace</dt><dd id="year-best"></dd></div>
-                    </dl>
-                    <div class="year-plan" id="year-plan" hidden>
-                        <p class="year-plan-k">Fotenie s hviezdou v zábere</p>
-                        <p class="year-plan-t" id="year-plan-t"></p>
-                        <button class="btn btn-gold" type="button" onclick="openStarShoot()">Rezervovať tento termín</button>
-                    </div>
-                    <p class="year-note">Výpočet platí pre oblohu nad Slovenskom.</p>
-                    <div class="year-tl">
-                        <p class="year-tl-k" id="year-tl-k"></p>
-                        <ol class="year-list" id="year-list"></ol>
-                    </div>
-                    <div class="year-act">
-                        <button class="btn btn-gold" type="button" onclick="openStarCard()">Darčeková karta s touto hviezdou</button>
-                        <button class="btn btn-ghost" type="button" onclick="openPanel('voucher')">Darovať fotenie pod hviezdami</button>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="ob-panel" id="fakty" role="tabpanel" aria-labelledby="obt-fakty" hidden>
             <p class="ob-lead">Pár faktov, ktoré ma na vesmíre fascinujú.</p>
             <div class="fact-card" id="fact-card" aria-live="polite">
@@ -1124,7 +1134,7 @@
     <div class="part" data-part="omne">
     <section class="section welcome" id="o-mne" aria-labelledby="welcome-title">
         <figure>
-            <picture><source type="image/webp" srcset="assets/img/nahlady/bio-600.webp 600w, assets/img/nahlady/bio.webp 931w" sizes="(max-width: 700px) 90vw, 600px"><img class="fp" src="assets/img/nahlady/bio.jpg" alt="Matej Kakiš" width="931" height="1400" loading="lazy" decoding="async"></picture>
+            <picture><source type="image/webp" srcset="assets/img/nahlady/bio-600.webp 600w, assets/img/nahlady/bio.webp 1400w" sizes="(max-width: 700px) 90vw, 600px"><img class="fp" src="assets/img/nahlady/bio.jpg" alt="Matej Kakiš v červenomodrom svetle" width="1400" height="1400" loading="lazy" decoding="async"></picture>
         </figure>
         <div>
             <h2 class="h2 fp" id="welcome-title">Kto stojí za objektívom</h2>
